@@ -32,5 +32,23 @@
     "upgrade_plan": "Actualizare plan",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Doar pictograma",
+    "icon_with_label": "Pictogramă cu nume",
+    "dock_app_rail": "Fixați bara de aplicații",
+    "undock_app_rail": "Detașați bara de aplicații",
+    "show_tab": "Afișați",
+    "clear_default": "Ștergeți setarea implicită",
+    "hide_in_more": "Ascundeți în meniul Mai multe",
+    "subgroup_by": "Subgrupați după",
+    "wrong_email": "Adresă de e-mail greșită?",
+    "marking_as_default": "Se setează ca implicit",
+    "project_settings": "Setările proiectului",
+    "instance_settings": "Setările instanței",
+    "images": "Imagini",
+    "light_mode": "Comutați la modul luminos",
+    "dark_mode": "Comutați la modul întunecat",
+    "back_to_plane": "Înapoi la Plane"
   }
 }

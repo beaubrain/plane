@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# hlas dole} few {# hlasy dole} many {# hlasu dole} other {# hlasov dole}}",
       "no_upvotes": "Zatiaľ žiadne hlasy hore",
       "no_downvotes": "Zatiaľ žiadne hlasy dole"
-    }
+    },
+    "estimated_hours": "Odhadovaný čas v hodinách",
+    "invalid_estimated_hours": "Zadajte nezáporné číslo s najviac dvoma desatinnými miestami."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Nemožno aktualizovať pracovné položky",
         "message": "Zmena stavu nie je povolená pre niektoré pracovné položky. Uistite sa, že zmena stavu je povolená."
       }
-    },
-    "upgrade_banner": {
-      "message": "Menite stav, prioritu a ďalšie vlastnosti viacerých pracovných položiek naraz. V priemere ušetríte tri minúty na operáciu.",
-      "cta": "Upgradovať na One"
     }
   },
   "recurring_work_items": {

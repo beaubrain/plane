@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "解決済み／保留中の作業項目",
     "projects_by_status": "ステータス別のプロジェクト",
     "active_users": "アクティブユーザー",
-    "intake_trends": "Intakeの推移"
+    "intake_trends": "Intakeの推移",
+    "assignee_workload": {
+      "title": "作業負荷",
+      "assigned_tasks": "割り当て済みの作業項目",
+      "allocated_hours": "割り当て時間",
+      "invalid_range": "終了日は開始日と同じ日か、それ以降にしてください。",
+      "empty": "条件に一致する割り当て済みの作業項目はありません。",
+      "work_date": "作業日"
+    },
+    "dashboard": "ダッシュボード",
+    "count": "件数"
   },
   "workspace_projects": {
     "label": "{count, plural, one {プロジェクト} other {プロジェクト}}",

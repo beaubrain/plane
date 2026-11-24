@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny
 
 # Module imports
 from .base import BaseAPIView
+from plane.utils.user_name import user_name_for_display
 from plane.app.serializers import DeployBoardSerializer
 from plane.db.models import Project, DeployBoard, ProjectMember
 
@@ -80,7 +81,7 @@ class ProjectMembersEndpoint(BaseAPIView):
         ).values(
             "id",
             "member",
-            "member__display_name",
             "member__avatar",
+            member__display_name=user_name_for_display("member"),
         )
         return Response(members, status=status.HTTP_200_OK)

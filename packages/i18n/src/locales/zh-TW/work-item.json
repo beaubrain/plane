@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# 張反對票} other {# 張反對票}}",
       "no_upvotes": "尚無贊成票",
       "no_downvotes": "尚無反對票"
-    }
+    },
+    "estimated_hours": "預估工時（小時）",
+    "invalid_estimated_hours": "請輸入非負數，最多可有兩位小數。"
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "無法更新工作項目",
         "message": "某些工作項目不允許狀態變更。請確保狀態變更是允許的。"
       }
-    },
-    "upgrade_banner": {
-      "message": "一次性變更多個工作事項的狀態、優先順序等。平均每次操作可節省三分鐘。",
-      "cta": "升級到 One"
     }
   },
   "recurring_work_items": {

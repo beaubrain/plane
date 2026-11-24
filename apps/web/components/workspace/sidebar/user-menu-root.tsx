@@ -93,9 +93,7 @@ export const UserMenuRoot = observer(function UserMenuRoot() {
                 size="xl"
               />
               <div className="relative w-full min-w-0 text-center text-on-color">
-                <p className="truncate text-body-sm-medium">
-                  {currentUser?.first_name} {currentUser?.last_name}
-                </p>
+                <p className="truncate text-body-sm-medium">{currentUser?.display_name}</p>
                 <Tooltip label={currentUser?.email ?? ""}>
                   <p className="truncate text-caption-md-regular">{currentUser?.email}</p>
                 </Tooltip>

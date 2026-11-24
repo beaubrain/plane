@@ -76,7 +76,7 @@ export const EditorUserMention = observer(function EditorUserMention(props: Prop
                 to={profileLink}
                 className="not-prose block truncate text-body-xs-medium text-primary hover:underline"
               >
-                {userDetails?.first_name} {userDetails?.last_name}
+                {userDetails?.display_name}
               </Link>
               {roleDetails && <p className="truncate text-caption-sm-regular text-secondary">{ROLE[roleDetails]}</p>}
             </div>

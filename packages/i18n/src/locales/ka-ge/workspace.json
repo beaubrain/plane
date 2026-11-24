@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Work items resolved vs pending",
     "projects_by_status": "Projects by status",
     "active_users": "Active users",
-    "intake_trends": "Intake Trends"
+    "intake_trends": "Intake Trends",
+    "assignee_workload": {
+      "title": "დატვირთვა",
+      "assigned_tasks": "მინიჭებული სამუშაო ერთეულები",
+      "allocated_hours": "განაწილებული საათები",
+      "invalid_range": "დასრულების თარიღი დაწყების თარიღზე ადრე არ უნდა იყოს.",
+      "empty": "ამ ფილტრებს არცერთი მინიჭებული სამუშაო ერთეული არ შეესაბამება.",
+      "work_date": "სამუშაო თარიღი"
+    },
+    "dashboard": "საინფორმაციო დაფა",
+    "count": "რაოდენობა"
   },
   "workspace_projects": {
     "label": "{count, plural, one {პროექტი} other {პროექტები}}",

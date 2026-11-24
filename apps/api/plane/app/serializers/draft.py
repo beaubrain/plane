@@ -343,6 +343,7 @@ class DraftIssueSerializer(BaseSerializer):
             "sort_order",
             "completed_at",
             "estimate_point",
+            "estimated_hours",
             "priority",
             "start_date",
             "target_date",

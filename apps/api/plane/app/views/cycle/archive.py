@@ -29,6 +29,7 @@ from django.utils import timezone
 # Third party imports
 from rest_framework import status
 from rest_framework.response import Response
+from plane.utils.user_name import user_name_for_display
 from plane.app.permissions import allow_permission, ROLE
 from plane.db.models import Cycle, UserFavorite, Issue, Label, User, Project
 from plane.utils.analytics_plot import burndown_plot
@@ -372,7 +373,7 @@ class CycleArchiveUnarchiveEndpoint(BaseAPIView):
                         workspace__slug=slug,
                         project_id=project_id,
                     )
-                    .annotate(display_name=F("assignees__display_name"))
+                    .annotate(display_name=user_name_for_display("assignees"))
                     .annotate(assignee_id=F("assignees__id"))
                     .annotate(
                         avatar_url=Case(
@@ -499,7 +500,7 @@ class CycleArchiveUnarchiveEndpoint(BaseAPIView):
                         output_field=models.CharField(),
                     )
                 )
-                .annotate(display_name=F("assignees__display_name"))
+                .annotate(display_name=user_name_for_display("assignees"))
                 .values(
                     "first_name",
                     "last_name",

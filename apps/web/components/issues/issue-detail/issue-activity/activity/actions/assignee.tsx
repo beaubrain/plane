@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { MembersOutline } from "@makeplane/propel/icons";
 // hooks;
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
+import { useMember } from "@/hooks/store/use-member";
 // components
 import { IssueActivityBlockComponent, IssueLink } from "./";
 
@@ -20,10 +21,14 @@ export const IssueAssigneeActivity = observer(function IssueAssigneeActivity(pro
   const {
     activity: { getActivityById },
   } = useIssueDetail();
+  const { getUserDetails } = useMember();
 
   const activity = getActivityById(activityId);
 
   if (!activity) return <></>;
+  const assigneeId = activity.new_identifier ?? activity.old_identifier;
+  const assigneeName =
+    (assigneeId && getUserDetails(assigneeId)?.display_name) || activity.new_value || activity.old_value;
   return (
     <IssueActivityBlockComponent
       icon={<MembersOutline className="h-3.5 w-3.5 flex-shrink-0 text-secondary" />}
@@ -33,12 +38,12 @@ export const IssueAssigneeActivity = observer(function IssueAssigneeActivity(pro
       <>
         {activity.old_value === "" ? `added a new assignee ` : `removed the assignee `}
         <a
-          href={`/${activity.workspace_detail?.slug}/profile/${activity.new_identifier ?? activity.old_identifier}`}
+          href={`/${activity.workspace_detail?.slug}/profile/${assigneeId}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center font-medium text-primary capitalize hover:underline"
         >
-          {activity.new_value && activity.new_value !== "" ? activity.new_value : activity.old_value}
+          {assigneeName}
         </a>
         {showIssue && (activity.old_value === "" ? ` to ` : ` from `)}
         {showIssue && <IssueLink activityId={activityId} />}.

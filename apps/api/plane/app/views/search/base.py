@@ -28,6 +28,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 # Module imports
+from plane.utils.user_name import user_name_for_display
 from plane.app.views.base import BaseAPIView
 from plane.app.permissions import ROLE, WorkspaceUserPermission
 from plane.db.models import (
@@ -407,8 +408,8 @@ class SearchEndpoint(BaseAPIView):
 
                     users = users.distinct().values(
                         "member__avatar_url",
-                        "member__display_name",
                         "member__id",
+                        member__display_name=user_name_for_display("member"),
                     )
 
                     response_data["user_mention"] = list(users[:count])
@@ -622,7 +623,9 @@ class SearchEndpoint(BaseAPIView):
                             )
                         )
                         .order_by("-created_at")
-                        .values("member__avatar_url", "member__display_name", "member__id")[:count]
+                        .values(
+                            "member__avatar_url", "member__id", member__display_name=user_name_for_display("member")
+                        )[:count]
                     )
                     response_data["user_mention"] = list(users)
 

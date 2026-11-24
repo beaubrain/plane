@@ -6,6 +6,39 @@
 
 import type { TChartData } from "./charts";
 
+export type TAssigneeWorkload = {
+  assignee_id: string;
+  display_name: string;
+  task_count: number;
+  allocated_hours: string | null;
+};
+
+export type TAssignedWorkloadTask = {
+  id: string;
+  name: string;
+  project_id: string;
+  project_identifier: string;
+  sequence_id: number;
+  state_name: string | null;
+  start_date: string | null;
+  target_date: string | null;
+  allocated_hours: string | null;
+};
+
+export type TAssigneeWorkloadQuery = {
+  project_ids?: string;
+  start_date?: string;
+  end_date?: string;
+};
+
+export type TAssignedWorkloadTaskPage = {
+  results: TAssignedWorkloadTask[];
+  next_cursor: string;
+  prev_cursor: string;
+  next_page_results: boolean;
+  prev_page_results: boolean;
+};
+
 export enum ChartXAxisProperty {
   STATES = "STATES",
   STATE_GROUPS = "STATE_GROUPS",
@@ -40,7 +73,7 @@ export enum ChartYAxisMetric {
 export type TAnalyticsTabsBase = "overview" | "work-items";
 export type TAnalyticsGraphsBase = "projects" | "work-items" | "custom-work-items";
 export interface AnalyticsTab {
-  key: TAnalyticsTabsBase;
+  key: TAnalyticsTabsBase | "assignee-workload";
   label: string;
   content: React.FC;
   isDisabled: boolean;

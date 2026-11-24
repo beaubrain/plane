@@ -13,6 +13,7 @@ import { Icon } from "@makeplane/propel/components/icon";
 import { List, ListItem, ListItemLink } from "@makeplane/propel/components/list";
 import { ScrollArea } from "@makeplane/propel/components/scroll-area";
 import { Tooltip } from "@makeplane/propel/components/tooltip";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // hooks
 import { useTheme } from "@/hooks/store";
@@ -28,6 +29,8 @@ type TAdminSidebarMenuItemProps = {
 
 function AdminSidebarMenuItem(props: TAdminSidebarMenuItemProps) {
   const { item, isActive, isCollapsed, onNavigate } = props;
+  const { t } = useTranslation();
+  const name = t(item.nameKey);
   // router: the row is a plain anchor, so client-side navigation is wired up by hand
   const href = useHref(item.href);
   const handleLinkClick = useLinkClickHandler<HTMLAnchorElement>(item.href);
@@ -45,12 +48,12 @@ function AdminSidebarMenuItem(props: TAdminSidebarMenuItemProps) {
         />
       }
     >
-      <Tooltip label={isCollapsed ? item.name : item.description} side="right">
+      <Tooltip label={name} side="right">
         <ListItemLink
           href={href}
-          label={isCollapsed ? "" : item.name}
+          label={isCollapsed ? "" : name}
           startIcon={<Icon icon={item.Icon} />}
-          aria-label={item.name}
+          aria-label={name}
           aria-current={isActive ? "page" : undefined}
           onClick={(event) => {
             handleLinkClick(event as MouseEvent<HTMLAnchorElement>);
@@ -63,6 +66,7 @@ function AdminSidebarMenuItem(props: TAdminSidebarMenuItemProps) {
 }
 
 export const AdminSidebarMenu = observer(function AdminSidebarMenu() {
+  const { t } = useTranslation();
   // router
   const pathName = usePathname();
   // store hooks
@@ -77,7 +81,7 @@ export const AdminSidebarMenu = observer(function AdminSidebarMenu() {
 
   return (
     <ScrollArea orientation="vertical" size="sm">
-      <nav aria-label="Instance settings" className="px-3 py-4">
+      <nav aria-label={t("navigation_ui.instance_settings")} className="px-3 py-4">
         <List>
           {sidebarMenu.map((item) => (
             <AdminSidebarMenuItem

@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# 张反对票} other {# 张反对票}}",
       "no_upvotes": "暂无赞成票",
       "no_downvotes": "暂无反对票"
-    }
+    },
+    "estimated_hours": "预计工时（小时）",
+    "invalid_estimated_hours": "请输入非负数，最多保留两位小数。"
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "无法更新工作项",
         "message": "某些工作项的状态更改不被允许。请确保状态更改是被允许的。"
       }
-    },
-    "upgrade_banner": {
-      "message": "一次性更改多个工作项的状态、优先级等。平均每次操作可节省三分钟。",
-      "cta": "升级到 One"
     }
   },
   "recurring_work_items": {

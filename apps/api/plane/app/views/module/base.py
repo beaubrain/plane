@@ -35,6 +35,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 # Module imports
+from plane.utils.user_name import user_name_for_display
 from plane.app.permissions import (
     ProjectEntityPermission,
     ProjectLitePermission,
@@ -439,7 +440,7 @@ class ModuleViewSet(BaseViewSet):
                 .annotate(first_name=F("assignees__first_name"))
                 .annotate(last_name=F("assignees__last_name"))
                 .annotate(assignee_id=F("assignees__id"))
-                .annotate(display_name=F("assignees__display_name"))
+                .annotate(display_name=user_name_for_display("assignees"))
                 .annotate(
                     avatar_url=Case(
                         # If `avatar_asset` exists, use it to generate the asset URL
@@ -547,7 +548,7 @@ class ModuleViewSet(BaseViewSet):
             .annotate(first_name=F("assignees__first_name"))
             .annotate(last_name=F("assignees__last_name"))
             .annotate(assignee_id=F("assignees__id"))
-            .annotate(display_name=F("assignees__display_name"))
+            .annotate(display_name=user_name_for_display("assignees"))
             .annotate(
                 avatar_url=Case(
                     # If `avatar_asset` exists, use it to generate the asset URL

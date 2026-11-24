@@ -32,5 +32,23 @@
     "upgrade_plan": "升級方案",
     "plane_pro": "平面專業版",
     "business": "商業"
+  },
+  "navigation_ui": {
+    "icon_only": "僅顯示圖示",
+    "icon_with_label": "顯示圖示和名稱",
+    "dock_app_rail": "固定應用程式列",
+    "undock_app_rail": "取消固定應用程式列",
+    "show_tab": "顯示",
+    "clear_default": "清除預設設定",
+    "hide_in_more": "隱藏至更多選單",
+    "subgroup_by": "子群組依據",
+    "wrong_email": "電子郵件地址不正確？",
+    "marking_as_default": "正在設為預設",
+    "project_settings": "專案設定",
+    "instance_settings": "執行個體設定",
+    "images": "圖片",
+    "light_mode": "切換至淺色模式",
+    "dark_mode": "切換至深色模式",
+    "back_to_plane": "返回 Plane"
   }
 }

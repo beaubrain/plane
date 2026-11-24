@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Work items resolved vs pending",
     "projects_by_status": "Projects by status",
     "active_users": "Active users",
-    "intake_trends": "Intake Trends"
+    "intake_trends": "Intake Trends",
+    "assignee_workload": {
+      "title": "Workload",
+      "assigned_tasks": "Assigned work items",
+      "allocated_hours": "Allocated hours",
+      "invalid_range": "End date must be on or after start date.",
+      "empty": "No assigned work items match these filters.",
+      "work_date": "Work date"
+    },
+    "dashboard": "Dashboard",
+    "count": "Count"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Project} other {Projects}}",

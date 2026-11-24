@@ -401,7 +401,7 @@ class WorkspaceUserProfileEndpoint(BaseAPIView):
                     "cover_image_url": user_data.cover_image_url,
                     "date_joined": user_data.date_joined,
                     "user_timezone": user_data.user_timezone,
-                    "display_name": user_data.display_name,
+                    "display_name": user_data.name_for_display,
                 },
             },
             status=status.HTTP_200_OK,

@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# suara turun} other {# suara turun}}",
       "no_upvotes": "Belum ada suara naik",
       "no_downvotes": "Belum ada suara turun"
-    }
+    },
+    "estimated_hours": "Perkiraan jam",
+    "invalid_estimated_hours": "Masukkan angka nol atau lebih besar dengan maksimal dua angka desimal."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Tidak dapat memperbarui item kerja",
         "message": "Perubahan status tidak diizinkan untuk beberapa item kerja. Pastikan perubahan status diizinkan."
       }
-    },
-    "upgrade_banner": {
-      "message": "Ubah status, prioritas, dan lainnya untuk beberapa item kerja sekaligus. Hemat rata-rata tiga menit per operasi.",
-      "cta": "Tingkatkan ke One"
     }
   },
   "recurring_work_items": {

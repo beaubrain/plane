@@ -140,7 +140,7 @@ def process_mention(mention_component):
     for mention in mentions:
         user_id = mention["entity_identifier"]
         user = User.objects.get(pk=user_id)
-        user_name = user.display_name
+        user_name = user.name_for_display
         highlighted_name = f"@{user_name}"
         mention.replace_with(highlighted_name)
     return str(soup)

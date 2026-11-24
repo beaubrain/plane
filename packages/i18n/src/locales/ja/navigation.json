@@ -32,5 +32,23 @@
     "upgrade_plan": "プランをアップグレード",
     "plane_pro": "Plane Pro",
     "business": "ビジネス"
+  },
+  "navigation_ui": {
+    "icon_only": "アイコンのみ",
+    "icon_with_label": "アイコンと名前",
+    "dock_app_rail": "アプリバーを固定",
+    "undock_app_rail": "アプリバーの固定を解除",
+    "show_tab": "表示",
+    "clear_default": "既定を解除",
+    "hide_in_more": "その他のメニューに移動",
+    "subgroup_by": "サブグループの基準",
+    "wrong_email": "メールアドレスが違いますか？",
+    "marking_as_default": "既定に設定中",
+    "project_settings": "プロジェクト設定",
+    "instance_settings": "インスタンス設定",
+    "images": "画像",
+    "light_mode": "ライトモードに切り替え",
+    "dark_mode": "ダークモードに切り替え",
+    "back_to_plane": "Plane に戻る"
   }
 }

@@ -20,6 +20,7 @@ from django.db.models.functions import Cast, Concat
 from django.utils import timezone
 
 # Module imports
+from plane.utils.user_name import user_name_for_display
 from plane.db.models import (
     Cycle,
     CycleIssue,
@@ -168,7 +169,7 @@ def transfer_cycle_issues(
                 workspace__slug=slug,
                 project_id=project_id,
             )
-            .annotate(display_name=F("assignees__display_name"))
+            .annotate(display_name=user_name_for_display("assignees"))
             .annotate(assignee_id=F("assignees__id"))
             .annotate(
                 avatar_url=Case(
@@ -290,7 +291,7 @@ def transfer_cycle_issues(
             workspace__slug=slug,
             project_id=project_id,
         )
-        .annotate(display_name=F("assignees__display_name"))
+        .annotate(display_name=user_name_for_display("assignees"))
         .annotate(assignee_id=F("assignees__id"))
         .annotate(
             avatar_url=Case(

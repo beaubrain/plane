@@ -32,5 +32,23 @@
     "upgrade_plan": "Надграждане на плана",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Само икона",
+    "icon_with_label": "Икона и име",
+    "dock_app_rail": "Закачане на лентата с приложения",
+    "undock_app_rail": "Откачане на лентата с приложения",
+    "show_tab": "Показване",
+    "clear_default": "Изчистване на настройката по подразбиране",
+    "hide_in_more": "Скриване в менюто „Още“",
+    "subgroup_by": "Подгрупиране по",
+    "wrong_email": "Грешен имейл адрес?",
+    "marking_as_default": "Задаване по подразбиране",
+    "project_settings": "Настройки на проекта",
+    "instance_settings": "Настройки на инстанцията",
+    "images": "Изображения",
+    "light_mode": "Превключване към светъл режим",
+    "dark_mode": "Превключване към тъмен режим",
+    "back_to_plane": "Обратно към Plane"
   }
 }

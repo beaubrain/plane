@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Item kerja yang diselesaikan vs tertunda",
     "projects_by_status": "Proyek berdasarkan status",
     "active_users": "Pengguna aktif",
-    "intake_trends": "Tren Penerimaan"
+    "intake_trends": "Tren Penerimaan",
+    "assignee_workload": {
+      "title": "Beban kerja",
+      "assigned_tasks": "Item kerja yang ditugaskan",
+      "allocated_hours": "Alokasi jam",
+      "invalid_range": "Tanggal selesai harus sama dengan atau setelah tanggal mulai.",
+      "empty": "Tidak ada item kerja yang ditugaskan yang sesuai dengan filter ini.",
+      "work_date": "Tanggal kerja"
+    },
+    "dashboard": "Dasbor",
+    "count": "Jumlah"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Proyek} other {Proyek}}",

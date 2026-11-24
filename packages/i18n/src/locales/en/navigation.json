@@ -32,5 +32,23 @@
     "upgrade_plan": "Upgrade plan",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Icon only",
+    "icon_with_label": "Icon with name",
+    "dock_app_rail": "Dock app rail",
+    "undock_app_rail": "Undock app rail",
+    "show_tab": "Show",
+    "clear_default": "Clear default",
+    "hide_in_more": "Hide in more menu",
+    "subgroup_by": "Sub-group by",
+    "wrong_email": "Wrong email address?",
+    "marking_as_default": "Setting as default",
+    "project_settings": "Project settings",
+    "instance_settings": "Instance settings",
+    "images": "Images",
+    "light_mode": "Switch to light mode",
+    "dark_mode": "Switch to dark mode",
+    "back_to_plane": "Back to Plane"
   }
 }

@@ -20,9 +20,6 @@
         "delete_btn": "Smazat prostor",
         "delete_modal": {
           "title": "Opravdu chcete smazat tento prostor?",
-          "description": "Máte aktivní zkušební verzi. Nejprve ji zrušte.",
-          "dismiss": "Zavřít",
-          "cancel": "Zrušit zkušební verzi",
           "success_title": "Prostor smazán.",
           "success_message": "Budete přesměrováni na profil.",
           "error_title": "Nepodařilo se.",
@@ -68,14 +65,6 @@
         "leave_input_label": "Pro pokračování zadejte název tohoto pracovního prostoru.",
         "description": "Spravujte přístup k tomuto pracovnímu prostoru.",
         "leave_title": "Opustit pracovní prostor?"
-      },
-      "billing_and_plans": {
-        "heading": "Fakturace a plány",
-        "description": "Vyberte si plán, spravujte předplatná a snadno je upgradujte, jak rostou vaše potřeby.",
-        "title": "Fakturace a plány",
-        "current_plan": "Aktuální plán",
-        "free_plan": "Používáte bezplatný plán",
-        "view_plans": "Zobrazit plány"
       },
       "exports": {
         "heading": "Exporty",
@@ -288,16 +277,6 @@
         "title": "Vztahy",
         "heading": "Vztahy",
         "description": "Vytvářejte a spravujte typy vztahů, které propojují pracovní položky napříč vaším pracovním prostorem."
-      },
-      "cancel_trial": {
-        "title": "Nejprve zrušte svou zkušební verzi.",
-        "description": "Máte aktivní zkušební verzi jednoho z našich placených plánů. Nejprve ji prosím zrušte, abyste mohli pokračovat.",
-        "dismiss": "Zavřít",
-        "cancel": "Zrušit zkušební verzi",
-        "cancel_success_title": "Zkušební verze zrušena.",
-        "cancel_success_message": "Nyní můžete workspace smazat.",
-        "cancel_error_title": "To nefungovalo.",
-        "cancel_error_message": "Zkuste to prosím znovu."
       },
       "applications": {
         "internal": "Interní",

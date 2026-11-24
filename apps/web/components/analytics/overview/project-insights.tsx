@@ -30,6 +30,16 @@ const RadarChart = lazy(function RadarChart() {
 
 const analyticsService = new AnalyticsService();
 
+const projectInsightLabels: Partial<Record<string, string>> = {
+  work_items: "sidebar.work_items",
+  cycles: "sidebar.cycles",
+  modules: "sidebar.modules",
+  intake: "sidebar.intake",
+  members: "common.members",
+  pages: "sidebar.pages",
+  views: "sidebar.views",
+};
+
 const ProjectInsights = observer(function ProjectInsights() {
   const params = useParams();
   const { t } = useTranslation();
@@ -52,6 +62,10 @@ const ProjectInsights = observer(function ProjectInsights() {
         isPeekView
       )
   );
+  const chartData = projectInsightsData?.map((item) => {
+    const label = projectInsightLabels[item.key];
+    return label ? { ...item, name: t(label) } : item;
+  });
 
   return (
     <AnalyticsSectionWrapper
@@ -70,16 +84,16 @@ const ProjectInsights = observer(function ProjectInsights() {
         />
       ) : (
         <div className="gap-8 xl:flex">
-          {projectInsightsData && (
+          {chartData && (
             <Suspense fallback={<ProjectInsightsLoader />}>
               <RadarChart
                 className={cn(ANALYTICS_CHART_HEIGHT_CLASSNAME, "w-full text-accent-primary xl:w-3/5")}
-                data={projectInsightsData}
+                data={chartData}
                 dataKey="key"
                 radars={[
                   {
                     key: "count",
-                    name: "Count",
+                    name: t("workspace_analytics.count"),
                     fill: "var(--text-color-accent-primary)",
                     stroke: "var(--text-color-accent-primary)",
                     fillOpacity: 0.6,
@@ -105,7 +119,7 @@ const ProjectInsights = observer(function ProjectInsights() {
                 <div>{t("workspace_analytics.trend_on_charts")}</div>
                 <div>{t("common.work_items")}</div>
               </div>
-              {projectInsightsData?.map((item) => (
+              {chartData?.map((item) => (
                 <div key={item.key} className="flex items-center justify-between text-body-xs-regular text-primary">
                   <div>{item.name}</div>
                   <div className="flex items-center gap-1">

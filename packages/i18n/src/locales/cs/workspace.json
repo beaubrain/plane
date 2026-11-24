@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Vyřešené vs. čekající pracovní položky",
     "projects_by_status": "Projekty podle stavu",
     "active_users": "Aktivní uživatelé",
-    "intake_trends": "Trendy příjmů"
+    "intake_trends": "Trendy příjmů",
+    "assignee_workload": {
+      "title": "Vytížení",
+      "assigned_tasks": "Přiřazené pracovní položky",
+      "allocated_hours": "Přidělené hodiny",
+      "invalid_range": "Datum ukončení nesmí být dříve než datum zahájení.",
+      "empty": "Těmto filtrům neodpovídají žádné přiřazené pracovní položky.",
+      "work_date": "Datum práce"
+    },
+    "dashboard": "Přehled",
+    "count": "Počet"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projekt} few {Projekty} other {Projektů}}",

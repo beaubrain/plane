@@ -32,5 +32,23 @@
     "upgrade_plan": "Apgreyd plen",
     "plane_pro": "Pleyn Pro",
     "business": "Biznis"
+  },
+  "navigation_ui": {
+    "icon_only": "Yalnızca simge",
+    "icon_with_label": "Simge ve ad",
+    "dock_app_rail": "Uygulama çubuğunu sabitle",
+    "undock_app_rail": "Uygulama çubuğunu ayır",
+    "show_tab": "Göster",
+    "clear_default": "Varsayılanı kaldır",
+    "hide_in_more": "Diğer menüsünde gizle",
+    "subgroup_by": "Şuna göre alt gruplandır",
+    "wrong_email": "E-posta adresi yanlış mı?",
+    "marking_as_default": "Varsayılan olarak ayarlanıyor",
+    "project_settings": "Proje ayarları",
+    "instance_settings": "Örnek ayarları",
+    "images": "Görseller",
+    "light_mode": "Açık moda geç",
+    "dark_mode": "Koyu moda geç",
+    "back_to_plane": "Plane’e dön"
   }
 }

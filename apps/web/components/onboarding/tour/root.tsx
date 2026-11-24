@@ -99,9 +99,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
               <PlaneLockup className="h-10 w-auto text-on-color" />
             </div>
             <div className="flex flex-col overflow-y-auto p-6">
-              <h3 className="font-semibold sm:text-h5-regular">
-                Welcome to Plane, {currentUser?.first_name} {currentUser?.last_name}
-              </h3>
+              <h3 className="font-semibold sm:text-h5-regular">Welcome to Plane, {currentUser?.display_name}</h3>
               <p className="mt-3 text-body-xs-regular text-secondary">
                 We{"'"}re glad that you decided to try out Plane. You can now manage your projects with ease. Get
                 started by creating a project.

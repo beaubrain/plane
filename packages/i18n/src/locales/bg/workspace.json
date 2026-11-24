@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Решени спрямо чакащи работни елементи",
     "projects_by_status": "Проекти по статус",
     "active_users": "Активни потребители",
-    "intake_trends": "Тенденции в Intake"
+    "intake_trends": "Тенденции в Intake",
+    "assignee_workload": {
+      "title": "Натовареност",
+      "assigned_tasks": "Възложени задачи",
+      "allocated_hours": "Разпределени часове",
+      "invalid_range": "Крайната дата трябва да е на или след началната.",
+      "empty": "Няма възложени задачи, които отговарят на тези филтри.",
+      "work_date": "Дата на работа"
+    },
+    "dashboard": "Табло",
+    "count": "Брой"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Проект} other {Проекти}}",

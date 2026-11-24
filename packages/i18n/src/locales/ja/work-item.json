@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {反対票 #件} other {反対票 #件}}",
       "no_upvotes": "まだ賛成票はありません",
       "no_downvotes": "まだ反対票はありません"
-    }
+    },
+    "estimated_hours": "見積もり時間（時間）",
+    "invalid_estimated_hours": "0以上の数値を小数点以下2桁まで入力してください。"
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "作業項目を更新できません",
         "message": "一部の作業項目では状態の変更が許可されていません。状態の変更が許可されていることを確認してください。"
       }
-    },
-    "upgrade_banner": {
-      "message": "複数の作業項目の状態や優先度などを一括で変更できます。1回の操作につき平均3分を節約できます。",
-      "cta": "One にアップグレード"
     }
   },
   "recurring_work_items": {

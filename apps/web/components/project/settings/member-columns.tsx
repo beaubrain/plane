@@ -52,7 +52,7 @@ export function NameColumn(props: NameProps) {
   // plane hooks
   const { t } = useTranslation();
   // derived values
-  const { avatar_url, display_name, email, first_name, id, last_name } = rowData.member;
+  const { avatar_url, display_name, email, id } = rowData.member;
 
   return (
     <div className="group relative">
@@ -61,9 +61,7 @@ export function NameColumn(props: NameProps) {
           <Link href={`/${workspaceSlug}/profile/${id}`} className="flex shrink-0">
             <Avatar size="sm" src={getFileURL(avatar_url ?? "")} alt={display_name || email} />
           </Link>
-          <span className="truncate">
-            {first_name} {last_name}
-          </span>
+          <span className="truncate">{display_name}</span>
         </div>
         {(isAdmin || id === currentUser?.id) && (
           <Menu>
@@ -114,17 +112,15 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
   const roleLabel = ROLE[rowData.original_role ?? EUserPermissions.GUEST];
   const isCurrentUser = currentUser?.id === rowData.member.id;
   const isRowDataWorkspaceAdmin = [EUserPermissions.ADMIN].includes(
-    Number(getWorkspaceMemberDetails(rowData.member.id)?.role) ?? EUserPermissions.GUEST
+    Number(getWorkspaceMemberDetails(rowData.member.id)?.role)
   );
   const isCurrentUserWorkspaceAdmin = currentUser
-    ? [EUserPermissions.ADMIN].includes(
-        Number(getWorkspaceMemberDetails(currentUser.id)?.role) ?? EUserPermissions.GUEST
-      )
+    ? [EUserPermissions.ADMIN].includes(Number(getWorkspaceMemberDetails(currentUser.id)?.role))
     : false;
   const currentProjectRole = getProjectRoleByWorkspaceSlugAndProjectId(workspaceSlug, projectId);
 
   const isCurrentUserProjectAdmin = currentProjectRole
-    ? ![EUserPermissions.MEMBER, EUserPermissions.GUEST].includes(Number(currentProjectRole) ?? EUserPermissions.GUEST)
+    ? ![EUserPermissions.MEMBER, EUserPermissions.GUEST].includes(Number(currentProjectRole))
     : false;
 
   // logic

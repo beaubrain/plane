@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# głos przeciw} few {# głosy przeciw} many {# głosów przeciw} other {# głosu przeciw}}",
       "no_upvotes": "Brak głosów za",
       "no_downvotes": "Brak głosów przeciw"
-    }
+    },
+    "estimated_hours": "Szacowany czas w godzinach",
+    "invalid_estimated_hours": "Wpisz liczbę nieujemną z maksymalnie dwoma miejscami po przecinku."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Nie można zaktualizować elementów pracy",
         "message": "Zmiana stanu nie jest dozwolona dla niektórych elementów pracy. Upewnij się, że zmiana stanu jest dozwolona."
       }
-    },
-    "upgrade_banner": {
-      "message": "Zmieniaj stan, priorytet i inne właściwości wielu elementów pracy jednocześnie. Zaoszczędź średnio trzy minuty na operację.",
-      "cta": "Uaktualnij do One"
     }
   },
   "recurring_work_items": {

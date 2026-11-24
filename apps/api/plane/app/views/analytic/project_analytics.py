@@ -10,6 +10,7 @@ from django.http import HttpRequest
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
 from datetime import timedelta
+from plane.utils.user_name import user_name_for_display
 from plane.app.views.base import BaseAPIView
 from plane.app.permissions import ROLE, allow_permission
 from plane.db.models import (
@@ -131,7 +132,7 @@ class ProjectAdvanceAnalyticsStatsEndpoint(ProjectAdvanceAnalyticsBaseView):
         else:
             base_queryset = Issue.issue_objects.filter(**self.filters["base_filters"], project_id=project_id)
         return (
-            base_queryset.annotate(display_name=F("assignees__display_name"))
+            base_queryset.annotate(display_name=user_name_for_display("assignees"))
             .annotate(assignee_id=F("assignees__id"))
             .annotate(avatar=F("assignees__avatar"))
             .annotate(

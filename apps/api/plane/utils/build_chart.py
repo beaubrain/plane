@@ -14,6 +14,7 @@ from django.db.models import (
 )
 
 from plane.db.models import Issue
+from plane.utils.user_name import user_name_for_display
 from rest_framework.exceptions import ValidationError
 
 
@@ -108,6 +109,12 @@ def build_number_chart_response(
     return [{"key": y_axis, "name": y_axis, "count": count}]
 
 
+def chart_label(field: str):
+    if field.endswith("__display_name"):
+        return user_name_for_display(field.removesuffix("__display_name"))
+    return F(field)
+
+
 def build_grouped_chart_response(
     queryset: QuerySet[Issue],
     id_field: str,
@@ -120,8 +127,8 @@ def build_grouped_chart_response(
         queryset.annotate(
             key=F(id_field),
             group_key=F(group_field),
-            group_name=F(group_name_field),
-            display_name=F(name_field) if name_field else F(id_field),
+            group_name=chart_label(group_name_field),
+            display_name=chart_label(name_field or id_field),
         )
         .values("key", "group_key", "group_name", "display_name")
         .annotate(count=aggregate_func)
@@ -134,7 +141,7 @@ def build_simple_chart_response(
     queryset: QuerySet, id_field: str, name_field: str, aggregate_func: Aggregate
 ) -> List[Dict[str, Any]]:
     data = (
-        queryset.annotate(key=F(id_field), display_name=F(name_field) if name_field else F(id_field))
+        queryset.annotate(key=F(id_field), display_name=chart_label(name_field or id_field))
         .values("key", "display_name")
         .annotate(count=aggregate_func)
         .order_by("key")

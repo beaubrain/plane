@@ -30,7 +30,6 @@ import {
   DialogClose,
   DialogCloseGroup,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogHeading,
   DialogMain,
@@ -57,7 +56,6 @@ type TCustomizeNavigationDialogProps = {
 type TWorkspaceNavigationItem = {
   key: string;
   labelTranslationKey: string;
-  isPinned: boolean;
   sortOrder: number;
 };
 
@@ -127,11 +125,7 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
     updateShowLimitedProjects,
     updateLimitedProjectsCount,
   } = useProjectNavigationPreferences();
-  const {
-    preferences: workspacePreferences,
-    toggleWorkspaceItem,
-    updateWorkspaceItemOrder,
-  } = useWorkspaceNavigationPreferences();
+  const { preferences: workspacePreferences, updateWorkspaceItemOrder } = useWorkspaceNavigationPreferences();
 
   // local state for limited projects count input
   const [projectCountInput, setProjectCountInput] = useState(projectPreferences.limitedProjectsCount.toString());
@@ -139,7 +133,7 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
   // Filter personal items by feature flags
   const filteredPersonalItems = PERSONAL_ITEMS;
 
-  // Filter workspace items by permissions and feature flags, then get pinned/unpinned items
+  // Workspace items are always visible, so only their order is configurable.
   const workspaceItems = useMemo(() => {
     const items = WORKSPACE_SIDEBAR_DYNAMIC_NAVIGATION_ITEMS_LINKS.filter((item) => {
       // Permission check
@@ -150,15 +144,12 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
       );
       return hasPermission;
     }).map((item) => {
-      // Get pinned status and sort order from localStorage
       const preference = workspacePreferences.items[item.key];
-      const isPinned = preference?.is_pinned ?? false;
       const sortOrder = preference?.sort_order ?? 0;
 
       return {
         key: item.key,
         labelTranslationKey: item.labelTranslationKey,
-        isPinned,
         sortOrder,
       };
     });
@@ -167,15 +158,7 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
     return items.sort((a, b) => a.sortOrder - b.sortOrder);
   }, [workspaceSlug, allowPermissions, workspacePreferences]);
 
-  // Handle checkbox toggle
-  const handleWorkspaceItemToggle = useCallback(
-    (itemKey: string, checked: boolean) => {
-      toggleWorkspaceItem(itemKey, checked);
-    },
-    [toggleWorkspaceItem]
-  );
-
-  // Handle reorder of pinned workspace items
+  // Handle reorder of workspace items
   const handleReorder = useCallback(
     (newData: TWorkspaceNavigationItem[]) => {
       const itemsWithOrder = newData.map((item, index) => ({
@@ -265,10 +248,6 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
           <DialogHeader>
             <DialogHeading>
               <DialogTitle>{t("customize_navigation")}</DialogTitle>
-              <DialogDescription>
-                Selected items will always stay visible in your sidebar. You can still find the others anytime from the
-                More menu. These changes are personal to you and won&apos;t affect anyone else on your workspace.
-              </DialogDescription>
             </DialogHeading>
           </DialogHeader>
 
@@ -298,19 +277,16 @@ export const CustomizeNavigationDialog = observer(function CustomizeNavigationDi
               {/* Workspace Section */}
               <NavigationSection title={t("common.workspace")}>
                 <div className="flex flex-col gap-1 rounded-lg border border-subtle bg-layer-1 px-3 py-2">
-                  {/* Pinned Items - Draggable */}
                   <Sortable
                     data={workspaceItems}
                     onChange={handleReorder}
                     keyExtractor={(item) => item.key}
-                    id="workspace-pinned-items"
+                    id="workspace-items"
                     render={(item) => (
-                      <SortableCheckboxRow
-                        checked={!!workspacePreferences.items[item.key]?.is_pinned}
-                        onCheckedChange={(checked) => handleWorkspaceItemToggle(item.key, checked)}
-                      >
-                        {t(item.labelTranslationKey)}
-                      </SortableCheckboxRow>
+                      <div className="flex cursor-grab items-center gap-2 rounded-sm bg-layer-1 py-1.5 active:cursor-grabbing">
+                        <Icon icon={DragDropOutline} size="xs" tint="muted" />
+                        <span className="text-body-sm-regular">{t(item.labelTranslationKey)}</span>
+                      </div>
                     )}
                   />
                 </div>

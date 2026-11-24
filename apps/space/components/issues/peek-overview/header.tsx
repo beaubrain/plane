@@ -40,16 +40,16 @@ type TPeekModeOption = {
 };
 
 const PEEK_MODES: TPeekModeOption[] = [
-  { key: "side", icon: SidePeekOutline, label: "Side Peek" },
+  { key: "side", icon: SidePeekOutline, label: "common.side_peek" },
   {
     key: "modal",
     icon: ModalPeekOutline,
-    label: "Modal",
+    label: "common.modal",
   },
   {
     key: "full",
     icon: FullScreenPeekOutline,
-    label: "Full Screen",
+    label: "common.full_screen",
   },
 ];
 
@@ -65,7 +65,7 @@ export const PeekOverviewHeader = observer(function PeekOverviewHeader(props: Pr
     const urlToCopy = window.location.href;
 
     copyTextToClipboard(urlToCopy).then(() => {
-      setToast({
+      return setToast({
         type: "success",
         title: "Link copied!",
         message: "Work item link copied to clipboard.",
@@ -96,7 +96,7 @@ export const PeekOverviewHeader = observer(function PeekOverviewHeader(props: Pr
             showSearch={false}
             pinSelected={false}
             getOptionValue={(mode) => mode.key}
-            getOptionLabel={(mode) => mode.label}
+            getOptionLabel={(mode) => t(mode.label)}
             getOptionIcon={(mode) => <mode.icon className="size-4 shrink-0" />}
           >
             <Select.Trigger<TPeekModeOption>

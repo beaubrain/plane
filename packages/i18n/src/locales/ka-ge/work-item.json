@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# უარყოფითი ხმა} other {# უარყოფითი ხმა}}",
       "no_upvotes": "დადებითი ხმები ჯერ არ არის",
       "no_downvotes": "უარყოფითი ხმები ჯერ არ არის"
-    }
+    },
+    "estimated_hours": "სავარაუდო საათები",
+    "invalid_estimated_hours": "შეიყვანეთ არაუარყოფითი რიცხვი მაქსიმუმ ორი ათწილადი ნიშნით."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Unable to update work items",
         "message": "State change is not allowed for some work items. Ensure the state change is allowed."
       }
-    },
-    "upgrade_banner": {
-      "message": "შეცვალეთ მდგომარეობა, პრიორიტეტი და სხვა რამდენიმე სამუშაო ელემენტისთვის ერთდროულად. საშუალოდ დაზოგეთ სამი წუთი თითოეულ ოპერაციაზე.",
-      "cta": "განახლება One-ზე"
     }
   },
   "recurring_work_items": {

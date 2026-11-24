@@ -32,5 +32,23 @@
     "upgrade_plan": "升级计划",
     "plane_pro": "Plane Pro",
     "business": "商业版"
+  },
+  "navigation_ui": {
+    "icon_only": "仅显示图标",
+    "icon_with_label": "显示图标和名称",
+    "dock_app_rail": "固定应用栏",
+    "undock_app_rail": "取消固定应用栏",
+    "show_tab": "显示",
+    "clear_default": "清除默认设置",
+    "hide_in_more": "隐藏到更多菜单",
+    "subgroup_by": "子分组依据",
+    "wrong_email": "电子邮箱地址不正确？",
+    "marking_as_default": "正在设为默认",
+    "project_settings": "项目设置",
+    "instance_settings": "实例设置",
+    "images": "图片",
+    "light_mode": "切换到浅色模式",
+    "dark_mode": "切换到深色模式",
+    "back_to_plane": "返回 Plane"
   }
 }

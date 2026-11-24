@@ -12,7 +12,7 @@ import ProjectInsights from "./project-insights";
 
 function Overview() {
   return (
-    <AnalyticsWrapper i18nTitle="common.overview">
+    <AnalyticsWrapper i18nTitle="workspace_analytics.dashboard">
       <div className="flex flex-col gap-14">
         <TotalInsights analyticsType="overview" />
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-5">

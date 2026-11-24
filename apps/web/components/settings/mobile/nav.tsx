@@ -43,7 +43,7 @@ export const SettingsMobileNav = observer(function SettingsMobileNav(props: Prop
           size="sm"
           render={<button type="button" className="group z-50 shrink-0" />}
           icon={<Icon icon={MenuOutline} />}
-          aria-label="Toggle settings menu"
+          aria-label={t("settings")}
           onClick={() => toggleSidebar()}
         />
       </div>

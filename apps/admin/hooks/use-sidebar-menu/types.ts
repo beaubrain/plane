@@ -8,8 +8,6 @@ import type { IconGlyph } from "@makeplane/propel/components/icon";
 
 export type TSidebarMenuItem = {
   Icon: IconGlyph;
-  name: string;
-  /** Shown as the row's tooltip; the sidebar renders names only. */
-  description: string;
+  nameKey: string;
   href: string;
 };

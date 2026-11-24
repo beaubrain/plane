@@ -32,5 +32,23 @@
     "upgrade_plan": "Mettre à niveau",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Icône seule",
+    "icon_with_label": "Icône avec nom",
+    "dock_app_rail": "Ancrer la barre d’applications",
+    "undock_app_rail": "Détacher la barre d’applications",
+    "show_tab": "Afficher",
+    "clear_default": "Réinitialiser le choix par défaut",
+    "hide_in_more": "Masquer dans le menu Plus",
+    "subgroup_by": "Sous-grouper par",
+    "wrong_email": "Adresse e-mail incorrecte ?",
+    "marking_as_default": "Définition par défaut",
+    "project_settings": "Paramètres du projet",
+    "instance_settings": "Paramètres de l’instance",
+    "images": "Images",
+    "light_mode": "Passer au mode clair",
+    "dark_mode": "Passer au mode sombre",
+    "back_to_plane": "Retour à Plane"
   }
 }

@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Elemente de lucru rezolvate vs în așteptare",
     "projects_by_status": "Proiecte după statut",
     "active_users": "Utilizatori activi",
-    "intake_trends": "Tendințe de admitere"
+    "intake_trends": "Tendințe de admitere",
+    "assignee_workload": {
+      "title": "Volum de muncă",
+      "assigned_tasks": "Elemente de lucru atribuite",
+      "allocated_hours": "Ore alocate",
+      "invalid_range": "Data de încheiere trebuie să fie identică cu data de început sau ulterioară acesteia.",
+      "empty": "Niciun element de lucru atribuit nu corespunde acestor filtre.",
+      "work_date": "Data de lucru"
+    },
+    "dashboard": "Tablou de bord",
+    "count": "Număr"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Proiect} other {Proiecte}}",

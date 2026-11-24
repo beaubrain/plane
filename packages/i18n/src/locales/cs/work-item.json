@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# hlas dolů} few {# hlasy dolů} many {# hlasu dolů} other {# hlasů dolů}}",
       "no_upvotes": "Zatím žádné hlasy nahoru",
       "no_downvotes": "Zatím žádné hlasy dolů"
-    }
+    },
+    "estimated_hours": "Odhadovaná doba v hodinách",
+    "invalid_estimated_hours": "Zadejte nezáporné číslo s nejvýše dvěma desetinnými místy."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Nelze aktualizovat pracovní položky",
         "message": "Změna stavu není povolena pro některé pracovní položky. Ujistěte se, že je změna stavu povolena."
       }
-    },
-    "upgrade_banner": {
-      "message": "Měňte stav, prioritu a další vlastnosti u více pracovních položek najednou. V průměru ušetříte tři minuty na operaci.",
-      "cta": "Upgradovat na One"
     }
   },
   "recurring_work_items": {

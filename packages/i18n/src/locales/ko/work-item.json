@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {비추천 #개} other {비추천 #개}}",
       "no_upvotes": "아직 추천이 없습니다",
       "no_downvotes": "아직 비추천이 없습니다"
-    }
+    },
+    "estimated_hours": "예상 시간(시간 단위)",
+    "invalid_estimated_hours": "0 이상의 숫자를 소수점 둘째 자리까지 입력하세요."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "작업 항목을 업데이트할 수 없습니다",
         "message": "일부 작업 항목에 대해 상태 변경이 허용되지 않습니다. 상태 변경이 허용되는지 확인하세요."
       }
-    },
-    "upgrade_banner": {
-      "message": "여러 작업 항목의 상태, 우선순위 등을 한 번에 변경할 수 있습니다. 작업당 평균 3분을 절약합니다.",
-      "cta": "One으로 업그레이드"
     }
   },
   "recurring_work_items": {

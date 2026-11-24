@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import { useParams } from "next/navigation";
 import { Collapsible } from "@makeplane/propel/components/collapsible";
 // plane imports
-import { AnalyticsOutline, CyclesOutline, ProjectsOutline, ViewsOutline } from "@makeplane/propel/icons";
+import { AnalyticsOutline, ProjectsOutline, ViewsOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
 import { EUserWorkspaceRoles } from "@plane/types";
 // hooks
@@ -42,13 +42,6 @@ export const SidebarWorkspaceMenu = observer(function SidebarWorkspaceMenu() {
       href: `/${workspaceSlug}/workspace-views/all-issues/`,
       access: [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER, EUserWorkspaceRoles.GUEST],
       Icon: ViewsOutline,
-    },
-    {
-      key: "active-cycles",
-      labelTranslationKey: "sidebar.cycles",
-      href: `/${workspaceSlug}/active-cycles/`,
-      access: [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER],
-      Icon: CyclesOutline,
     },
     {
       key: "analytics",

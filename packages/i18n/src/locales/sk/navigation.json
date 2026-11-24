@@ -32,5 +32,23 @@
     "upgrade_plan": "Apgrejd plán",
     "plane_pro": "Plejn Pro",
     "business": "Biznis"
+  },
+  "navigation_ui": {
+    "icon_only": "Iba ikona",
+    "icon_with_label": "Ikona s názvom",
+    "dock_app_rail": "Pripnúť panel aplikácií",
+    "undock_app_rail": "Odopnúť panel aplikácií",
+    "show_tab": "Zobraziť",
+    "clear_default": "Zrušiť predvolené nastavenie",
+    "hide_in_more": "Skryť v ponuke Viac",
+    "subgroup_by": "Podskupiny podľa",
+    "wrong_email": "Nesprávna e-mailová adresa?",
+    "marking_as_default": "Nastavuje sa ako predvolené",
+    "project_settings": "Nastavenia projektu",
+    "instance_settings": "Nastavenia inštancie",
+    "images": "Obrázky",
+    "light_mode": "Prepnúť na svetlý režim",
+    "dark_mode": "Prepnúť na tmavý režim",
+    "back_to_plane": "Späť do Plane"
   }
 }

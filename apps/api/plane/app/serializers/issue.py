@@ -670,7 +670,7 @@ class IssueReactionSerializer(BaseSerializer):
 
 
 class IssueReactionLiteSerializer(DynamicBaseSerializer):
-    display_name = serializers.CharField(source="actor.display_name", read_only=True)
+    display_name = serializers.CharField(source="actor.name_for_display", read_only=True)
 
     class Meta:
         model = IssueReaction
@@ -678,7 +678,7 @@ class IssueReactionLiteSerializer(DynamicBaseSerializer):
 
 
 class CommentReactionSerializer(BaseSerializer):
-    display_name = serializers.CharField(source="actor.display_name", read_only=True)
+    display_name = serializers.CharField(source="actor.name_for_display", read_only=True)
 
     class Meta:
         model = CommentReaction
@@ -804,6 +804,7 @@ class IssueSerializer(DynamicBaseSerializer):
             "sort_order",
             "completed_at",
             "estimate_point",
+            "estimated_hours",
             "priority",
             "start_date",
             "target_date",
@@ -861,6 +862,7 @@ class IssueListDetailSerializer(serializers.Serializer):
             "sort_order": instance.sort_order,
             "completed_at": instance.completed_at,
             "estimate_point": instance.estimate_point_id,
+            "estimated_hours": str(instance.estimated_hours) if instance.estimated_hours is not None else None,
             "priority": instance.priority,
             "start_date": instance.start_date,
             "target_date": instance.target_date,

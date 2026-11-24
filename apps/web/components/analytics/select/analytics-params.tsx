@@ -4,7 +4,6 @@
  * See the LICENSE file for details.
  */
 
-import { useMemo } from "react";
 import { observer } from "mobx-react";
 import type { Control, UseFormSetValue } from "react-hook-form";
 import { Controller } from "react-hook-form";
@@ -13,6 +12,7 @@ import { CalendarOutline, PreferencesOutline } from "@makeplane/propel/icons";
 import { ANALYTICS_X_AXIS_VALUES, ANALYTICS_Y_AXIS_VALUES } from "@plane/constants";
 import type { IAnalyticsParams } from "@plane/types";
 import { ChartYAxisMetric } from "@plane/types";
+import { useTranslation } from "@plane/i18n";
 import { cn } from "@plane/utils";
 // plane web components
 import { SelectXAxis } from "./select-x-axis";
@@ -29,14 +29,17 @@ type Props = {
 
 export const AnalyticsSelectParams = observer(function AnalyticsSelectParams(props: Props) {
   const { control, params, classNames, isEpic } = props;
-  const xAxisOptions = useMemo(
-    () => ANALYTICS_X_AXIS_VALUES.filter((option) => option.value !== params.group_by),
-    [params.group_by]
-  );
-  const groupByOptions = useMemo(
-    () => ANALYTICS_X_AXIS_VALUES.filter((option) => option.value !== params.x_axis),
-    [params.x_axis]
-  );
+  const { t } = useTranslation();
+  const xOptions = ANALYTICS_X_AXIS_VALUES.map((option) => ({
+    value: option.value,
+    label: t(option.i18nKey, { count: 1 }),
+  }));
+  const xAxisOptions = xOptions.filter((option) => option.value !== params.group_by);
+  const groupByOptions = xOptions.filter((option) => option.value !== params.x_axis);
+  const yAxisOptions = ANALYTICS_Y_AXIS_VALUES.map((option) => ({
+    value: option.value,
+    label: t(option.i18nKey),
+  }));
 
   return (
     <div className={cn("flex w-full justify-between", classNames)}>
@@ -50,7 +53,7 @@ export const AnalyticsSelectParams = observer(function AnalyticsSelectParams(pro
               onChange={(val: ChartYAxisMetric | null) => {
                 onChange(val);
               }}
-              options={ANALYTICS_Y_AXIS_VALUES}
+              options={yAxisOptions}
               hiddenOptions={[
                 ChartYAxisMetric.ESTIMATE_POINT_COUNT,
                 isEpic ? ChartYAxisMetric.WORK_ITEM_COUNT : ChartYAxisMetric.EPIC_WORK_ITEM_COUNT,
@@ -71,7 +74,7 @@ export const AnalyticsSelectParams = observer(function AnalyticsSelectParams(pro
                 <div className="flex items-center gap-2">
                   <CalendarOutline className="h-3 w-3" />
                   <span className={cn("text-secondary", value && "text-primary")}>
-                    {xAxisOptions.find((v) => v.value === value)?.label || "Add Property"}
+                    {xAxisOptions.find((v) => v.value === value)?.label || t("common.properties")}
                   </span>
                 </div>
               }
@@ -92,12 +95,12 @@ export const AnalyticsSelectParams = observer(function AnalyticsSelectParams(pro
                 <div className="flex items-center gap-2">
                   <PreferencesOutline className="h-3 w-3" />
                   <span className={cn("text-secondary", value && "text-primary")}>
-                    {groupByOptions.find((v) => v.value === value)?.label || "Add Property"}
+                    {groupByOptions.find((v) => v.value === value)?.label || t("common.group_by")}
                   </span>
                 </div>
               }
               options={groupByOptions}
-              placeholder="Group By"
+              placeholder={t("common.group_by")}
               allowNoValue
             />
           )}

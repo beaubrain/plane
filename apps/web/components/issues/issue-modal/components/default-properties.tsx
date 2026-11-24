@@ -30,6 +30,7 @@ import { PrioritySelect } from "@/components/dropdowns/priority/priority-select"
 import { StateSelect } from "@/components/dropdowns/state/state-select";
 import { ParentIssuesListModal } from "@/components/issues/parent-issues-list-modal";
 import { IssueIdentifier } from "@/components/issues/issue-detail/issue-identifier";
+import { EstimatedHoursInput, isValidEstimatedHours } from "@/components/issues/estimated-hours-input";
 // hooks
 import { useProjectEstimates } from "@/hooks/store/estimates";
 import { useProject } from "@/hooks/store/use-project";
@@ -198,6 +199,33 @@ export const IssueDefaultProperties = observer(function IssueDefaultProperties(p
             variant="pill-md"
             testId="create-work-item-due-date-select"
           />
+        )}
+      />
+      <Controller
+        control={control}
+        name="estimated_hours"
+        rules={{ validate: (value) => isValidEstimatedHours(value) || t("issue.invalid_estimated_hours") }}
+        render={({ field, fieldState }) => (
+          <div>
+            <label className="flex flex-wrap items-center gap-2 text-body-xs-regular text-secondary">
+              {t("issue.estimated_hours")}
+              <EstimatedHoursInput
+                {...field}
+                className="w-24"
+                value={field.value ?? ""}
+                aria-invalid={Boolean(fieldState.error)}
+                onChange={(event) => {
+                  field.onChange(event.target.value || null);
+                  handleFormChange();
+                }}
+              />
+            </label>
+            {fieldState.error && (
+              <span role="alert" className="text-caption-sm-regular text-danger-primary">
+                {fieldState.error.message}
+              </span>
+            )}
+          </div>
         )}
       />
       {projectDetails?.cycle_view && projectId && (

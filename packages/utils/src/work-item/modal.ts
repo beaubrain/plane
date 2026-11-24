@@ -15,6 +15,7 @@ export const getUpdateFormDataForReset = (projectId: string | null | undefined, 
   name: formData.name,
   description_html: formData.description_html,
   priority: formData.priority,
+  estimated_hours: formData.estimated_hours,
   start_date: formData.start_date,
   target_date: formData.target_date,
 });

@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# vote contre} many {# votes contre} other {# votes contre}}",
       "no_upvotes": "Pas encore de vote pour",
       "no_downvotes": "Pas encore de vote contre"
-    }
+    },
+    "estimated_hours": "Heures estimées",
+    "invalid_estimated_hours": "Saisissez un nombre positif ou nul avec deux décimales au maximum."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Impossible de mettre à jour les éléments de travail",
         "message": "Le changement d'état n'est pas autorisé pour certains éléments de travail. Assurez-vous que le changement d'état est autorisé."
       }
-    },
-    "upgrade_banner": {
-      "message": "Modifiez l’état, la priorité et bien plus pour plusieurs éléments de travail à la fois. Économisez en moyenne trois minutes par opération.",
-      "cta": "Mettre à niveau vers One"
     }
   },
   "recurring_work_items": {

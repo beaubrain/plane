@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# Runterstimme} other {# Runterstimmen}}",
       "no_upvotes": "Noch keine Hochstimmen",
       "no_downvotes": "Noch keine Runterstimmen"
-    }
+    },
+    "estimated_hours": "Geschätzte Stunden",
+    "invalid_estimated_hours": "Gib eine nichtnegative Zahl mit bis zu zwei Nachkommastellen ein."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Arbeitsaufgaben können nicht aktualisiert werden",
         "message": "Statusänderung ist für einige Arbeitsaufgaben nicht erlaubt. Stellen Sie sicher, dass die Statusänderung zulässig ist."
       }
-    },
-    "upgrade_banner": {
-      "message": "Status, Priorität und mehr für mehrere Arbeitselemente gleichzeitig ändern. Im Schnitt drei Minuten pro Vorgang sparen.",
-      "cta": "Upgrade auf One"
     }
   },
   "recurring_work_items": {

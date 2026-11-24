@@ -13,7 +13,7 @@ import { useTranslation } from "@plane/i18n";
 import { AreaChart } from "@plane/blocks/charts/area-chart";
 import { EmptyStateCompact } from "@plane/blocks/empty-state";
 import type { IChartResponse, TChartData } from "@plane/types";
-import { cn, renderFormattedDate } from "@plane/utils";
+import { cn } from "@plane/utils";
 // hooks
 import { useAnalytics } from "@/hooks/store/use-analytics";
 // services
@@ -35,7 +35,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
     isEpic,
   } = useAnalytics();
   const params = useParams();
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const workspaceSlug = params.workspaceSlug.toString();
   const { data: createdVsResolvedData, isLoading: isCreatedVsResolvedLoading } = useSWR(
     `created-vs-resolved-${workspaceSlug}-${selectedDuration}-${selectedProjects}-${selectedCycle}-${selectedModule}-${isPeekView}-${isEpic}`,
@@ -55,18 +55,27 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
   );
   const parsedData: TChartData<string, string>[] = useMemo(() => {
     if (!createdVsResolvedData?.data) return [];
-    return createdVsResolvedData.data.map((datum) => ({
-      ...datum,
-      [datum.key]: datum.count,
-      name: renderFormattedDate(datum.key) ?? datum.key,
-    }));
-  }, [createdVsResolvedData]);
+    const dates = new Intl.DateTimeFormat(currentLocale === "ua" ? "uk" : currentLocale, {
+      dateStyle: "medium",
+      timeZone: "UTC",
+    });
+    return createdVsResolvedData.data.map((datum) => {
+      const date = new Date(datum.key);
+      return {
+        ...datum,
+        [datum.key]: datum.count,
+        name: Number.isNaN(date.getTime()) ? datum.key : dates.format(date),
+      };
+    });
+  }, [createdVsResolvedData, currentLocale]);
 
+  const resolvedLabel = t("common.resolved");
+  const createdLabel = t("created");
   const areas = useMemo(
     () => [
       {
         key: "completed_issues",
-        label: "Resolved",
+        label: resolvedLabel,
         fill: "#19803833",
         fillOpacity: 1,
         stackId: "bar-one",
@@ -77,7 +86,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
       },
       {
         key: "created_issues",
-        label: "Created",
+        label: createdLabel,
         fill: "#1192E833",
         fillOpacity: 1,
         stackId: "bar-one",
@@ -87,7 +96,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
         strokeOpacity: 1,
       },
     ],
-    []
+    [createdLabel, resolvedLabel]
   );
 
   return (

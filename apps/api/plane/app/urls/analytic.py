@@ -19,6 +19,7 @@ from plane.app.views import (
     ProjectAdvanceAnalyticsStatsEndpoint,
     ProjectAdvanceAnalyticsChartEndpoint,
 )
+from plane.app.views.analytic.workload import AssigneeWorkloadEndpoint
 
 
 urlpatterns = [
@@ -71,6 +72,11 @@ urlpatterns = [
         "workspaces/<str:slug>/advance-analytics-charts/",
         AdvanceAnalyticsChartEndpoint.as_view(),
         name="advance-analytics-chart",
+    ),
+    path(
+        "workspaces/<str:slug>/assignee-workload/",
+        AssigneeWorkloadEndpoint.as_view(),
+        name="assignee-workload",
     ),
     path(
         "workspaces/<str:slug>/projects/<uuid:project_id>/advance-analytics/",

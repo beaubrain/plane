@@ -59,9 +59,9 @@ function AnalyticsPage({ params }: Route.ComponentProps) {
             <div className="flex h-full overflow-hidden">
               <Tabs variant="underline" layout="fill" value={selectedTab}>
                 <div className="flex h-full w-full flex-col">
-                  <div className="flex w-full items-center justify-between gap-4 overflow-hidden border-b border-subtle-1 bg-surface-1 px-page-x py-2">
+                  <div className="flex w-full flex-wrap-reverse items-center justify-between gap-x-4 gap-y-2 overflow-hidden border-b border-subtle-1 bg-surface-1 px-page-x py-2">
                     {/* pulls the underline onto the header's bottom border */}
-                    <div className="-mb-2">
+                    <div className="-mb-2 max-w-full overflow-x-auto">
                       <TabsList>
                         {ANALYTICS_TABS.map((tab) => (
                           <UnderlineTabLink

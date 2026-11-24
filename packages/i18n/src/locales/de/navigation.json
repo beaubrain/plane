@@ -32,5 +32,23 @@
     "upgrade_plan": "Plan upgraden",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Nur Symbol",
+    "icon_with_label": "Symbol mit Namen",
+    "dock_app_rail": "App-Leiste anheften",
+    "undock_app_rail": "App-Leiste lösen",
+    "show_tab": "Anzeigen",
+    "clear_default": "Standard zurücksetzen",
+    "hide_in_more": "Im Menü „Mehr“ ausblenden",
+    "subgroup_by": "Untergruppieren nach",
+    "wrong_email": "Falsche E-Mail-Adresse?",
+    "marking_as_default": "Wird als Standard festgelegt",
+    "project_settings": "Projekteinstellungen",
+    "instance_settings": "Instanzeinstellungen",
+    "images": "Bilder",
+    "light_mode": "Zum hellen Modus wechseln",
+    "dark_mode": "Zum dunklen Modus wechseln",
+    "back_to_plane": "Zurück zu Plane"
   }
 }

@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Çözülen vs bekleyen iş öğeleri",
     "projects_by_status": "Durumuna göre projeler",
     "active_users": "Aktif kullanıcılar",
-    "intake_trends": "Alım Eğilimleri"
+    "intake_trends": "Alım Eğilimleri",
+    "assignee_workload": {
+      "title": "İş Yükü",
+      "assigned_tasks": "Atanan iş öğeleri",
+      "allocated_hours": "Ayrılan saat",
+      "invalid_range": "Bitiş tarihi, başlangıç tarihiyle aynı veya daha sonra olmalıdır.",
+      "empty": "Bu filtrelerle eşleşen atanmış iş öğesi yok.",
+      "work_date": "Çalışma tarihi"
+    },
+    "dashboard": "Kontrol paneli",
+    "count": "Sayı"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Proje} other {Projeler}}",

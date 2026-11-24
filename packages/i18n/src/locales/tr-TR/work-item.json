@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# olumsuz oy} other {# olumsuz oy}}",
       "no_upvotes": "Henüz olumlu oy yok",
       "no_downvotes": "Henüz olumsuz oy yok"
-    }
+    },
+    "estimated_hours": "Tahmini saat",
+    "invalid_estimated_hours": "En fazla iki ondalık basamaklı, negatif olmayan bir sayı girin."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "İş öğeleri güncellenemiyor",
         "message": "Bazı iş öğeleri için durum değişikliğine izin verilmiyor. Durum değişikliğine izin verildiğinden emin olun."
       }
-    },
-    "upgrade_banner": {
-      "message": "Birden fazla iş öğesinin durumunu, önceliğini ve daha fazlasını tek seferde değiştirin. İşlem başına ortalama üç dakika kazanın.",
-      "cta": "One'a yükseltin"
     }
   },
   "recurring_work_items": {

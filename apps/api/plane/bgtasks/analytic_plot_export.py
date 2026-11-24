@@ -16,6 +16,7 @@ from django.template.loader import render_to_string
 from django.db.models import Q, Case, Value, When
 from django.db import models
 from django.db.models.functions import Cast, Concat
+from plane.utils.user_name import user_name_for_display
 
 # Module imports
 from plane.db.models import Issue
@@ -97,6 +98,7 @@ def get_assignee_details(slug, filters):
             **filters,
         )
         .annotate(
+            assignees__display_name=user_name_for_display("assignees"),
             assignees__avatar_url=Case(
                 # If `avatar_asset` exists, use it to generate the asset URL
                 When(

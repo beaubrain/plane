@@ -28,6 +28,7 @@ from django.db import models
 # Third party imports
 from rest_framework import status
 from rest_framework.response import Response
+from plane.utils.user_name import user_name_for_display
 from plane.app.permissions import ProjectEntityPermission
 from plane.app.serializers import ModuleDetailSerializer
 from plane.db.models import Issue, Module, ModuleLink, UserFavorite, Project
@@ -332,7 +333,7 @@ class ModuleArchiveUnarchiveEndpoint(BaseAPIView):
                     .annotate(first_name=F("assignees__first_name"))
                     .annotate(last_name=F("assignees__last_name"))
                     .annotate(assignee_id=F("assignees__id"))
-                    .annotate(display_name=F("assignees__display_name"))
+                    .annotate(display_name=user_name_for_display("assignees"))
                     .annotate(
                         avatar_url=Case(
                             # If `avatar_asset` exists, use it to generate the asset URL
@@ -439,7 +440,7 @@ class ModuleArchiveUnarchiveEndpoint(BaseAPIView):
                 .annotate(first_name=F("assignees__first_name"))
                 .annotate(last_name=F("assignees__last_name"))
                 .annotate(assignee_id=F("assignees__id"))
-                .annotate(display_name=F("assignees__display_name"))
+                .annotate(display_name=user_name_for_display("assignees"))
                 .annotate(
                     avatar_url=Case(
                         # If `avatar_asset` exists, use it to generate the asset URL

@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Éléments de travail résolus vs en attente",
     "projects_by_status": "Projets par statut",
     "active_users": "Utilisateurs actifs",
-    "intake_trends": "Tendances des admissions"
+    "intake_trends": "Tendances des admissions",
+    "assignee_workload": {
+      "title": "Charge de travail",
+      "assigned_tasks": "Éléments de travail attribués",
+      "allocated_hours": "Heures attribuées",
+      "invalid_range": "La date de fin doit être égale ou postérieure à la date de début.",
+      "empty": "Aucun élément de travail attribué ne correspond à ces filtres.",
+      "work_date": "Date de travail"
+    },
+    "dashboard": "Tableau de bord",
+    "count": "Nombre"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projet} other {Projets}}",

@@ -29,6 +29,7 @@ class ViewIssueListSerializer(serializers.Serializer):
             "sort_order": instance.sort_order,
             "completed_at": instance.completed_at,
             "estimate_point": instance.estimate_point_id,
+            "estimated_hours": str(instance.estimated_hours) if instance.estimated_hours is not None else None,
             "priority": instance.priority,
             "start_date": instance.start_date,
             "target_date": instance.target_date,

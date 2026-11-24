@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "해결된 vs 대기 중인 작업 항목",
     "projects_by_status": "상태별 프로젝트",
     "active_users": "활성 사용자",
-    "intake_trends": "수용 추세"
+    "intake_trends": "수용 추세",
+    "assignee_workload": {
+      "title": "업무량",
+      "assigned_tasks": "할당된 작업 항목",
+      "allocated_hours": "할당 시간",
+      "invalid_range": "종료일은 시작일과 같거나 이후여야 합니다.",
+      "empty": "필터에 해당하는 할당된 작업 항목이 없습니다.",
+      "work_date": "작업일"
+    },
+    "dashboard": "대시보드",
+    "count": "건수"
   },
   "workspace_projects": {
     "label": "{count, plural, one {프로젝트} other {프로젝트}}",

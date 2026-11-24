@@ -375,7 +375,7 @@ class ExportWorkspaceUserActivityEndpoint(BaseAPIView):
         ]
         rows = [
             (
-                activity.actor.display_name,
+                activity.actor.name_for_display,
                 f"{activity.project.identifier} - {activity.issue.sequence_id if activity.issue else ''}",
                 activity.project.name,
                 activity.created_at,

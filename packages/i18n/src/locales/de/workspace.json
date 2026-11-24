@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Gelöste vs. ausstehende Arbeitsaufgaben",
     "projects_by_status": "Projekte nach Status",
     "active_users": "Aktive Nutzer",
-    "intake_trends": "Aufnahmetrends"
+    "intake_trends": "Aufnahmetrends",
+    "assignee_workload": {
+      "title": "Auslastung",
+      "assigned_tasks": "Zugewiesene Arbeitselemente",
+      "allocated_hours": "Zugewiesene Stunden",
+      "invalid_range": "Das Enddatum darf nicht vor dem Startdatum liegen.",
+      "empty": "Keine zugewiesenen Arbeitselemente entsprechen diesen Filtern.",
+      "work_date": "Arbeitstag"
+    },
+    "dashboard": "Dashboard",
+    "count": "Anzahl"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projekt} few {Projekte} other {Projekte}}",

@@ -32,5 +32,23 @@
     "upgrade_plan": "Nâng cấp gói",
     "plane_pro": "Plane Pro",
     "business": "Doanh nghiệp"
+  },
+  "navigation_ui": {
+    "icon_only": "Chỉ biểu tượng",
+    "icon_with_label": "Biểu tượng kèm tên",
+    "dock_app_rail": "Ghim thanh ứng dụng",
+    "undock_app_rail": "Bỏ ghim thanh ứng dụng",
+    "show_tab": "Hiển thị",
+    "clear_default": "Xóa lựa chọn mặc định",
+    "hide_in_more": "Ẩn trong menu Thêm",
+    "subgroup_by": "Nhóm phụ theo",
+    "wrong_email": "Địa chỉ email không đúng?",
+    "marking_as_default": "Đang đặt làm mặc định",
+    "project_settings": "Cài đặt dự án",
+    "instance_settings": "Cài đặt phiên bản",
+    "images": "Hình ảnh",
+    "light_mode": "Chuyển sang chế độ sáng",
+    "dark_mode": "Chuyển sang chế độ tối",
+    "back_to_plane": "Quay lại Plane"
   }
 }

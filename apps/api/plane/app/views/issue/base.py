@@ -180,6 +180,7 @@ class IssueListEndpoint(BaseAPIView):
                 "sort_order",
                 "completed_at",
                 "estimate_point",
+                "estimated_hours",
                 "priority",
                 "start_date",
                 "target_date",
@@ -470,6 +471,7 @@ class IssueViewSet(BaseViewSet):
             )
             datetime_fields = ["created_at", "updated_at"]
             issue = user_timezone_converter(issue, datetime_fields, request.user.user_timezone)
+            issue["estimated_hours"] = serializer.data["estimated_hours"]
             # Send the model activity
             model_activity.delay(
                 model_name="issue",
@@ -878,6 +880,7 @@ class IssuePaginatedViewSet(BaseViewSet):
             "sort_order",
             "completed_at",
             "estimate_point",
+            "estimated_hours",
             "priority",
             "start_date",
             "target_date",

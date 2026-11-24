@@ -27,8 +27,6 @@ interface ResizableSidebarProps {
   onCollapsedChange?: (collapsed: boolean) => void;
   className?: string;
   children?: ReactElement;
-  extendedSidebar?: ReactElement;
-  isAnyExtendedSidebarExpanded?: boolean;
   isAnySidebarDropdownOpen?: boolean;
 }
 
@@ -46,14 +44,11 @@ export function ResizableSidebar({
   maxWidth = 350,
   className = "",
   children,
-  extendedSidebar,
-  isAnyExtendedSidebarExpanded = false,
   isAnySidebarDropdownOpen = false,
 }: ResizableSidebarProps) {
   const { t } = useTranslation();
   // states
   const [isResizing, setIsResizing] = useState(false);
-  const [isHoveringTrigger, setIsHoveringTrigger] = useState(false);
   // refs
   const peekTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const initialWidthRef = useRef<number>(0);
@@ -121,7 +116,6 @@ export function ResizableSidebar({
   const toggleCollapsed = useCallback(() => {
     toggleCollapsedProp();
     setShowPeek(false);
-    setIsHoveringTrigger(false);
     if (peekTimeoutRef.current) {
       clearTimeout(peekTimeoutRef.current);
     }
@@ -136,12 +130,12 @@ export function ResizableSidebar({
   }, [isCollapsed, showPeek]);
 
   const handlePeekLeave = useCallback(() => {
-    if (isCollapsed && !isAnyExtendedSidebarExpanded && !isAnySidebarDropdownOpen) {
+    if (isCollapsed && !isAnySidebarDropdownOpen) {
       peekTimeoutRef.current = setTimeout(() => {
         setShowPeek(false);
       }, peekDuration);
     }
-  }, [isCollapsed, peekDuration, setShowPeek, isAnyExtendedSidebarExpanded, isAnySidebarDropdownOpen]);
+  }, [isCollapsed, peekDuration, setShowPeek, isAnySidebarDropdownOpen]);
 
   // Set up event listeners for resizing
   useEffect(() => {
@@ -170,23 +164,10 @@ export function ResizableSidebar({
     []
   );
 
-  useEffect(() => {
-    if (!isAnySidebarDropdownOpen && isCollapsed && isHoveringTrigger) {
-      handlePeekLeave();
-    }
-  }, [isAnySidebarDropdownOpen]);
-
-  useEffect(() => {
-    if (!isAnyExtendedSidebarExpanded && isCollapsed && isHoveringTrigger) {
-      handlePeekLeave();
-    }
-  }, [isAnyExtendedSidebarExpanded]);
-
   // Reset peek when sidebar is expanded
   useEffect(() => {
     if (!isCollapsed) {
       setShowPeek(false);
-      setIsHoveringTrigger(false);
       if (peekTimeoutRef.current) {
         clearTimeout(peekTimeoutRef.current);
       }
@@ -225,12 +206,7 @@ export function ResizableSidebar({
         aria-hidden={isCollapsed}
         data-prevent-outside-click={isMobile}
       >
-        <aside
-          className={cn(
-            "group/sidebar relative flex h-full w-full flex-col overflow-hidden bg-surface-1",
-            isAnyExtendedSidebarExpanded && "rounded-none"
-          )}
-        >
+        <aside className="group/sidebar relative flex h-full w-full flex-col overflow-hidden bg-surface-1">
           {children}
 
           {/* Resize Handle */}
@@ -278,8 +254,7 @@ export function ResizableSidebar({
         <aside
           className={cn(
             "group/sidebar relative z-20 flex h-full w-full flex-col overflow-hidden bg-surface-1 pt-4",
-            "self-center rounded-md rounded-tl-none rounded-bl-none border-r border-subtle",
-            isAnyExtendedSidebarExpanded && "rounded-none"
+            "self-center rounded-md rounded-tl-none rounded-bl-none border-r border-subtle"
           )}
         >
           {children}
@@ -305,9 +280,6 @@ export function ResizableSidebar({
           />
         </aside>
       </div>
-
-      {/* Extended Sidebar */}
-      {extendedSidebar && extendedSidebar}
     </>
   );
 }

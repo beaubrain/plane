@@ -164,7 +164,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def full_name(self):
         """Return user's full name (first + last)."""
-        return f"{self.first_name} {self.last_name}".strip()
+        return " ".join(part.strip() for part in (self.first_name, self.last_name) if part and part.strip())
+
+    @property
+    def name_for_display(self):
+        return self.full_name or self.display_name
 
     def save(self, *args, **kwargs):
         self.email = self.email.lower().strip()
@@ -235,6 +239,7 @@ class Profile(TimeAuditModel):
     # Last visited workspace
     last_workspace_id = models.UUIDField(null=True)
     # address data
+    # Historical billing addresses remain stored for existing installations.
     billing_address_country = models.CharField(max_length=255, default="INDIA")
     billing_address = models.JSONField(null=True)
     has_billing_address = models.BooleanField(default=False)

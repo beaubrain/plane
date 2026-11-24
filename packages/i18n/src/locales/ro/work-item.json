@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# vot negativ} few {# voturi negative} other {# de voturi negative}}",
       "no_upvotes": "Încă nu există voturi pozitive",
       "no_downvotes": "Încă nu există voturi negative"
-    }
+    },
+    "estimated_hours": "Ore estimate",
+    "invalid_estimated_hours": "Introduceți un număr nenegativ cu cel mult două zecimale."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Imposibil de actualizat elementele de lucru",
         "message": "Schimbarea stării nu este permisă pentru unele elemente de lucru. Asigură-te că schimbarea stării este permisă."
       }
-    },
-    "upgrade_banner": {
-      "message": "Schimbă starea, prioritatea și multe altele pentru mai multe activități simultan. Economisește în medie trei minute per operațiune.",
-      "cta": "Treci la One"
     }
   },
   "recurring_work_items": {

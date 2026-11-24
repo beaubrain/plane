@@ -4,6 +4,7 @@
 
 # Django imports
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 
@@ -41,6 +42,9 @@ class DraftIssue(WorkspaceBaseModel):
         related_name="draft_issue_estimates",
         null=True,
         blank=True,
+    )
+    estimated_hours = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)]
     )
     name = models.CharField(max_length=255, verbose_name="Issue Name", blank=True, null=True)
     description_json = models.JSONField(blank=True, default=dict)

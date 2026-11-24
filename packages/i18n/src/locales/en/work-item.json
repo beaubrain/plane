@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# downvote} other {# downvotes}}",
       "no_upvotes": "No upvotes yet",
       "no_downvotes": "No downvotes yet"
-    }
+    },
+    "estimated_hours": "Estimated hours",
+    "invalid_estimated_hours": "Enter a non-negative number with up to two decimal places."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Unable to update work items",
         "message": "State change is not allowed for some work items. Ensure the state change is allowed."
       }
-    },
-    "upgrade_banner": {
-      "message": "Change state, priority, and more for several work items at once. Save three minutes on an average per operation.",
-      "cta": "Upgrade to One"
     }
   },
   "recurring_work_items": {

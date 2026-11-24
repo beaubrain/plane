@@ -12,6 +12,7 @@ from django.db.models import QuerySet
 from typing import List, Optional, Dict, Any, Union
 
 # Module imports
+from plane.utils.user_name import user_name_for_display
 from plane.db.models import (
     Cycle,
     Issue,
@@ -132,7 +133,7 @@ def issue_on_results(
                                 default=F("votes__actor__avatar"),
                                 output_field=CharField(),
                             ),
-                            display_name=F("votes__actor__display_name"),
+                            display_name=user_name_for_display("votes__actor"),
                         ),
                     ),
                 ),
@@ -166,7 +167,7 @@ def issue_on_results(
                                 default=F("issue_reactions__actor__avatar"),
                                 output_field=CharField(),
                             ),
-                            display_name=F("issue_reactions__actor__display_name"),
+                            display_name=user_name_for_display("issue_reactions__actor"),
                         ),
                     ),
                 ),

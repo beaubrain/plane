@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Werkitems opgelost versus openstaand",
     "projects_by_status": "Projecten op status",
     "active_users": "Actieve gebruikers",
-    "intake_trends": "Intaketrends"
+    "intake_trends": "Intaketrends",
+    "assignee_workload": {
+      "title": "Werklast",
+      "assigned_tasks": "Toegewezen werkitems",
+      "allocated_hours": "Toegewezen uren",
+      "invalid_range": "De einddatum moet op of na de startdatum liggen.",
+      "empty": "Er zijn geen toegewezen werkitems die aan deze filters voldoen.",
+      "work_date": "Werkdatum"
+    },
+    "dashboard": "Dashboard",
+    "count": "Aantal"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Project} other {Projecten}}",

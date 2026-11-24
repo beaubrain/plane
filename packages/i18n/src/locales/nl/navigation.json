@@ -32,5 +32,23 @@
     "upgrade_plan": "Abonnement upgraden",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "Alleen pictogram",
+    "icon_with_label": "Pictogram met naam",
+    "dock_app_rail": "App-balk vastzetten",
+    "undock_app_rail": "App-balk losmaken",
+    "show_tab": "Tonen",
+    "clear_default": "Standaard wissen",
+    "hide_in_more": "Verbergen in het menu Meer",
+    "subgroup_by": "Subgroeperen op",
+    "wrong_email": "Onjuist e-mailadres?",
+    "marking_as_default": "Wordt als standaard ingesteld",
+    "project_settings": "Projectinstellingen",
+    "instance_settings": "Instantie-instellingen",
+    "images": "Afbeeldingen",
+    "light_mode": "Overschakelen naar lichte modus",
+    "dark_mode": "Overschakelen naar donkere modus",
+    "back_to_plane": "Terug naar Plane"
   }
 }

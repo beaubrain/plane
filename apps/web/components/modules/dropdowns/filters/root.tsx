@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 // plane imports
 import { MenuCheckboxItem, MenuSeparator } from "@makeplane/propel/components/menu";
 import type { TModuleStatus } from "@plane/blocks/icons";
@@ -26,6 +27,7 @@ type Props = {
 };
 
 export const ModuleFiltersSelection = observer(function ModuleFiltersSelection(props: Props) {
+  const { t } = useTranslation();
   const {
     displayFilters,
     filters,
@@ -40,7 +42,7 @@ export const ModuleFiltersSelection = observer(function ModuleFiltersSelection(p
       {!isArchived && (
         <>
           <MenuCheckboxItem
-            label="Favorites"
+            label={t("sidebar.favorites")}
             checked={!!displayFilters.favorites}
             onCheckedChange={(checked) => handleDisplayFiltersUpdate({ favorites: checked })}
           />

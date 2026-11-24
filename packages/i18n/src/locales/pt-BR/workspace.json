@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Itens de trabalho resolvidos vs pendentes",
     "projects_by_status": "Projetos por status",
     "active_users": "Usuários ativos",
-    "intake_trends": "Tendências de entrada"
+    "intake_trends": "Tendências de entrada",
+    "assignee_workload": {
+      "title": "Carga de trabalho",
+      "assigned_tasks": "Itens de trabalho atribuídos",
+      "allocated_hours": "Horas alocadas",
+      "invalid_range": "A data de término deve ser igual ou posterior à data de início.",
+      "empty": "Nenhum item de trabalho atribuído corresponde a esses filtros.",
+      "work_date": "Data de trabalho"
+    },
+    "dashboard": "Painel",
+    "count": "Contagem"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projeto} other {Projetos}}",

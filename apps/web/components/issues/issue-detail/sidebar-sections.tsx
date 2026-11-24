@@ -22,6 +22,7 @@ import { calculateTimeAgo, cn, renderFormattedDate } from "@plane/utils";
 // components
 import { SidebarPropertyListItem } from "@/components/common/layout/sidebar/property-list-item";
 import { EstimateSelect } from "@/components/dropdowns/estimate/estimate-select";
+import { EstimatedHoursInput, isValidEstimatedHours } from "@/components/issues/estimated-hours-input";
 import { IssueParentSelectRoot } from "@/components/issues/parent-select-root";
 // hooks
 import { useProjectEstimates } from "@/hooks/store/estimates";
@@ -124,6 +125,31 @@ export const IssueDetailSidebarSections = observer(function IssueDetailSidebarSe
 
           <SidebarPropertyListItem icon={LabelsOutline} label={t("common.labels")}>
             <IssueLabel workspaceSlug={workspaceSlug} projectId={projectId} issueId={issueId} disabled={disabled} />
+          </SidebarPropertyListItem>
+
+          <SidebarPropertyListItem icon={EstimateOutline} label={t("issue.estimated_hours")}>
+            <EstimatedHoursInput
+              key={`${issueId}:${issue.estimated_hours ?? ""}`}
+              defaultValue={issue.estimated_hours ?? ""}
+              disabled={disabled}
+              className="w-full"
+              onBlur={(event) => {
+                const input = event.currentTarget;
+                const value = input.value || null;
+                if (!input.validity.valid || !isValidEstimatedHours(value)) {
+                  input.value = String(issue.estimated_hours ?? "");
+                  return;
+                }
+                const previous = issue.estimated_hours == null ? null : Number(issue.estimated_hours);
+                const updated = value === null ? null : Number(value);
+                if (updated !== previous) {
+                  void issueOperations.update(workspaceSlug, projectId, issueId, { estimated_hours: value });
+                }
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") event.currentTarget.blur();
+              }}
+            />
           </SidebarPropertyListItem>
 
           {projectId && areEstimateEnabledByProjectId(projectId) && (

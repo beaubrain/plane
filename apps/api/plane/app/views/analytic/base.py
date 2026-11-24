@@ -16,6 +16,7 @@ from rest_framework.response import Response
 
 # Module imports
 from plane.app.permissions import WorkSpaceAdminPermission
+from plane.utils.user_name import user_name_for_display
 from plane.app.serializers import AnalyticViewSerializer
 from plane.app.views.base import BaseAPIView, BaseViewSet
 from plane.bgtasks.analytic_plot_export import analytic_export_task
@@ -106,6 +107,7 @@ class AnalyticsEndpoint(BaseAPIView):
                     **filters,
                 )
                 .annotate(
+                    assignees__display_name=user_name_for_display("assignees"),
                     assignees__avatar_url=Case(
                         # If `avatar_asset` exists, use it to generate the asset URL
                         When(
@@ -309,6 +311,7 @@ class DefaultAnalyticsEndpoint(BaseAPIView):
 
         most_issue_created_user = (
             base_issues.exclude(created_by=None)
+            .annotate(created_by__display_name=user_name_for_display("created_by"))
             .values(*user_details)
             .annotate(count=Count("id"))
             .annotate(
@@ -341,6 +344,7 @@ class DefaultAnalyticsEndpoint(BaseAPIView):
         most_issue_closed_user = (
             base_issues.filter(completed_at__isnull=False)
             .exclude(assignees=None)
+            .annotate(assignees__display_name=user_name_for_display("assignees"))
             .values(*user_assignee_details)
             .annotate(
                 assignees__avatar_url=Case(
@@ -365,6 +369,7 @@ class DefaultAnalyticsEndpoint(BaseAPIView):
 
         pending_issue_user = (
             base_issues.filter(completed_at__isnull=True)
+            .annotate(assignees__display_name=user_name_for_display("assignees"))
             .values(*user_assignee_details)
             .annotate(count=Count("id"))
             .annotate(

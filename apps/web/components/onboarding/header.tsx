@@ -61,11 +61,7 @@ export const OnboardingHeader = observer(function OnboardingHeader(props: Onboar
   // derived values
   const currentStepNumber = stepOrder.indexOf(currentStep) + 1;
   const totalSteps = stepOrder.length;
-  const userName = user?.display_name
-    ? user?.display_name
-    : user?.first_name
-      ? `${user?.first_name} ${user?.last_name ?? ""}`
-      : user?.email;
+  const userName = user?.display_name || user?.email;
 
   return (
     <div className="sticky top-0 z-10 flex flex-col gap-4">

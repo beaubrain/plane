@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 // plane imports
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@makeplane/propel/components/menu";
+import { useTranslation } from "@plane/i18n";
 import { getFileURL } from "@plane/utils";
 // hooks
 import { useUser } from "@/hooks/store/user";
@@ -21,16 +22,13 @@ type TSwitchAccountDropdownProps = {
 
 export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(props: TSwitchAccountDropdownProps) {
   const { fullName } = props;
+  const { t } = useTranslation();
   // states
   const [showSwitchAccountModal, setShowSwitchAccountModal] = useState(false);
   // store hooks
   const { data: user } = useUser();
 
-  const displayName = user?.first_name
-    ? `${user?.first_name} ${user?.last_name ?? ""}`
-    : fullName && fullName.trim().length > 0
-      ? fullName
-      : user?.email;
+  const displayName = fullName?.trim() || user?.display_name || user?.email;
 
   if (!displayName && !fullName) return null;
 
@@ -55,7 +53,11 @@ export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(pro
           <span className="text-body-sm-regular text-secondary">{displayName}</span>
         </MenuTrigger>
         <MenuContent side="bottom" align="end">
-          <MenuItem variant="danger" label="Wrong e-mail address?" onClick={() => setShowSwitchAccountModal(true)} />
+          <MenuItem
+            variant="danger"
+            label={t("navigation_ui.wrong_email")}
+            onClick={() => setShowSwitchAccountModal(true)}
+          />
         </MenuContent>
       </Menu>
     </>

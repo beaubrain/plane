@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "已解决 vs 待处理的工作项",
     "projects_by_status": "按状态分类的项目",
     "active_users": "活跃用户",
-    "intake_trends": "入学趋势"
+    "intake_trends": "入学趋势",
+    "assignee_workload": {
+      "title": "工作量",
+      "assigned_tasks": "已分配的工作项",
+      "allocated_hours": "分配工时",
+      "invalid_range": "结束日期不得早于开始日期。",
+      "empty": "没有符合这些筛选条件的已分配工作项。",
+      "work_date": "工作日期"
+    },
+    "dashboard": "仪表板",
+    "count": "数量"
   },
   "workspace_projects": {
     "label": "{count, plural, one {项目} other {项目}}",

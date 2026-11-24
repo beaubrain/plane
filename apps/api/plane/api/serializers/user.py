@@ -22,6 +22,7 @@ class UserLiteSerializer(BaseSerializer):
         help_text="Avatar URL",
         read_only=True,
     )
+    display_name = serializers.CharField(source="name_for_display", read_only=True)
 
     class Meta:
         model = User

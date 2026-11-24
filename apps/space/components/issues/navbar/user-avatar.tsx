@@ -15,6 +15,7 @@ import { Button } from "@makeplane/propel/components/button";
 import { Icon } from "@makeplane/propel/components/icon";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@makeplane/propel/components/menu";
 import { LogOutOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 import { AuthService } from "@plane/services";
 import { getFileURL } from "@plane/utils";
 // helpers
@@ -25,6 +26,7 @@ import { useUser } from "@/hooks/store/use-user";
 const authService = new AuthService();
 
 export const UserAvatar = observer(function UserAvatar() {
+  const { t } = useTranslation();
   const pathName = usePathname();
   const searchParams = useSearchParams();
   // query params
@@ -52,11 +54,7 @@ export const UserAvatar = observer(function UserAvatar() {
 
   // derived values
   const { queryParam } = queryParamGenerator({ peekId, board, state, priority, labels });
-  const displayName =
-    currentUser?.display_name ||
-    `${currentUser?.first_name} ${currentUser?.first_name}` ||
-    currentUser?.email ||
-    "User";
+  const displayName = currentUser?.display_name || currentUser?.email || "";
 
   return (
     <div className="relative mr-2">
@@ -97,7 +95,7 @@ export const UserAvatar = observer(function UserAvatar() {
               {csrfToken && (
                 <MenuItem
                   icon={<Icon icon={LogOutOutline} tint="danger" />}
-                  label="Sign out"
+                  label={t("sign_out")}
                   onClick={() => signOutFormRef.current?.requestSubmit()}
                 />
               )}
@@ -112,7 +110,7 @@ export const UserAvatar = observer(function UserAvatar() {
             stretch="auto"
             nativeButton={false}
             render={<Link to={`/?next_path=${pathName}?${queryParam}`} />}
-            label="Sign in"
+            label={t("auth.common.login")}
           />
         </div>
       )}

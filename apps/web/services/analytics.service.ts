@@ -11,6 +11,9 @@ import type {
   TAnalyticsTabsBase,
   TAnalyticsGraphsBase,
   TAnalyticsFilterParams,
+  TAssignedWorkloadTaskPage,
+  TAssigneeWorkload,
+  TAssigneeWorkloadQuery,
 } from "@plane/types";
 // services
 import { APIService } from "./api.service";
@@ -18,6 +21,23 @@ import { APIService } from "./api.service";
 export class AnalyticsService extends APIService {
   constructor() {
     super(API_BASE_URL);
+  }
+
+  async getAssigneeWorkload(workspaceSlug: string, params: TAssigneeWorkloadQuery): Promise<TAssigneeWorkload[]> {
+    const response = await this.get(`/api/workspaces/${workspaceSlug}/assignee-workload/`, { params });
+    return response.data;
+  }
+
+  async getAssignedWorkloadTasks(
+    workspaceSlug: string,
+    params: TAssigneeWorkloadQuery,
+    assigneeId: string,
+    cursor: string | undefined
+  ): Promise<TAssignedWorkloadTaskPage> {
+    const response = await this.get(`/api/workspaces/${workspaceSlug}/assignee-workload/`, {
+      params: { ...params, assignee_id: assigneeId, cursor },
+    });
+    return response.data;
   }
 
   async getAdvanceAnalytics<T extends IAnalyticsResponse>(

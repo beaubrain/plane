@@ -104,7 +104,9 @@ export const StateQuickActions = observer(function StateQuickActions(props: TSta
           {!state.default && (
             <MenuItem
               icon={<Icon icon={DefaultTabOutline} />}
-              label={isMarkingAsDefault ? "Marking as default" : "Mark as default"}
+              label={t(
+                isMarkingAsDefault ? "navigation_ui.marking_as_default" : "work_item_types.settings.set_as_default"
+              )}
               disabled={isMarkingAsDefault}
               onClick={() => void handleMarkAsDefault()}
             />

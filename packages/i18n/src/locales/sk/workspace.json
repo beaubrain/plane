@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Vyriešené vs. čakajúce pracovné položky",
     "projects_by_status": "Projekty podľa stavu",
     "active_users": "Aktívni používatelia",
-    "intake_trends": "Trendy prijímania"
+    "intake_trends": "Trendy prijímania",
+    "assignee_workload": {
+      "title": "Vyťaženie",
+      "assigned_tasks": "Priradené pracovné položky",
+      "allocated_hours": "Pridelené hodiny",
+      "invalid_range": "Dátum ukončenia nesmie byť pred dátumom začiatku.",
+      "empty": "Týmto filtrom nezodpovedajú žiadne priradené pracovné položky.",
+      "work_date": "Dátum práce"
+    },
+    "dashboard": "Prehľad",
+    "count": "Počet"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projekt} few {Projekty} other {Projektov}}",

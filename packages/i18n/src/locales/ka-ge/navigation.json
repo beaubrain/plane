@@ -32,5 +32,23 @@
     "upgrade_plan": "Upgrade plan",
     "plane_pro": "Plane Pro",
     "business": "Business"
+  },
+  "navigation_ui": {
+    "icon_only": "მხოლოდ ხატულა",
+    "icon_with_label": "ხატულა სახელით",
+    "dock_app_rail": "აპების ზოლის მიმაგრება",
+    "undock_app_rail": "აპების ზოლის მოხსნა",
+    "show_tab": "ჩვენება",
+    "clear_default": "ნაგულისხმევი არჩევანის გაუქმება",
+    "hide_in_more": "დამალვა დამატებით მენიუში",
+    "subgroup_by": "ქვეჯგუფებად დაყოფა",
+    "wrong_email": "ელფოსტის მისამართი არასწორია?",
+    "marking_as_default": "ნაგულისხმევად დაყენება",
+    "project_settings": "პროექტის პარამეტრები",
+    "instance_settings": "ინსტანციის პარამეტრები",
+    "images": "სურათები",
+    "light_mode": "ღია რეჟიმზე გადართვა",
+    "dark_mode": "მუქ რეჟიმზე გადართვა",
+    "back_to_plane": "Plane-ში დაბრუნება"
   }
 }

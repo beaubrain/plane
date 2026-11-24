@@ -32,5 +32,23 @@
     "upgrade_plan": "Апгрейд план",
     "plane_pro": "Плейн Про",
     "business": "Бизнес"
+  },
+  "navigation_ui": {
+    "icon_only": "Только значок",
+    "icon_with_label": "Значок и название",
+    "dock_app_rail": "Закрепить панель приложений",
+    "undock_app_rail": "Открепить панель приложений",
+    "show_tab": "Показать",
+    "clear_default": "Сбросить выбор по умолчанию",
+    "hide_in_more": "Скрыть в меню «Ещё»",
+    "subgroup_by": "Подгруппировать по",
+    "wrong_email": "Неверный адрес электронной почты?",
+    "marking_as_default": "Установка по умолчанию",
+    "project_settings": "Настройки проекта",
+    "instance_settings": "Настройки экземпляра",
+    "images": "Изображения",
+    "light_mode": "Переключиться на светлую тему",
+    "dark_mode": "Переключиться на тёмную тему",
+    "back_to_plane": "Вернуться в Plane"
   }
 }

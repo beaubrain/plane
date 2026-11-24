@@ -21,38 +21,32 @@ export type TCoreSidebarMenuKey = "general" | "email" | "workspace" | "authentic
 export const coreSidebarMenuLinks: Record<TCoreSidebarMenuKey, TSidebarMenuItem> = {
   general: {
     Icon: SettingsOutline,
-    name: "General",
-    description: "Identify your instances and get key details.",
+    nameKey: "common.general",
     href: `/general/`,
   },
   email: {
     Icon: MailOutline,
-    name: "Email",
-    description: "Configure your SMTP controls.",
+    nameKey: "email",
     href: `/email/`,
   },
   workspace: {
     Icon: WorkspaceOutline,
-    name: "Workspaces",
-    description: "Manage all workspaces on this instance.",
+    nameKey: "common.workspaces",
     href: `/workspace/`,
   },
   authentication: {
     Icon: LockOutline,
-    name: "Authentication",
-    description: "Configure authentication modes.",
+    nameKey: "workspace_settings.settings.members.details.authentication",
     href: `/authentication/`,
   },
   ai: {
     Icon: AiStarFourOutline,
-    name: "Artificial intelligence",
-    description: "Configure your OpenAI creds.",
+    nameKey: "pi_chat",
     href: `/ai/`,
   },
   image: {
     Icon: ImageOutline,
-    name: "Images in Plane",
-    description: "Allow third-party image libraries.",
+    nameKey: "navigation_ui.images",
     href: `/image/`,
   },
 };

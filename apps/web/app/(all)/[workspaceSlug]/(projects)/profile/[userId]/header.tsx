@@ -50,7 +50,7 @@ export const UserProfileHeader = observer(function UserProfileHeader(props: TUse
 
   const tabsList = isAuthorized ? [...PROFILE_VIEWER_TAB, ...PROFILE_ADMINS_TAB] : PROFILE_VIEWER_TAB;
 
-  const userName = `${userProjectsData?.user_data?.first_name} ${userProjectsData?.user_data?.last_name}`;
+  const userName = userProjectsData?.user_data?.display_name ?? "";
 
   const isCurrentUser = currentUser?.id === userId;
 

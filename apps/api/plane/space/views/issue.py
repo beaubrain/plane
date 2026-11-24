@@ -38,6 +38,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .base import BaseAPIView, BaseViewSet
 
 # fetch the space app grouper function separately
+from plane.utils.user_name import user_name_for_display
 from plane.space.utils.grouper import (
     issue_group_values,
     issue_on_results,
@@ -770,7 +771,7 @@ class IssueRetrievePublicEndpoint(BaseAPIView):
                                         default=Value(None),
                                         output_field=CharField(),
                                     ),
-                                    display_name=F("votes__actor__display_name"),
+                                    display_name=user_name_for_display("votes__actor"),
                                 ),
                             ),
                         ),
@@ -816,7 +817,7 @@ class IssueRetrievePublicEndpoint(BaseAPIView):
                                         default=Value(None),
                                         output_field=CharField(),
                                     ),
-                                    display_name=F("issue_reactions__actor__display_name"),
+                                    display_name=user_name_for_display("issue_reactions__actor"),
                                 ),
                             ),
                         ),

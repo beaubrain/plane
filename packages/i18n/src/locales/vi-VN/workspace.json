@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Mục công việc đã giải quyết vs đang chờ",
     "projects_by_status": "Dự án theo trạng thái",
     "active_users": "Người dùng hoạt động",
-    "intake_trends": "Xu hướng tiếp nhận"
+    "intake_trends": "Xu hướng tiếp nhận",
+    "assignee_workload": {
+      "title": "Khối lượng công việc",
+      "assigned_tasks": "Công việc được giao",
+      "allocated_hours": "Số giờ phân bổ",
+      "invalid_range": "Ngày kết thúc phải trùng hoặc sau ngày bắt đầu.",
+      "empty": "Không có công việc được giao nào khớp với các bộ lọc này.",
+      "work_date": "Ngày làm việc"
+    },
+    "dashboard": "Bảng điều khiển",
+    "count": "Số lượng"
   },
   "workspace_projects": {
     "label": "{count, plural, one {dự án} other {dự án}}",

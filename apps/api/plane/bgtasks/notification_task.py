@@ -470,7 +470,7 @@ def notifications(
                         notification = create_mention_notification(
                             project=project,
                             issue=issue,
-                            notification_comment=f"{actor.display_name} has mentioned you in a comment in issue {issue.name}",  # noqa: E501
+                            notification_comment=f"{actor.name_for_display} has mentioned you in a comment in issue {issue.name}",  # noqa: E501
                             actor_id=actor_id,
                             mention_id=mention_id,
                             issue_id=issue_id,

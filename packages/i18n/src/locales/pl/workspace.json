@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Rozwiązane vs oczekujące elementy pracy",
     "projects_by_status": "Projekty według statusu",
     "active_users": "Aktywni użytkownicy",
-    "intake_trends": "Trendy przyjęć"
+    "intake_trends": "Trendy przyjęć",
+    "assignee_workload": {
+      "title": "Obciążenie",
+      "assigned_tasks": "Przypisane elementy pracy",
+      "allocated_hours": "Przydzielone godziny",
+      "invalid_range": "Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.",
+      "empty": "Żadne przypisane elementy pracy nie pasują do tych filtrów.",
+      "work_date": "Data pracy"
+    },
+    "dashboard": "Panel",
+    "count": "Liczba"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Projekt} few {Projekty} other {Projektów}}",

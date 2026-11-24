@@ -178,6 +178,7 @@ class WorkspaceDraftIssueViewSet(BaseViewSet):
                 .first()
             )
 
+            issue["estimated_hours"] = serializer.data["estimated_hours"]
             return Response(issue, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -272,8 +273,10 @@ class WorkspaceDraftIssueViewSet(BaseViewSet):
             draft_issue.workspace_id,
         )
 
+        issue_data = request.data.copy()
+        issue_data.setdefault("estimated_hours", draft_issue.estimated_hours)
         serializer = IssueCreateSerializer(
-            data=request.data,
+            data=issue_data,
             context={
                 "project_id": draft_issue.project_id,
                 "workspace_id": draft_issue.project.workspace_id,

@@ -32,5 +32,23 @@
     "upgrade_plan": "Plán upgradu",
     "plane_pro": "Plane Pro",
     "business": "Byznys"
+  },
+  "navigation_ui": {
+    "icon_only": "Pouze ikona",
+    "icon_with_label": "Ikona s názvem",
+    "dock_app_rail": "Připnout panel aplikací",
+    "undock_app_rail": "Odepnout panel aplikací",
+    "show_tab": "Zobrazit",
+    "clear_default": "Zrušit výchozí nastavení",
+    "hide_in_more": "Skrýt do nabídky Další",
+    "subgroup_by": "Podskupiny podle",
+    "wrong_email": "Nesprávná e-mailová adresa?",
+    "marking_as_default": "Nastavuje se jako výchozí",
+    "project_settings": "Nastavení projektu",
+    "instance_settings": "Nastavení instance",
+    "images": "Obrázky",
+    "light_mode": "Přepnout do světlého režimu",
+    "dark_mode": "Přepnout do tmavého režimu",
+    "back_to_plane": "Zpět do Plane"
   }
 }

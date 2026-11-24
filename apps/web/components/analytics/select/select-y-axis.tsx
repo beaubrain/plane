@@ -11,6 +11,7 @@ import { EEstimateSystem } from "@plane/constants";
 import { ProjectsOutline } from "@makeplane/propel/icons";
 import type { ChartYAxisMetric } from "@plane/types";
 // plane package imports
+import { useTranslation } from "@plane/i18n";
 import { Select } from "@plane/blocks/select";
 // hooks
 import { useProjectEstimates } from "@/hooks/store/estimates";
@@ -25,6 +26,7 @@ type Props = {
 };
 
 export const SelectYAxis = observer(function SelectYAxis({ value, onChange, hiddenOptions, options }: Props) {
+  const { t } = useTranslation();
   // hooks
   const { projectId } = useParams();
   const { areEstimateEnabledByProjectId, currentActiveEstimateId, estimateById } = useProjectEstimates();
@@ -67,7 +69,7 @@ export const SelectYAxis = observer(function SelectYAxis({ value, onChange, hidd
       <Select.Trigger variant="select-md" className="w-auto">
         <div className="flex items-center gap-2">
           <ProjectsOutline className="h-3 w-3" />
-          <span>{selected?.label ?? "Add Metric"}</span>
+          <span>{selected?.label ?? t("common.select")}</span>
         </div>
       </Select.Trigger>
     </Select>

@@ -32,5 +32,23 @@
     "upgrade_plan": "Apgrejduj plan",
     "plane_pro": "Plejn Pro",
     "business": "Biznes"
+  },
+  "navigation_ui": {
+    "icon_only": "Tylko ikona",
+    "icon_with_label": "Ikona i nazwa",
+    "dock_app_rail": "Przypnij pasek aplikacji",
+    "undock_app_rail": "Odepnij pasek aplikacji",
+    "show_tab": "Pokaż",
+    "clear_default": "Usuń ustawienie domyślne",
+    "hide_in_more": "Ukryj w menu Więcej",
+    "subgroup_by": "Podgrupuj według",
+    "wrong_email": "Nieprawidłowy adres e-mail?",
+    "marking_as_default": "Ustawianie jako domyślne",
+    "project_settings": "Ustawienia projektu",
+    "instance_settings": "Ustawienia instancji",
+    "images": "Obrazy",
+    "light_mode": "Przełącz na tryb jasny",
+    "dark_mode": "Przełącz na tryb ciemny",
+    "back_to_plane": "Wróć do Plane"
   }
 }

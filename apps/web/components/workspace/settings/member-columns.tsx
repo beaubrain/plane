@@ -57,7 +57,7 @@ export function NameColumn(props: NameProps) {
   // plane hooks
   const { t } = useTranslation();
   // derived values
-  const { avatar_url, display_name, email, first_name, id, last_name } = rowData.member;
+  const { avatar_url, display_name, email, id } = rowData.member;
   const isSuspended = rowData.is_active === false;
 
   return (
@@ -73,9 +73,7 @@ export function NameColumn(props: NameProps) {
               <Avatar size="sm" src={getFileURL(avatar_url ?? "")} alt={display_name || email} />
             </Link>
           )}
-          <span className="truncate">
-            {first_name} {last_name}
-          </span>
+          <span className="truncate">{display_name}</span>
         </div>
 
         {!isSuspended && (isAdmin || id === currentUser?.id) && (

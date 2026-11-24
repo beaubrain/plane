@@ -32,5 +32,23 @@
     "upgrade_plan": "Tingkatkan paket",
     "plane_pro": "Plane Pro",
     "business": "Bisnis"
+  },
+  "navigation_ui": {
+    "icon_only": "Hanya ikon",
+    "icon_with_label": "Ikon dengan nama",
+    "dock_app_rail": "Sematkan bilah aplikasi",
+    "undock_app_rail": "Lepas sematan bilah aplikasi",
+    "show_tab": "Tampilkan",
+    "clear_default": "Hapus pengaturan bawaan",
+    "hide_in_more": "Sembunyikan di menu Lainnya",
+    "subgroup_by": "Subkelompokkan menurut",
+    "wrong_email": "Alamat email salah?",
+    "marking_as_default": "Menetapkan sebagai bawaan",
+    "project_settings": "Pengaturan proyek",
+    "instance_settings": "Pengaturan instans",
+    "images": "Gambar",
+    "light_mode": "Beralih ke mode terang",
+    "dark_mode": "Beralih ke mode gelap",
+    "back_to_plane": "Kembali ke Plane"
   }
 }

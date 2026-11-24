@@ -29,17 +29,17 @@ import { useInstance, useTheme } from "@/hooks/store";
 
 const helpOptions = [
   {
-    name: "Documentation",
+    name: "documentation",
     href: "https://docs.plane.so/",
     Icon: PagesOutline,
   },
   {
-    name: "Join our Forum",
+    name: "power_k.help_actions.join_forum",
     href: "https://forum.plane.so",
     Icon: ChatOutline,
   },
   {
-    name: "Report a bug",
+    name: "power_k.help_actions.report_bug",
     href: "https://github.com/makeplane/plane/issues/new/choose",
     Icon: Github,
   },
@@ -64,14 +64,14 @@ export const AdminSidebarHelpSection = observer(function AdminSidebarHelpSection
       })}
     >
       {isSidebarCollapsed ? (
-        <Tooltip label="Redirect to Plane" side="right">
+        <Tooltip label={t("navigation_ui.back_to_plane")} side="right">
           <IconButton
             variant="secondary"
             size="md"
-            aria-label="Redirect to Plane"
+            aria-label={t("navigation_ui.back_to_plane")}
             showTooltip={false}
             nativeButton={false}
-            render={<a href={redirectionLink} aria-label="Redirect to Plane" />}
+            render={<a href={redirectionLink} aria-label={t("navigation_ui.back_to_plane")} />}
             icon={<Icon icon={NewTabOutline} />}
           />
         </Tooltip>
@@ -81,21 +81,21 @@ export const AdminSidebarHelpSection = observer(function AdminSidebarHelpSection
           size="sm"
           stretch="auto"
           nativeButton={false}
-          render={<a href={redirectionLink} aria-label="Redirect to Plane" />}
+          render={<a href={redirectionLink} aria-label={t("navigation_ui.back_to_plane")} />}
           icon={<Icon icon={NewTabOutline} />}
-          label="Redirect to Plane"
+          label={t("navigation_ui.back_to_plane")}
         />
       )}
       <div className={cn("flex items-center gap-1", isSidebarCollapsed ? "flex-col" : "ml-auto")}>
         <Menu modal={false}>
-          <Tooltip label="Help" side={isSidebarCollapsed ? "right" : "top"}>
+          <Tooltip label={t("power_k.group_titles.help")} side={isSidebarCollapsed ? "right" : "top"}>
             <MenuTrigger
               render={
                 <IconButton
                   type="button"
                   variant="ghost"
                   size="md"
-                  aria-label="Help"
+                  aria-label={t("power_k.group_titles.help")}
                   showTooltip={false}
                   icon={<Icon icon={HelpOutline} />}
                 />
@@ -106,7 +106,11 @@ export const AdminSidebarHelpSection = observer(function AdminSidebarHelpSection
             side={isSidebarCollapsed ? "right" : "top"}
             align="end"
             footer={
-              instance?.current_version ? <MenuFooter>Version: v{instance.current_version}</MenuFooter> : undefined
+              instance?.current_version ? (
+                <MenuFooter>
+                  {t("version")} v{instance.current_version}
+                </MenuFooter>
+              ) : undefined
             }
           >
             {helpOptions.map(({ name, Icon: HelpIcon, href }) => (
@@ -115,7 +119,7 @@ export const AdminSidebarHelpSection = observer(function AdminSidebarHelpSection
                 href={ensureTrailingSlash(href)}
                 external
                 target="_blank"
-                label={name}
+                label={t(name)}
                 icon={<Icon icon={HelpIcon} tint="secondary" />}
               />
             ))}

@@ -13,6 +13,11 @@ from .base import BaseSerializer
 
 
 class UserSerializer(BaseSerializer):
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["display_name"] = instance.name_for_display
+        return data
+
     def validate_first_name(self, value):
         if contains_url(value):
             raise serializers.ValidationError("First name cannot contain a URL.")
@@ -75,6 +80,8 @@ class UserSerializer(BaseSerializer):
 
 
 class UserMeSerializer(BaseSerializer):
+    display_name = serializers.CharField(source="name_for_display", read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -153,6 +160,8 @@ class UserMeSettingsSerializer(BaseSerializer):
 
 
 class UserLiteSerializer(BaseSerializer):
+    display_name = serializers.CharField(source="name_for_display", read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -168,6 +177,8 @@ class UserLiteSerializer(BaseSerializer):
 
 
 class UserAdminLiteSerializer(BaseSerializer):
+    display_name = serializers.CharField(source="name_for_display", read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -215,7 +226,7 @@ class ResetPasswordSerializer(serializers.Serializer):
 class ProfileSerializer(BaseSerializer):
     class Meta:
         model = Profile
-        fields = "__all__"
+        exclude = ("billing_address_country", "billing_address", "has_billing_address")
         read_only_fields = ["user"]
 
 

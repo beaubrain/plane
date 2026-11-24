@@ -30,7 +30,6 @@ RESTRICTED_WORKSPACE_SLUGS = [
     "drive",
     "channels",
     "upgrade",
-    "billing",
     "sign-in",
     "sign-up",
     "signin",

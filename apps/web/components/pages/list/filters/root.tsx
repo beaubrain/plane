@@ -5,6 +5,7 @@
  */
 
 import { observer } from "mobx-react";
+import { useTranslation } from "@plane/i18n";
 import { MenuCheckboxItem, MenuSeparator } from "@makeplane/propel/components/menu";
 import type { TPageFilterProps, TPageFilters } from "@plane/types";
 // components
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export const PageFiltersSelection = observer(function PageFiltersSelection(props: Props) {
+  const { t } = useTranslation();
   const { filters, handleFiltersUpdate, memberIds } = props;
 
   const handleFilters = (key: keyof TPageFilterProps, value: boolean | string | string[]) => {
@@ -46,7 +48,7 @@ export const PageFiltersSelection = observer(function PageFiltersSelection(props
   return (
     <>
       <MenuCheckboxItem
-        label="Favorites"
+        label={t("sidebar.favorites")}
         checked={!!filters.filters?.favorites}
         onCheckedChange={(checked) =>
           handleFiltersUpdate("filters", {

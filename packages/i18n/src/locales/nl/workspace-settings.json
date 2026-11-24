@@ -20,9 +20,6 @@
         "delete_btn": "Deze werkruimte verwijderen",
         "delete_modal": {
           "title": "Weet je zeker dat je deze werkruimte wilt verwijderen?",
-          "description": "Je hebt een actieve proefperiode voor een van onze betaalde plannen. Annuleer die eerst om verder te gaan.",
-          "dismiss": "Sluiten",
-          "cancel": "Proefperiode annuleren",
           "success_title": "Werkruimte verwijderd.",
           "success_message": "Je gaat zo naar je profielpagina.",
           "error_title": "Dat werkte niet.",
@@ -68,14 +65,6 @@
         "leave_input_label": "Typ de naam van deze werkruimte om door te gaan.",
         "description": "Beheer de toegang tot deze werkruimte.",
         "leave_title": "Werkruimte verlaten?"
-      },
-      "billing_and_plans": {
-        "heading": "Facturering & plannen",
-        "description": "Kies je plan, beheer abonnementen en upgrade eenvoudig naarmate je behoeften groeien.",
-        "title": "Facturering & plannen",
-        "current_plan": "Huidig plan",
-        "free_plan": "Je gebruikt momenteel het gratis plan",
-        "view_plans": "Plannen bekijken"
       },
       "exports": {
         "heading": "Exports",
@@ -288,16 +277,6 @@
         "title": "Relaties",
         "heading": "Relaties",
         "description": "Maak en beheer relatietypen die werkitems in je hele werkruimte met elkaar verbinden."
-      },
-      "cancel_trial": {
-        "title": "Annuleer eerst je proefperiode.",
-        "description": "Je hebt een actieve proefperiode voor een van onze betaalde plannen. Annuleer die eerst om verder te gaan.",
-        "dismiss": "Sluiten",
-        "cancel": "Proefperiode annuleren",
-        "cancel_success_title": "Proefperiode geannuleerd.",
-        "cancel_success_message": "Je kunt de werkruimte nu verwijderen.",
-        "cancel_error_title": "Dat werkte niet.",
-        "cancel_error_message": "Probeer het opnieuw."
       },
       "applications": {
         "internal": "Intern",

@@ -34,6 +34,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 # Third party imports
 from rest_framework import status
 from rest_framework.response import Response
+from plane.utils.user_name import user_name_for_display
 from plane.app.permissions import allow_permission, ROLE
 from plane.app.serializers import (
     CycleSerializer,
@@ -854,7 +855,7 @@ class CycleAnalyticsEndpoint(BaseAPIView):
                     workspace__slug=slug,
                     project_id=project_id,
                 )
-                .annotate(display_name=F("assignees__display_name"))
+                .annotate(display_name=user_name_for_display("assignees"))
                 .annotate(assignee_id=F("assignees__id"))
                 .annotate(
                     avatar_url=Case(
@@ -951,7 +952,7 @@ class CycleAnalyticsEndpoint(BaseAPIView):
                     project_id=project_id,
                     workspace__slug=slug,
                 )
-                .annotate(display_name=F("assignees__display_name"))
+                .annotate(display_name=user_name_for_display("assignees"))
                 .annotate(assignee_id=F("assignees__id"))
                 .annotate(
                     avatar_url=Case(

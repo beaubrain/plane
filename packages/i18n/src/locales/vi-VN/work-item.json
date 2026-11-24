@@ -285,7 +285,9 @@
       "downvotes_count": "{count, plural, one {# phiếu chống} other {# phiếu chống}}",
       "no_upvotes": "Chưa có phiếu thuận nào",
       "no_downvotes": "Chưa có phiếu chống nào"
-    }
+    },
+    "estimated_hours": "Số giờ ước tính",
+    "invalid_estimated_hours": "Nhập số không âm có tối đa hai chữ số thập phân."
   },
   "sub_work_item": {
     "update": {
@@ -345,10 +347,6 @@
         "title": "Không thể cập nhật mục công việc",
         "message": "Thay đổi trạng thái không được phép cho một số mục công việc. Đảm bảo thay đổi trạng thái được cho phép."
       }
-    },
-    "upgrade_banner": {
-      "message": "Thay đổi trạng thái, mức ưu tiên và nhiều thứ khác cho nhiều mục công việc cùng lúc. Tiết kiệm trung bình ba phút cho mỗi thao tác.",
-      "cta": "Nâng cấp lên One"
     }
   },
   "recurring_work_items": {

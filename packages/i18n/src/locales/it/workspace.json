@@ -148,7 +148,17 @@
     "workitem_resolved_vs_pending": "Elementi di lavoro risolti vs in sospeso",
     "projects_by_status": "Progetti per stato",
     "active_users": "Utenti attivi",
-    "intake_trends": "Tendenze di ammissione"
+    "intake_trends": "Tendenze di ammissione",
+    "assignee_workload": {
+      "title": "Carico di lavoro",
+      "assigned_tasks": "Elementi di lavoro assegnati",
+      "allocated_hours": "Ore assegnate",
+      "invalid_range": "La data di fine deve essere uguale o successiva alla data di inizio.",
+      "empty": "Nessun elemento di lavoro assegnato corrisponde a questi filtri.",
+      "work_date": "Data di lavoro"
+    },
+    "dashboard": "Dashboard",
+    "count": "Conteggio"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Progetto} other {Progetti}}",

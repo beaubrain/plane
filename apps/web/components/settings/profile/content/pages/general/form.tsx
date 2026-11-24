@@ -30,7 +30,7 @@ import { handleCoverImageChange } from "@/helpers/cover-image.helper";
 import { useInstance } from "@/hooks/store/use-instance";
 import { useUser, useUserProfile } from "@/hooks/store/user";
 // utils
-import { validatePersonName, validateOptionalPersonName, validateDisplayName } from "@plane/utils";
+import { validatePersonName, validateOptionalPersonName } from "@plane/utils";
 
 type TUserProfileForm = {
   avatar_url: string;
@@ -39,7 +39,6 @@ type TUserProfileForm = {
   cover_image_url: string;
   first_name: string;
   last_name: string;
-  display_name: string;
   email: string;
   role: string;
   language: string;
@@ -74,7 +73,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       cover_image_url: user.cover_image_url || "",
       first_name: user.first_name || "",
       last_name: user.last_name || "",
-      display_name: user.display_name || "",
       email: user.email || "",
       role: profile.role || "Product / Project Manager",
       language: profile.language || "en",
@@ -123,7 +121,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       first_name: formData.first_name,
       last_name: formData.last_name,
       avatar_url: formData.avatar_url,
-      display_name: formData?.display_name,
     };
 
     try {
@@ -301,31 +298,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                   placeholder="Enter your last name"
                   maxLength={50}
                   autoComplete="on"
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="display_name"
-              rules={{
-                required: "Display name is required.",
-                validate: validateDisplayName,
-              }}
-              render={({ field: { value, onChange, ref } }) => (
-                <InputField
-                  size="lg"
-                  orientation="vertical"
-                  id="display_name"
-                  name="display_name"
-                  type="text"
-                  label={t("display_name")}
-                  required
-                  value={value}
-                  onChange={onChange}
-                  ref={ref}
-                  error={errors?.display_name?.message}
-                  placeholder="Enter your display name"
-                  maxLength={50}
                 />
               )}
             />

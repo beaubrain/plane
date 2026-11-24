@@ -75,18 +75,13 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
 
   useEffect(() => {
     const handleToggleProfileSidebar = () => {
-      if (window && window.innerWidth < 768) {
-        toggleProfileSidebar(true);
-      }
-      if (window && profileSidebarCollapsed && window.innerWidth >= 768) {
-        toggleProfileSidebar(false);
-      }
+      toggleProfileSidebar(window.innerWidth < 768);
     };
 
     window.addEventListener("resize", handleToggleProfileSidebar);
     handleToggleProfileSidebar();
     return () => window.removeEventListener("resize", handleToggleProfileSidebar);
-  }, []);
+  }, [toggleProfileSidebar]);
 
   return (
     <div
@@ -123,19 +118,12 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
                 showDefaultWhenEmpty
               />
               <div className="absolute -bottom-7 left-5 flex">
-                <Avatar
-                  size="2xl"
-                  src={getFileURL(userData?.avatar_url ?? "")}
-                  alt={[userData?.first_name, userData?.last_name].filter(Boolean).join(" ") || userData?.display_name}
-                />
+                <Avatar size="2xl" src={getFileURL(userData?.avatar_url ?? "")} alt={userData?.display_name} />
               </div>
             </div>
             <div className="px-5">
               <div className="mt-10">
-                <h4 className="text-h6-semibold">
-                  {userData?.first_name} {userData?.last_name}
-                </h4>
-                <h6 className="text-body-xs-regular text-secondary">({userData?.display_name})</h6>
+                <h4 className="text-h6-semibold">{userData?.display_name}</h4>
               </div>
               <div className="mt-6 space-y-5">
                 {userDetails.map((detail) => (

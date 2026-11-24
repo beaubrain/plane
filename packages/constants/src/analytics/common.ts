@@ -121,69 +121,69 @@ export const ANALYTICS_DURATION_FILTER_OPTIONS = [
   },
 ];
 
-export const ANALYTICS_X_AXIS_VALUES: { value: ChartXAxisProperty; label: string }[] = [
+export const ANALYTICS_X_AXIS_VALUES: { value: ChartXAxisProperty; i18nKey: string }[] = [
   {
     value: ChartXAxisProperty.STATES,
-    label: "State name",
+    i18nKey: "common.state",
   },
   {
     value: ChartXAxisProperty.STATE_GROUPS,
-    label: "State group",
+    i18nKey: "common.state_group",
   },
   {
     value: ChartXAxisProperty.PRIORITY,
-    label: "Priority",
+    i18nKey: "common.priority",
   },
   {
     value: ChartXAxisProperty.LABELS,
-    label: "Label",
+    i18nKey: "labels",
   },
   {
     value: ChartXAxisProperty.ASSIGNEES,
-    label: "Assignee",
+    i18nKey: "common.assignee",
   },
   {
     value: ChartXAxisProperty.ESTIMATE_POINTS,
-    label: "Estimate point",
+    i18nKey: "estimate",
   },
   {
     value: ChartXAxisProperty.CYCLES,
-    label: "Cycle",
+    i18nKey: "cycle.label",
   },
   {
     value: ChartXAxisProperty.MODULES,
-    label: "Module",
+    i18nKey: "module.label",
   },
   {
     value: ChartXAxisProperty.COMPLETED_AT,
-    label: "Completed date",
+    i18nKey: "common.completed_on",
   },
   {
     value: ChartXAxisProperty.TARGET_DATE,
-    label: "Due date",
+    i18nKey: "due_date",
   },
   {
     value: ChartXAxisProperty.START_DATE,
-    label: "Start date",
+    i18nKey: "start_date",
   },
   {
     value: ChartXAxisProperty.CREATED_AT,
-    label: "Created date",
+    i18nKey: "common.created_on",
   },
 ];
 
-export const ANALYTICS_Y_AXIS_VALUES: { value: ChartYAxisMetric; label: string }[] = [
+export const ANALYTICS_Y_AXIS_VALUES: { value: ChartYAxisMetric; i18nKey: string }[] = [
   {
     value: ChartYAxisMetric.WORK_ITEM_COUNT,
-    label: "Work item",
+    i18nKey: "common.work_item",
   },
   {
     value: ChartYAxisMetric.ESTIMATE_POINT_COUNT,
-    label: "Estimate",
+    i18nKey: "estimate",
   },
   {
     value: ChartYAxisMetric.EPIC_WORK_ITEM_COUNT,
-    label: "Epic",
+    i18nKey: "sidebar.epics",
   },
 ];
 
