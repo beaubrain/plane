@@ -32,6 +32,7 @@ from plane.app.views import (
     IssueMetaEndpoint,
     IssueDetailIdentifierEndpoint,
 )
+from plane.app.views.issue.work_name import WorkNameEndpoint
 
 urlpatterns = [
     path(
@@ -72,6 +73,11 @@ urlpatterns = [
         "workspaces/<str:slug>/projects/<uuid:project_id>/issue-labels/",
         LabelViewSet.as_view({"get": "list", "post": "create"}),
         name="project-issue-labels",
+    ),
+    path(
+        "workspaces/<str:slug>/projects/<uuid:project_id>/work-names/",
+        WorkNameEndpoint.as_view(),
+        name="project-work-names",
     ),
     path(
         "workspaces/<str:slug>/projects/<uuid:project_id>/issue-labels/<uuid:pk>/",

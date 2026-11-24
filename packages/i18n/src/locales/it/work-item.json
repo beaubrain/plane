@@ -286,6 +286,9 @@
       "no_upvotes": "Ancora nessun voto a favore",
       "no_downvotes": "Ancora nessun voto contro"
     },
+    "work_code": "Codice attività",
+    "work_name": "Nome dell’attività",
+    "add_work_name": "Aggiungi «{name}» come nome dell’attività",
     "estimated_hours": "Ore stimate",
     "invalid_estimated_hours": "Inserisci un numero non negativo con al massimo due decimali."
   },

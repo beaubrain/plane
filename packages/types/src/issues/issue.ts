@@ -46,6 +46,7 @@ export type TBaseIssue = {
   id: string;
   sequence_id: number;
   name: string;
+  work_name?: string;
   sort_order: number;
 
   state_id: string | null;

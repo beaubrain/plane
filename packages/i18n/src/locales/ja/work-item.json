@@ -286,6 +286,9 @@
       "no_upvotes": "まだ賛成票はありません",
       "no_downvotes": "まだ反対票はありません"
     },
+    "work_code": "業務コード",
+    "work_name": "業務名",
+    "add_work_name": "「{name}」を業務名に追加",
     "estimated_hours": "見積もり時間（時間）",
     "invalid_estimated_hours": "0以上の数値を小数点以下2桁まで入力してください。"
   },

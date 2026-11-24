@@ -286,6 +286,9 @@
       "no_upvotes": "Zatiaľ žiadne hlasy hore",
       "no_downvotes": "Zatiaľ žiadne hlasy dole"
     },
+    "work_code": "Kód úlohy",
+    "work_name": "Názov úlohy",
+    "add_work_name": "Pridať „{name}“ ako názov úlohy",
     "estimated_hours": "Odhadovaný čas v hodinách",
     "invalid_estimated_hours": "Zadajte nezáporné číslo s najviac dvoma desatinnými miestami."
   },

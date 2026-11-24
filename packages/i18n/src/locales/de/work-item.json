@@ -286,6 +286,9 @@
       "no_upvotes": "Noch keine Hochstimmen",
       "no_downvotes": "Noch keine Runterstimmen"
     },
+    "work_code": "Aufgabencode",
+    "work_name": "Aufgabenname",
+    "add_work_name": "„{name}“ als Aufgabennamen hinzufügen",
     "estimated_hours": "Geschätzte Stunden",
     "invalid_estimated_hours": "Gib eine nichtnegative Zahl mit bis zu zwei Nachkommastellen ein."
   },

@@ -12,12 +12,13 @@ type TSidebarPropertyListItemProps = {
   icon: React.FC<{ className?: string }>;
   label: string;
   children: ReactNode;
+  singleLineLabel?: boolean;
   appendElement?: ReactNode;
   childrenClassName?: string;
 };
 
 export function SidebarPropertyListItem(props: TSidebarPropertyListItemProps) {
-  const { icon: Icon, label, children, appendElement, childrenClassName } = props;
+  const { icon: Icon, label, children, singleLineLabel, appendElement, childrenClassName } = props;
 
   return (
     <div className="flex items-start gap-2">
@@ -28,7 +29,9 @@ export function SidebarPropertyListItem(props: TSidebarPropertyListItemProps) {
             <Icon className="size-4 shrink-0" />
           </span>
           <Tooltip label={label}>
-            <span className="line-clamp-2 min-w-0 whitespace-normal">{label}</span>
+            <span className={cn("min-w-0", singleLineLabel ? "truncate" : "line-clamp-2 whitespace-normal")}>
+              {label}
+            </span>
           </Tooltip>
           {appendElement}
         </div>

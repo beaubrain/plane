@@ -24,6 +24,7 @@ export type TIssueLabel = {
   projectId: string;
   issueId: string;
   disabled: boolean;
+  fieldLabel?: string;
   isInboxIssue?: boolean;
   onLabelUpdate?: (labelIds: string[]) => void;
   issueServiceType?: TIssueServiceType;
@@ -39,6 +40,7 @@ export const IssueLabel = observer(function IssueLabel(props: TIssueLabel) {
     projectId,
     issueId,
     disabled = false,
+    fieldLabel,
     isInboxIssue = false,
     onLabelUpdate,
     issueServiceType = EIssueServiceType.ISSUES,
@@ -84,9 +86,10 @@ export const IssueLabel = observer(function IssueLabel(props: TIssueLabel) {
         }
         disabled={disabled}
         variant="select-ghost-md"
-        placeholder={t("label.select")}
+        placeholder={fieldLabel ? t("common.select") : t("label.select")}
+        searchPlaceholder={fieldLabel ? t("search") : undefined}
         className="min-h-8"
-        tooltip
+        tooltip={fieldLabel ? { heading: fieldLabel } : true}
         testId="work-item-label-select"
         // The sidebar row already names the property; selected labels show as soft label pills.
         showEmptyIcon={false}

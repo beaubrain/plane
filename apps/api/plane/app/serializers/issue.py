@@ -955,6 +955,7 @@ class IssueDetailSerializer(IssueSerializer):
     class Meta(IssueSerializer.Meta):
         fields = IssueSerializer.Meta.fields + [
             "description_html",
+            "work_name",
             "is_subscribed",
             "is_intake",
         ]

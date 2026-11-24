@@ -286,6 +286,9 @@
       "no_upvotes": "Încă nu există voturi pozitive",
       "no_downvotes": "Încă nu există voturi negative"
     },
+    "work_code": "Codul sarcinii",
+    "work_name": "Numele sarcinii",
+    "add_work_name": "Adaugă „{name}” ca nume al sarcinii",
     "estimated_hours": "Ore estimate",
     "invalid_estimated_hours": "Introduceți un număr nenegativ cu cel mult două zecimale."
   },

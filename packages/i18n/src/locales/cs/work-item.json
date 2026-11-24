@@ -286,6 +286,9 @@
       "no_upvotes": "Zatím žádné hlasy nahoru",
       "no_downvotes": "Zatím žádné hlasy dolů"
     },
+    "work_code": "Kód úkolu",
+    "work_name": "Název úkolu",
+    "add_work_name": "Přidat „{name}“ jako název úkolu",
     "estimated_hours": "Odhadovaná doba v hodinách",
     "invalid_estimated_hours": "Zadejte nezáporné číslo s nejvýše dvěma desetinnými místy."
   },

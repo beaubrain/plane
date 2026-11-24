@@ -9,11 +9,10 @@ import { observer } from "mobx-react";
 import {
   CompletedAtOutline,
   CreatedAtOutline,
-  CyclesOutline,
   EstimateOutline,
   LabelsOutline,
-  ModuleOutline,
   ParentOutline,
+  TextOutline,
   UpdatedAtOutline,
   UserOutline,
 } from "@makeplane/propel/icons";
@@ -28,13 +27,11 @@ import { IssueParentSelectRoot } from "@/components/issues/parent-select-root";
 import { useProjectEstimates } from "@/hooks/store/estimates";
 import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 import { useMember } from "@/hooks/store/use-member";
-import { useProject } from "@/hooks/store/use-project";
 // local imports
-import { IssueCycleSelect } from "./cycle-select";
 import { IssueLabel } from "./label";
-import { IssueModuleSelect } from "./module-select";
 import type { TIssueOperations } from "./root";
 import { IssueDetailSidebarGroup } from "./sidebar-group";
+import { WorkNameSelect } from "./work-name-select";
 
 type Props = {
   workspaceSlug: string;
@@ -52,14 +49,12 @@ const formatAuditDate = (date: string | null | undefined) =>
   date ? renderFormattedDate(date, AUDIT_DATE_FORMAT) : undefined;
 
 /**
- * Work item properties shared by the detail page sidebar and the peek overview: grouped into
- * collapsible "Details" and "Project structure" sections, followed by created/updated metadata.
+ * Work item properties shared by the detail page sidebar and the peek overview.
  */
 export const IssueDetailSidebarSections = observer(function IssueDetailSidebarSections(props: Props) {
   const { workspaceSlug, projectId, issueId, issueOperations, disabled, showUpdatedMeta = false } = props;
   // hooks
   const { t } = useTranslation();
-  const { getProjectById } = useProject();
   const { areEstimateEnabledByProjectId } = useProjectEstimates();
   const {
     issue: { getIssueById },
@@ -69,10 +64,10 @@ export const IssueDetailSidebarSections = observer(function IssueDetailSidebarSe
   const issue = getIssueById(issueId);
   if (!issue) return null;
 
-  const projectDetails = getProjectById(issue.project_id);
   const createdByDetails = getUserDetails(issue.created_by);
   const createdByName = createdByDetails?.display_name?.includes("-intake") ? "Plane" : createdByDetails?.display_name;
-  const hasProjectStructureProperties = !!projectDetails?.cycle_view || !!projectDetails?.module_view;
+  const workName = issue.work_name ?? "";
+  const workCodeLabel = t("issue.work_code");
 
   const auditRows = [
     createdByName ? { key: "created_by", icon: UserOutline, text: `${t("common.created_by")} ${createdByName}` } : null,
@@ -123,11 +118,27 @@ export const IssueDetailSidebarSections = observer(function IssueDetailSidebarSe
             />
           </SidebarPropertyListItem>
 
-          <SidebarPropertyListItem icon={LabelsOutline} label={t("common.labels")}>
-            <IssueLabel workspaceSlug={workspaceSlug} projectId={projectId} issueId={issueId} disabled={disabled} />
+          <SidebarPropertyListItem icon={LabelsOutline} label={workCodeLabel}>
+            <IssueLabel
+              workspaceSlug={workspaceSlug}
+              projectId={projectId}
+              issueId={issueId}
+              disabled={disabled}
+              fieldLabel={workCodeLabel}
+            />
           </SidebarPropertyListItem>
 
-          <SidebarPropertyListItem icon={EstimateOutline} label={t("issue.estimated_hours")}>
+          <SidebarPropertyListItem icon={TextOutline} label={t("issue.work_name")}>
+            <WorkNameSelect
+              workspaceSlug={workspaceSlug}
+              projectId={projectId}
+              value={workName}
+              disabled={disabled}
+              onChange={(name) => issueOperations.update(workspaceSlug, projectId, issueId, { work_name: name })}
+            />
+          </SidebarPropertyListItem>
+
+          <SidebarPropertyListItem icon={EstimateOutline} label={t("issue.estimated_hours")} singleLineLabel>
             <EstimatedHoursInput
               key={`${issueId}:${issue.estimated_hours ?? ""}`}
               defaultValue={issue.estimated_hours ?? ""}
@@ -169,40 +180,6 @@ export const IssueDetailSidebarSections = observer(function IssueDetailSidebarSe
             </SidebarPropertyListItem>
           )}
         </IssueDetailSidebarGroup>
-
-        {hasProjectStructureProperties && (
-          <>
-            <div className="w-full border-t border-subtle" />
-
-            <IssueDetailSidebarGroup label={t("common.project_structure")}>
-              {projectDetails?.cycle_view && (
-                <SidebarPropertyListItem icon={CyclesOutline} label={t("common.cycle")}>
-                  <IssueCycleSelect
-                    className="h-8 w-full grow"
-                    workspaceSlug={workspaceSlug}
-                    projectId={projectId}
-                    issueId={issueId}
-                    issueOperations={issueOperations}
-                    disabled={disabled}
-                  />
-                </SidebarPropertyListItem>
-              )}
-
-              {projectDetails?.module_view && (
-                <SidebarPropertyListItem icon={ModuleOutline} label={t("common.modules")}>
-                  <IssueModuleSelect
-                    className="w-full grow"
-                    workspaceSlug={workspaceSlug}
-                    projectId={projectId}
-                    issueId={issueId}
-                    issueOperations={issueOperations}
-                    disabled={disabled}
-                  />
-                </SidebarPropertyListItem>
-              )}
-            </IssueDetailSidebarGroup>
-          </>
-        )}
       </div>
 
       {auditRows.length > 0 && (

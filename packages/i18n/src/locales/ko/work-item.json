@@ -286,7 +286,10 @@
       "no_upvotes": "아직 추천이 없습니다",
       "no_downvotes": "아직 비추천이 없습니다"
     },
-    "estimated_hours": "예상 시간(시간 단위)",
+    "work_code": "업무코드",
+    "work_name": "업무명",
+    "add_work_name": "업무명 \"{name}\" 추가",
+    "estimated_hours": "예상 시간 (시간)",
     "invalid_estimated_hours": "0 이상의 숫자를 소수점 둘째 자리까지 입력하세요."
   },
   "sub_work_item": {

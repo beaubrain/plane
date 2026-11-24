@@ -286,6 +286,9 @@
       "no_upvotes": "Chưa có phiếu thuận nào",
       "no_downvotes": "Chưa có phiếu chống nào"
     },
+    "work_code": "Mã công việc",
+    "work_name": "Tên công việc",
+    "add_work_name": "Thêm “{name}” làm tên công việc",
     "estimated_hours": "Số giờ ước tính",
     "invalid_estimated_hours": "Nhập số không âm có tối đa hai chữ số thập phân."
   },

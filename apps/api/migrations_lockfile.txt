@@ -4,6 +4,6 @@
 # A merge conflict here means another PR added a migration to the same app first:
 # merge preview, delete your migration, and run makemigrations again.
 
-db: 0127_use_seoul_timezone
+db: 0130_default_project_board_layout
 
 license: 0006_instance_is_current_version_deprecated

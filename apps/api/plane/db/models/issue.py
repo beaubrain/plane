@@ -137,6 +137,7 @@ class Issue(ChangeTrackerMixin, ProjectBaseModel):
         max_digits=8, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)]
     )
     name = models.CharField(max_length=255, verbose_name="Issue Name")
+    work_name = models.CharField(max_length=255, blank=True, default="")
     description_json = models.JSONField(blank=True, default=dict)
     description_html = models.TextField(blank=True, default="<p></p>")
     description_stripped = models.TextField(blank=True, null=True)

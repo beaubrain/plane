@@ -31,6 +31,7 @@ type LabelSelectWebProps = {
   testId?: string;
   disabled?: boolean;
   placeholder?: string;
+  searchPlaceholder?: string;
   onClose?: () => void;
   className?: string;
   tooltip?: SelectTooltip;
@@ -58,6 +59,7 @@ export const LabelSelect = observer(function LabelSelect(props: LabelSelectWebPr
     variant,
     disabled,
     placeholder,
+    searchPlaceholder,
     onClose,
     className,
     tooltip,
@@ -124,6 +126,7 @@ export const LabelSelect = observer(function LabelSelect(props: LabelSelectWebPr
       testId={testId}
       disabled={disabled}
       placeholder={placeholder}
+      searchPlaceholder={searchPlaceholder}
       onClose={onClose}
       createLabel={{
         canCreate: canCreateLabel,

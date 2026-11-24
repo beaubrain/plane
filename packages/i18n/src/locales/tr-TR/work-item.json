@@ -286,6 +286,9 @@
       "no_upvotes": "Henüz olumlu oy yok",
       "no_downvotes": "Henüz olumsuz oy yok"
     },
+    "work_code": "Görev kodu",
+    "work_name": "Görev adı",
+    "add_work_name": "“{name}” adını görev adı olarak ekle",
     "estimated_hours": "Tahmini saat",
     "invalid_estimated_hours": "En fazla iki ondalık basamaklı, negatif olmayan bir sayı girin."
   },

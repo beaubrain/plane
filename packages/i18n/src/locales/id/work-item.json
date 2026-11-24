@@ -286,6 +286,9 @@
       "no_upvotes": "Belum ada suara naik",
       "no_downvotes": "Belum ada suara turun"
     },
+    "work_code": "Kode tugas",
+    "work_name": "Nama tugas",
+    "add_work_name": "Tambahkan “{name}” sebagai nama tugas",
     "estimated_hours": "Perkiraan jam",
     "invalid_estimated_hours": "Masukkan angka nol atau lebih besar dengan maksimal dua angka desimal."
   },

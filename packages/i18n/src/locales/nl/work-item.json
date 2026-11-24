@@ -286,6 +286,9 @@
       "no_upvotes": "Nog geen positieve stemmen",
       "no_downvotes": "Nog geen negatieve stemmen"
     },
+    "work_code": "Taakcode",
+    "work_name": "Taaknaam",
+    "add_work_name": "‘{name}’ als taaknaam toevoegen",
     "estimated_hours": "Geschatte uren",
     "invalid_estimated_hours": "Voer een niet-negatief getal met maximaal twee decimalen in."
   },

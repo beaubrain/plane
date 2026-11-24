@@ -442,6 +442,7 @@ class IssueViewSet(BaseViewSet):
                 .values(
                     "id",
                     "name",
+                    "work_name",
                     "state_id",
                     "sort_order",
                     "completed_at",

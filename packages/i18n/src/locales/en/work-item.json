@@ -286,6 +286,9 @@
       "no_upvotes": "No upvotes yet",
       "no_downvotes": "No downvotes yet"
     },
+    "work_code": "Work code",
+    "work_name": "Work name",
+    "add_work_name": "Add “{name}” as a work name",
     "estimated_hours": "Estimated hours",
     "invalid_estimated_hours": "Enter a non-negative number with up to two decimal places."
   },

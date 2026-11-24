@@ -286,6 +286,9 @@
       "no_upvotes": "Pas encore de vote pour",
       "no_downvotes": "Pas encore de vote contre"
     },
+    "work_code": "Code de la tâche",
+    "work_name": "Nom de la tâche",
+    "add_work_name": "Ajouter « {name} » comme nom de tâche",
     "estimated_hours": "Heures estimées",
     "invalid_estimated_hours": "Saisissez un nombre positif ou nul avec deux décimales au maximum."
   },

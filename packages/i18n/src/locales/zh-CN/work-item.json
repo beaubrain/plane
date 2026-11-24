@@ -286,6 +286,9 @@
       "no_upvotes": "暂无赞成票",
       "no_downvotes": "暂无反对票"
     },
+    "work_code": "工作代码",
+    "work_name": "工作名称",
+    "add_work_name": "添加“{name}”作为工作名称",
     "estimated_hours": "预计工时（小时）",
     "invalid_estimated_hours": "请输入非负数，最多保留两位小数。"
   },

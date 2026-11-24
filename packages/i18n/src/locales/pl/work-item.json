@@ -286,6 +286,9 @@
       "no_upvotes": "Brak głosów za",
       "no_downvotes": "Brak głosów przeciw"
     },
+    "work_code": "Kod zadania",
+    "work_name": "Nazwa zadania",
+    "add_work_name": "Dodaj „{name}” jako nazwę zadania",
     "estimated_hours": "Szacowany czas w godzinach",
     "invalid_estimated_hours": "Wpisz liczbę nieujemną z maksymalnie dwoma miejscami po przecinku."
   },

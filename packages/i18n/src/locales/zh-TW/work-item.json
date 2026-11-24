@@ -286,6 +286,9 @@
       "no_upvotes": "尚無贊成票",
       "no_downvotes": "尚無反對票"
     },
+    "work_code": "工作代碼",
+    "work_name": "工作名稱",
+    "add_work_name": "將「{name}」新增為工作名稱",
     "estimated_hours": "預估工時（小時）",
     "invalid_estimated_hours": "請輸入非負數，最多可有兩位小數。"
   },

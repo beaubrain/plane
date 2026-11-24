@@ -65,6 +65,12 @@ def get_default_preferences():
     return {"pages": {"block_display": True}, "navigation": {"default_tab": "work_items", "hide_in_more_menu": []}}
 
 
+def get_default_project_work_item_display_filters():
+    from .issue import get_default_display_filters
+
+    return {**get_default_display_filters(), "layout": "kanban", "group_by": "state"}
+
+
 class Project(ChangeTrackerMixin, BaseModel):
     TRACKED_FIELDS = ["timezone"]
 
@@ -390,7 +396,7 @@ class ProjectPublicMember(ProjectBaseModel):
 
 
 class ProjectUserProperty(ProjectBaseModel):
-    from .issue import get_default_filters, get_default_display_filters, get_default_display_properties
+    from .issue import get_default_filters, get_default_display_properties
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -398,7 +404,7 @@ class ProjectUserProperty(ProjectBaseModel):
         related_name="project_property_user",
     )
     filters = models.JSONField(default=get_default_filters)
-    display_filters = models.JSONField(default=get_default_display_filters)
+    display_filters = models.JSONField(default=get_default_project_work_item_display_filters)
     display_properties = models.JSONField(default=get_default_display_properties)
     rich_filters = models.JSONField(default=dict)
     preferences = models.JSONField(default=get_default_preferences)
