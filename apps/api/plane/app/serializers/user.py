@@ -51,6 +51,7 @@ class UserSerializer(BaseSerializer):
             "id",
             "username",
             "mobile_number",
+            "user_timezone",
             "email",
             "token",
             "created_at",

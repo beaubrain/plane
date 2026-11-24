@@ -3,7 +3,6 @@
 # See the LICENSE file for details.
 
 # Python imports
-import pytz
 
 # Django imports
 from django.conf import settings
@@ -75,8 +74,8 @@ class Cycle(ProjectBaseModel):
     archived_at = models.DateTimeField(null=True)
     logo_props = models.JSONField(default=dict)
     # timezone
-    TIMEZONE_CHOICES = tuple(zip(pytz.common_timezones, pytz.common_timezones))
-    timezone = models.CharField(max_length=255, default="UTC", choices=TIMEZONE_CHOICES)
+    TIMEZONE_CHOICES = (("Asia/Seoul", "Asia/Seoul"),)
+    timezone = models.CharField(max_length=255, default="Asia/Seoul", choices=TIMEZONE_CHOICES)
     version = models.IntegerField(default=1)
 
     class Meta:

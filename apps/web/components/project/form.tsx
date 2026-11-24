@@ -24,7 +24,6 @@ import { Select } from "@plane/blocks/select";
 import { renderFormattedDate } from "@plane/utils";
 import { CoverImage } from "@/components/common/cover-image";
 import { ImagePickerPopover } from "@/components/core/image-picker-popover";
-import { TimezoneSelect } from "@/components/global";
 // helpers
 import { handleCoverImageChange } from "@/helpers/cover-image.helper";
 // hooks
@@ -163,7 +162,6 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
       description: formData.description,
 
       logo_props: formData.logo_props,
-      timezone: formData.timezone,
     };
 
     // Handle cover image changes
@@ -417,29 +415,6 @@ export function ProjectDetailsForm(props: IProjectDetailsForm) {
                   </Select>
                 );
               }}
-            />
-          </div>
-          <div className="col-span-1 flex flex-col gap-1.5 sm:col-span-2 xl:col-span-1">
-            <Controller
-              name="timezone"
-              control={control}
-              rules={{ required: t("project_settings.general.please_select_a_timezone") }}
-              render={({ field: { value, onChange } }) => (
-                <>
-                  <TimezoneSelect
-                    fieldLabel={t("common.project_timezone")}
-                    errorMessage={errors.timezone?.message}
-                    value={value}
-                    onChange={(value: string) => {
-                      onChange(value);
-                    }}
-                    label={t("common.project_timezone")}
-                    error={Boolean(errors.timezone)}
-                    buttonClassName="!border-subtle !shadow-none font-medium rounded-md"
-                    disabled={!isAdmin}
-                  />
-                </>
-              )}
             />
           </div>
         </div>

@@ -8,6 +8,13 @@ import { useState } from "react";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { setLanguage } from "@plane/i18n";
+import {
+  getStateDisplayName,
+  renderFormattedDate,
+  renderFormattedPayloadDate,
+  renderFormattedTime,
+} from "@plane/utils";
 import type { DateRangeValue } from "./date-range-select";
 import { DateRangeSelect } from "./date-range-select";
 import { DateSelect } from "./date-select";
@@ -23,6 +30,30 @@ const popup = () => within(document.body);
 const day = (name: string) => popup().getByRole("button", { name: new RegExp(name) });
 
 describe("DateSelect", () => {
+  it("displays calendar dates in Korean and timestamps in Seoul time", async () => {
+    await setLanguage("ko");
+    try {
+      const value = new Date(2025, 5, 10);
+      render(<DateSelect value={value} onChange={vi.fn()} variant="select-md" testId="localized-date" defaultOpen />);
+
+      expect(screen.getByTestId("localized-date").textContent).toContain("2025년 6월 10일");
+      expect(day("2025년 6월 15일")).toBeDefined();
+      expect(renderFormattedPayloadDate(value)).toBe("2025-06-10");
+      expect(renderFormattedDate("2025-06-10T15:30:00Z")).toBe("2025년 6월 11일");
+      expect(renderFormattedTime("2025-06-10T15:30:00Z")).toBe("00:30");
+    } finally {
+      await setLanguage("en");
+    }
+  });
+
+  it("localizes stock workflow states while preserving project-specific labels", () => {
+    const translate = vi.fn(() => "진행 중");
+    expect(getStateDisplayName("In Progress", translate, "started", "ko")).toBe("진행 중");
+    expect(getStateDisplayName("In Progress", translate, "started", "en")).toBe("In Progress");
+    expect(getStateDisplayName("Review", translate, "started", "ko")).toBe("Review");
+    expect(translate).toHaveBeenCalledExactlyOnceWith("project_modules.status.in_progress");
+  });
+
   it("opens the calendar and reports the picked day", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();

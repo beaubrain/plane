@@ -49,7 +49,7 @@ import type {
 import { EIssuesStoreType } from "@plane/types";
 // plane ui
 
-import { renderFormattedDate, getFileURL } from "@plane/utils";
+import { renderFormattedDate, getFileURL, getStateDisplayName } from "@plane/utils";
 // store
 import { store } from "@/lib/store-context";
 import { ISSUE_FILTER_DEFAULT_DATA } from "@/store/issue/helpers/base-issues.store";
@@ -106,6 +106,7 @@ export const isWorkspaceLevel = (type: EIssuesStoreType) =>
     : false;
 
 type TGetGroupByColumns = {
+  t: (key: string, options?: Record<string, unknown>) => string;
   groupBy: GroupByColumnTypes | null;
   includeNone: boolean;
   isWorkspaceLevel: boolean;
@@ -117,6 +118,7 @@ type TGetGroupByColumns = {
 // We are using `as` to typecast it to the expected type.
 // It can break the includeNone logic if not handled properly.
 export const getGroupByColumns = ({
+  t,
   groupBy,
   includeNone,
   isWorkspaceLevel,
@@ -128,7 +130,7 @@ export const getGroupByColumns = ({
     return [
       {
         id: "All Issues",
-        name: `All ${isEpic ? "Epics" : "work items"}`,
+        name: t("entity.all", { entity: t(isEpic ? "common.epics" : "common.work_items") }),
         payload: {},
         icon: undefined,
       },
@@ -146,9 +148,9 @@ export const getGroupByColumns = ({
     project: getProjectColumns,
     cycle: getCycleColumns,
     module: getModuleColumns,
-    state: getStateColumns,
-    "state_detail.group": getStateGroupColumns,
-    priority: getPriorityColumns,
+    state: (options) => getStateColumns(options, t),
+    "state_detail.group": () => getStateGroupColumns(t),
+    priority: () => getPriorityColumns(t),
     labels: getLabelsColumns,
     assignees: getAssigneeColumns,
     created_by: getCreatedByColumns,
@@ -239,14 +241,14 @@ const getModuleColumns = (): IGroupByColumn[] | undefined => {
   return modules;
 };
 
-const getStateColumns = ({ projectId }: TGetColumns): IGroupByColumn[] | undefined => {
+const getStateColumns = ({ projectId }: TGetColumns, t: (key: string) => string): IGroupByColumn[] | undefined => {
   const { getProjectStates, projectStates } = store.state;
   const _states = projectId ? getProjectStates(projectId) : projectStates;
   if (!_states) return;
   // map project states to group by columns
   return _states.map((state) => ({
     id: state.id,
-    name: state.name,
+    name: getStateDisplayName(state.name, t, state.group),
     icon: (
       <div className="size-4 rounded-full">
         <StateGroupIcon stateGroup={state.group} color={state.color} size={EIconSize.LG} percentage={state.order} />
@@ -256,12 +258,12 @@ const getStateColumns = ({ projectId }: TGetColumns): IGroupByColumn[] | undefin
   }));
 };
 
-const getStateGroupColumns = (): IGroupByColumn[] => {
+const getStateGroupColumns = (t: (key: string) => string): IGroupByColumn[] => {
   const stateGroups = STATE_GROUPS;
   // map state groups to group by columns
   return Object.values(stateGroups).map((stateGroup) => ({
     id: stateGroup.key,
-    name: stateGroup.label,
+    name: t(`workspace_projects.state.${stateGroup.key}`),
     icon: (
       <div className="size-4 rounded-full">
         <StateGroupIcon stateGroup={stateGroup.key} size={EIconSize.LG} />
@@ -271,12 +273,12 @@ const getStateGroupColumns = (): IGroupByColumn[] => {
   }));
 };
 
-const getPriorityColumns = (): IGroupByColumn[] => {
+const getPriorityColumns = (t: (key: string) => string): IGroupByColumn[] => {
   const priorities = ISSUE_PRIORITIES;
   // map priorities to group by columns
   return priorities.map((priority) => ({
     id: priority.key,
-    name: priority.title,
+    name: t(`issue.priority.${priority.key}`),
     icon: <PriorityIcon priority={priority?.key} />,
     payload: { priority: priority.key },
   }));

@@ -56,6 +56,7 @@ class CycleCreateSerializer(BaseSerializer):
             "created_at",
             "updated_at",
             "deleted_at",
+            "timezone",
         ]
 
     def validate(self, data):

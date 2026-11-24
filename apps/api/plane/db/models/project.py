@@ -115,8 +115,8 @@ class Project(ChangeTrackerMixin, BaseModel):
     default_state = models.ForeignKey("db.State", on_delete=models.SET_NULL, null=True, related_name="default_state")
     archived_at = models.DateTimeField(null=True)
     # timezone
-    TIMEZONE_CHOICES = tuple(zip(pytz.common_timezones, pytz.common_timezones))
-    timezone = models.CharField(max_length=255, default="UTC", choices=TIMEZONE_CHOICES)
+    TIMEZONE_CHOICES = (("Asia/Seoul", "Asia/Seoul"),)
+    timezone = models.CharField(max_length=255, default="Asia/Seoul", choices=TIMEZONE_CHOICES)
     # external_id for imports
     external_source = models.CharField(max_length=255, null=True, blank=True)
     external_id = models.CharField(max_length=255, blank=True, null=True)

@@ -14,10 +14,10 @@ import type { TGroupedIssues, TIssue, TIssueMap, TPaginationData, ICalendarDate 
 // types
 // ui
 // components
-import { cn, renderFormattedPayloadDate } from "@plane/utils";
+import { cn, renderFormattedPayloadDate, getSeoulToday, formatCalendarDate } from "@plane/utils";
 import { highlightIssueOnDrop } from "@/components/issues/issue-layouts/utils";
 // helpers
-import { MONTHS_LIST } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 // helpers
 // types
 import type { ICycleIssuesFilter } from "@/store/issue/cycle";
@@ -54,6 +54,7 @@ type Props = {
 };
 
 export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
+  const { currentLocale } = useTranslation();
   const {
     issuesFilterStore,
     date,
@@ -135,7 +136,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
   if (!formattedDatePayload) return null;
   const issueIds = groupedIssueIds?.[formattedDatePayload];
 
-  const isToday = date.date.toDateString() === new Date().toDateString();
+  const isToday = date.date.toDateString() === getSeoulToday().toDateString();
   const isSelectedDate = date.date.toDateString() == selectedDate.toDateString();
 
   const isWeekend = [0, 6].includes(date.date.getDay());
@@ -157,7 +158,7 @@ export const CalendarDayTile = observer(function CalendarDayTile(props: Props) {
               : "font-medium" // if week layout, highlight all days
           } ${isWeekend ? "bg-layer-1" : "bg-layer-transparent"} `}
         >
-          {date.date.getDate() === 1 && <span>{MONTHS_LIST[date.date.getMonth() + 1].shortTitle}</span>}
+          {date.date.getDate() === 1 && <span>{formatCalendarDate(date.date, "MMM", currentLocale)}</span>}
           {isToday ? (
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent-primary text-on-color">
               {date.date.getDate()}

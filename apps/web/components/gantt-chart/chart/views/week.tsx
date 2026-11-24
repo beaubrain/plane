@@ -4,9 +4,10 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 // plane utils
-import { cn } from "@plane/utils";
+import { cn, formatCalendarDate, formatDayOfWeek } from "@plane/utils";
 // hooks
 import { useTimeLineChartStore } from "@/hooks/use-timeline-chart";
 //
@@ -14,6 +15,7 @@ import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "../../constants";
 import type { IWeekBlock } from "../../views";
 
 export const WeekChartView = observer(function WeekChartView(_props: any) {
+  const { t, currentLocale } = useTranslation();
   const { currentViewData, renderView } = useTimeLineChartStore();
   const weekBlocks: IWeekBlock[] = renderView;
 
@@ -40,10 +42,17 @@ export const WeekChartView = observer(function WeekChartView(_props: any) {
                     left: `${SIDEBAR_WIDTH}px`,
                   }}
                 >
-                  {block?.title}
+                  {[
+                    formatCalendarDate(block.startDate, "MMM, yyyy", currentLocale),
+                    formatCalendarDate(block.endDate, "MMM, yyyy", currentLocale),
+                  ]
+                    .filter((month, index, all) => index === 0 || month !== all[0])
+                    .join(" – ")}
                 </div>
                 <div className="sticky px-3 py-2 text-caption-sm-regular whitespace-nowrap text-placeholder capitalize">
-                  {block?.weekData?.title}
+                  {currentLocale === "ko"
+                    ? `${block.weekNumber}${t("common.week")}`
+                    : `${t("common.week")} ${block.weekNumber}`}
                 </div>
               </div>
               {/** Days Sub title */}
@@ -60,7 +69,7 @@ export const WeekChartView = observer(function WeekChartView(_props: any) {
                     style={{ width: `${currentViewData?.data.dayWidth}px` }}
                   >
                     <div className="space-x-1 text-caption-sm-medium text-placeholder">
-                      {weekDay.dayData.abbreviation}
+                      {formatDayOfWeek(weekDay.date.getDay(), currentLocale, true)}
                     </div>
                     <div className="space-x-1 text-caption-sm-medium">
                       <span

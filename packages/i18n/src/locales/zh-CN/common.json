@@ -1,4 +1,9 @@
 {
+  "date_filter": {
+    "after": "之后",
+    "before": "之前",
+    "range": "范围"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "我们正在处理此问题。如果您需要紧急协助，",
     "reach_out_to_us": "请联系我们",

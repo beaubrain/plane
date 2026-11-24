@@ -81,6 +81,7 @@ class WorkSpaceSerializer(DynamicBaseSerializer):
             "created_at",
             "updated_at",
             "owner",
+            "timezone",
             "logo_url",
             "deleted_at",
         ]

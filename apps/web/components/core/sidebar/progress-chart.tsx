@@ -7,6 +7,7 @@
 import React from "react";
 // plane imports
 import { AreaChart } from "@plane/blocks/charts/area-chart";
+import { useTranslation } from "@plane/i18n";
 import type { TChartData, TModuleCompletionChartDistribution } from "@plane/types";
 import { renderFormattedDateWithoutYear } from "@plane/utils";
 
@@ -17,7 +18,9 @@ type Props = {
   plotTitle?: string;
 };
 
-function ProgressChart({ distribution, totalIssues, className = "", plotTitle = "work items" }: Props) {
+function ProgressChart({ distribution, totalIssues, className = "", plotTitle }: Props) {
+  const { t } = useTranslation();
+  const entity = plotTitle ?? t("common.work_items");
   const chartData: TChartData<string, string>[] = Object.keys(distribution ?? []).map((key, index) => ({
     name: renderFormattedDateWithoutYear(key),
     current: distribution[key] ?? 0,
@@ -31,7 +34,7 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
         areas={[
           {
             key: "current",
-            label: `Current ${plotTitle}`,
+            label: `${t("current")} ${entity}`,
             strokeColor: "#3F76FF",
             fill: "#3F76FF33",
             fillOpacity: 1,
@@ -42,7 +45,7 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
           },
           {
             key: "ideal",
-            label: `Ideal ${plotTitle}`,
+            label: `${t("ideal")} ${entity}`,
             strokeColor: "#A9BBD0",
             fill: "#A9BBD0",
             fillOpacity: 0,
@@ -56,8 +59,8 @@ function ProgressChart({ distribution, totalIssues, className = "", plotTitle = 
             },
           },
         ]}
-        xAxis={{ key: "name", label: "Date" }}
-        yAxis={{ key: "current", label: "Completion" }}
+        xAxis={{ key: "name", label: t("date") }}
+        yAxis={{ key: "current", label: t("common.completion") }}
         margin={{ bottom: 30 }}
         className="h-[370px] w-full"
         legend={{

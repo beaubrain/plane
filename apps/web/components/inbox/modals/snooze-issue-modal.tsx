@@ -8,6 +8,7 @@ import { useState } from "react";
 import { addDays } from "date-fns";
 // ui
 import { useTranslation } from "@plane/i18n";
+import { getCalendarLocale, getSeoulToday } from "@plane/utils";
 import { Button } from "@makeplane/propel/components/button";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import { Dialog, DialogActions, DialogBody, DialogContent, DialogMain } from "@makeplane/propel/components/dialog";
@@ -15,30 +16,23 @@ import { Dialog, DialogActions, DialogBody, DialogContent, DialogMain } from "@m
 export type InboxIssueSnoozeModalProps = {
   isOpen: boolean;
   value: Date | undefined;
-  projectTimezone: string | undefined;
   onConfirm: (value: Date) => void;
   handleClose: () => void;
 };
 
-// `date`'s calendar day in `timeZone` (browser zone if unset), as a local-midnight Date (what the calendar compares against).
-const getDayInTimezone = (date: Date, timeZone: string | undefined) => {
-  const parts = new Intl.DateTimeFormat("en-CA", { timeZone }).formatToParts(date);
-  const part = (type: Intl.DateTimeFormatPartTypes) => Number(parts.find((p) => p.type === type)?.value);
-  return new Date(part("year"), part("month") - 1, part("day"));
-};
-
 export function InboxIssueSnoozeModal(props: InboxIssueSnoozeModalProps) {
-  const { isOpen, handleClose, value, projectTimezone, onConfirm } = props;
+  const { isOpen, handleClose, value, onConfirm } = props;
   // states
   const [pickedDate, setPickedDate] = useState<Date | undefined>();
   //hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // derived values
   // A snooze ends at 00:00 of the picked day in the project timezone, so any day that has already
   // started there would lapse at once. The pick is cleared on close because this modal stays
   // mounted across intake items.
-  const tomorrow = addDays(getDayInTimezone(new Date(), projectTimezone), 1);
-  const snoozedDay = value ? getDayInTimezone(new Date(value), projectTimezone) : undefined;
+  const today = getSeoulToday();
+  const tomorrow = addDays(today, 1);
+  const snoozedDay = value ? getSeoulToday(value) : undefined;
   const date = pickedDate ?? (snoozedDay && snoozedDay >= tomorrow ? snoozedDay : tomorrow);
 
   const onClose = () => {
@@ -57,6 +51,8 @@ export function InboxIssueSnoozeModal(props: InboxIssueSnoozeModalProps) {
         <DialogMain>
           <DialogBody>
             <Calendar
+              locale={getCalendarLocale(currentLocale)}
+              today={today}
               selected={date}
               defaultMonth={date}
               onSelect={(selected: Date | undefined) => {

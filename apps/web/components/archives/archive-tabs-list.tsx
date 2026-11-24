@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 import { Tab, Tabs, TabsList } from "@makeplane/propel/components/tabs";
 import Link from "next/link";
@@ -20,22 +21,23 @@ const ARCHIVES_TAB_LIST: {
 }[] = [
   {
     key: "issues",
-    label: "Work items",
+    label: "sidebar.work_items",
     shouldRender: () => true,
   },
   {
     key: "cycles",
-    label: "Cycles",
+    label: "sidebar.cycles",
     shouldRender: (projectDetails) => projectDetails.cycle_view,
   },
   {
     key: "modules",
-    label: "Modules",
+    label: "sidebar.modules",
     shouldRender: (projectDetails) => projectDetails.module_view,
   },
 ];
 
 export const ArchiveTabsList = observer(function ArchiveTabsList() {
+  const { t } = useTranslation();
   // router
   const { workspaceSlug, projectId } = useParams();
   const pathname = usePathname();
@@ -60,7 +62,7 @@ export const ArchiveTabsList = observer(function ArchiveTabsList() {
                 <Tab
                   key={tab.key}
                   value={tab.key}
-                  label={tab.label}
+                  label={t(tab.label)}
                   nativeButton={false}
                   render={<Link href={`/${workspaceSlug}/projects/${projectId}/archives/${tab.key}`} />}
                 />

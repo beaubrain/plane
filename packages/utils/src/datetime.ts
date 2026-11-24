@@ -5,7 +5,107 @@
  */
 
 import { differenceInDays, format, formatDistanceToNow, isAfter, isEqual, isValid, parseISO } from "date-fns";
+import {
+  bg,
+  cs,
+  de,
+  enUS,
+  es,
+  fr,
+  id,
+  it,
+  ja,
+  ka,
+  ko,
+  nl,
+  pl,
+  ptBR,
+  ro,
+  ru,
+  sk,
+  tr,
+  uk,
+  vi,
+  zhCN,
+  zhTW,
+} from "date-fns/locale";
 import { isNumber } from "lodash-es";
+
+export const SEOUL_TIME_ZONE = "Asia/Seoul";
+const DISPLAY_DATE_TOKEN = "MMM dd, yyyy";
+const DATE_LOCALES = {
+  bg,
+  cs,
+  de,
+  en: enUS,
+  es,
+  fr,
+  id,
+  it,
+  ja,
+  "ka-ge": ka,
+  ko,
+  nl,
+  pl,
+  "pt-br": ptBR,
+  ro,
+  ru,
+  sk,
+  "tr-tr": tr,
+  ua: uk,
+  vi,
+  "vi-vn": vi,
+  "zh-cn": zhCN,
+  "zh-tw": zhTW,
+};
+const KOREAN_DATE_TOKENS: Record<string, string> = {
+  [DISPLAY_DATE_TOKEN]: "yyyy년 M월 d일",
+  "MMM dd": "M월 d일",
+  "MMM, yyyy": "yyyy년 M월",
+  "MMM d, yyyy h:mma": "yyyy년 M월 d일 a h:mm",
+};
+
+export function getDisplayLanguage() {
+  return typeof document === "undefined" ? "en" : document.documentElement.lang || "en";
+}
+
+export function getCalendarLocale(language = getDisplayLanguage()) {
+  const key = language.toLowerCase();
+  return DATE_LOCALES[key as keyof typeof DATE_LOCALES] ?? enUS;
+}
+
+export function formatCalendarDate(date: Date, token = DISPLAY_DATE_TOKEN, language = getDisplayLanguage()) {
+  const locale = getCalendarLocale(language);
+  const displayToken = locale === ko ? (KOREAN_DATE_TOKENS[token] ?? token) : token;
+  return format(date, displayToken, { locale });
+}
+
+export function formatDayOfWeek(day: number, language = getDisplayLanguage(), short = false) {
+  return formatCalendarDate(new Date(2024, 0, 7 + day), short ? "EEE" : "EEEE", language);
+}
+
+const seoulClock = new Intl.DateTimeFormat("en-CA", {
+  timeZone: SEOUL_TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h23",
+});
+
+// Project an instant onto Seoul's calendar and clock for date-fns and day-picker's local Date values.
+export function getSeoulWallTime(date: Date = new Date()) {
+  const parts = Object.fromEntries(seoulClock.formatToParts(date).map(({ type, value }) => [type, Number(value)]));
+  return new Date(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+}
+
+export function getSeoulToday(date: Date = new Date()) {
+  const day = getSeoulWallTime(date);
+  day.setHours(0, 0, 0, 0);
+  return day;
+}
 
 // Format Date Helpers
 /**
@@ -18,10 +118,10 @@ import { isNumber } from "lodash-es";
  */
 export const renderFormattedDate = (
   date: string | Date | undefined | null,
-  formatToken: string = "MMM dd, yyyy"
+  formatToken: string = DISPLAY_DATE_TOKEN
 ): string | undefined => {
-  // Parse the date to check if it is valid
-  const parsedDate = getDate(date);
+  const instant = typeof date === "string" && /^\d{4}-\d{2}-\d{2}T/.test(date) ? parseISO(date) : undefined;
+  const parsedDate = instant && isValid(instant) ? getSeoulWallTime(instant) : getDate(date);
   // return if undefined
   if (!parsedDate) return;
   // Check if the parsed date is valid before formatting
@@ -29,10 +129,10 @@ export const renderFormattedDate = (
   let formattedDate;
   try {
     // Format the date in the format provided or default format (MMM dd, yyyy)
-    formattedDate = format(parsedDate, formatToken);
+    formattedDate = formatCalendarDate(parsedDate, formatToken);
   } catch (_e) {
     // Format the date in format (MMM dd, yyyy) in case of any error
-    formattedDate = format(parsedDate, "MMM dd, yyyy");
+    formattedDate = formatCalendarDate(parsedDate);
   }
   return formattedDate;
 };
@@ -51,7 +151,7 @@ export const renderFormattedDateWithoutYear = (date: string | Date): string => {
   // Check if the parsed date is valid before formatting
   if (!isValid(parsedDate)) return ""; // Return empty string for invalid dates
   // Format the date in short format (MMM dd)
-  const formattedDate = format(parsedDate, "MMM dd");
+  const formattedDate = formatCalendarDate(parsedDate, "MMM dd");
   return formattedDate;
 };
 
@@ -89,14 +189,13 @@ export const renderFormattedTime = (date: string | Date, timeFormat: "12-hour" |
   if (!parsedDate) return "";
   // Check if the parsed date is valid
   if (!isValid(parsedDate)) return ""; // Return empty string for invalid dates
-  // Format the date in 12 hour format if in12HourFormat is true
-  if (timeFormat === "12-hour") {
-    const formattedTime = format(parsedDate, "hh:mm a");
-    return formattedTime;
-  }
-  // Format the date in 24 hour format
-  const formattedTime = format(parsedDate, "HH:mm");
-  return formattedTime;
+  const language = getDisplayLanguage();
+  return new Intl.DateTimeFormat(language === "ua" ? "uk" : language, {
+    timeZone: SEOUL_TIME_ZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: timeFormat === "12-hour" ? "h12" : "h23",
+  }).format(parsedDate);
 };
 
 // Date Difference Helpers
@@ -158,7 +257,7 @@ export const findHowManyDaysLeft = (
 ): number | undefined => {
   if (!date) return undefined;
   // Pass the date to findTotalDaysInRange function to find the total number of days in range from today
-  return findTotalDaysInRange(new Date(), date, inclusive);
+  return findTotalDaysInRange(getSeoulToday(), date, inclusive);
 };
 
 // Time Difference Helpers
@@ -173,9 +272,9 @@ export const calculateTimeAgo = (time: string | number | Date | null): string =>
   // Parse the time to check if it is valid
   const parsedTime = typeof time === "string" || typeof time === "number" ? parseISO(String(time)) : time;
   // return if undefined
-  if (!parsedTime) return ""; // Return empty string for invalid dates
+  if (!isValid(parsedTime)) return "";
   // Format the time in the form of amount of time passed since the event happened
-  const distance = formatDistanceToNow(parsedTime, { addSuffix: true });
+  const distance = formatDistanceToNow(parsedTime, { addSuffix: true, locale: getCalendarLocale() });
   return distance;
 };
 
@@ -228,7 +327,7 @@ export const isDateGreaterThanToday = (dateStr: string): boolean => {
   if (!dateStr) return false;
   // Parse the date to check if it is valid
   const date = parseISO(dateStr);
-  const today = new Date();
+  const today = getSeoulToday();
   // Check if the parsed date is valid
   if (!isValid(date)) return false; // Return false for invalid dates
   // Return true if the date is greater than today
@@ -496,6 +595,10 @@ export const formatDateRange = (
   // If no dates are provided
   if (!parsedStartDate && !parsedEndDate) {
     return "";
+  }
+
+  if (getCalendarLocale() === ko) {
+    return [parsedStartDate, parsedEndDate].flatMap((date) => (date ? [formatCalendarDate(date)] : [])).join(" ~ ");
   }
 
   // If only start date is provided

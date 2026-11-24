@@ -5,7 +5,8 @@
  */
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { useTranslation } from "@plane/i18n";
+import { formatCalendarDate, getCalendarLocale, getSeoulToday } from "@plane/utils";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import type { DateSelectCommonProps } from "./date-select-shell";
 import { DateSelectShell } from "./date-select-shell";
@@ -73,14 +74,21 @@ const MERGE_TOKENS: Record<string, { sameYear: MergeTokenPair; sameMonth: MergeT
  * "Jun 10 - 24, 2025"; two months in one year give "Jan 24 - Feb 02, 2025"; anything wider — or any
  * `formatToken` outside {@link MERGE_TOKENS} — stays whole.
  */
-function mergeRangeLabel(range: DateRangeValue, from: string, to: string, formatToken: string): string {
+function mergeRangeLabel(
+  range: DateRangeValue,
+  from: string,
+  to: string,
+  formatToken: string,
+  language: string
+): string {
   const joined = from && to ? `${from} - ${to}` : from || to;
   if (!range.from || !range.to || !from || !to) return joined;
+  if (language === "ko" && formatToken === DEFAULT_DATE_FORMAT_TOKEN) return `${from} ~ ${to}`;
   if (range.from.getFullYear() !== range.to.getFullYear()) return joined;
   const tokens = MERGE_TOKENS[formatToken];
   if (!tokens) return joined;
   const pair = range.from.getMonth() === range.to.getMonth() ? tokens.sameMonth : tokens.sameYear;
-  return `${format(range.from, pair.from)} - ${format(range.to, pair.to)}`;
+  return `${formatCalendarDate(range.from, pair.from, language)} - ${formatCalendarDate(range.to, pair.to, language)}`;
 }
 
 /**
@@ -102,6 +110,8 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
     clearable = false,
     onClose,
   } = props;
+  const { currentLocale } = useTranslation();
+  const today = getSeoulToday();
   // states
   const [isOpen, setIsOpen] = useState(props.defaultOpen ?? false);
   // react-day-picker answers the FIRST click of a range with `{ from: day, to: day }`, which is
@@ -110,13 +120,13 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
   // sees a range it did not ask for.
   const [draft, setDraft] = useState<DateRangeValue | null>(null);
   // derived values
-  const from = value.from ? format(value.from, formatToken) : "";
-  const to = value.to ? format(value.to, formatToken) : "";
+  const from = value.from ? formatCalendarDate(value.from, formatToken, currentLocale) : "";
+  const to = value.to ? formatCalendarDate(value.to, formatToken, currentLocale) : "";
   const joined = from && to ? `${from} - ${to}` : from || to;
   const formatted = props.formatLabel
     ? props.formatLabel(value, { from, to })
     : props.mergeDates
-      ? mergeRangeLabel(value, from, to, formatToken)
+      ? mergeRangeLabel(value, from, to, formatToken, currentLocale)
       : joined;
   const isEmpty = !value.from && !value.to;
   const disabledMatchers = buildDisabledMatchers(minDate, maxDate);
@@ -144,9 +154,11 @@ export function DateRangeSelect(props: DateRangeSelectProps) {
       }}
     >
       <Calendar
+        locale={getCalendarLocale(currentLocale)}
+        today={today}
         mode="range"
         selected={shown.from ? { from: shown.from, to: shown.to ?? undefined } : undefined}
-        defaultMonth={value.from ?? defaultMonth}
+        defaultMonth={value.from ?? defaultMonth ?? today}
         disabled={disabledMatchers}
         weekStartsOn={weekStartsOn}
         onSelect={(range) => {

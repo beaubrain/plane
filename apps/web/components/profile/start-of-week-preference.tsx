@@ -7,6 +7,8 @@
 import { observer } from "mobx-react";
 // plane imports
 import { SelectField } from "@makeplane/propel/components/select-field";
+import { useTranslation } from "@plane/i18n";
+import { formatDayOfWeek } from "@plane/utils";
 import { START_OF_THE_WEEK_OPTIONS } from "@plane/constants";
 import { setToast } from "@plane/blocks/toast";
 import type { EStartOfTheWeek } from "@plane/types";
@@ -15,31 +17,40 @@ import { SettingsControlItem } from "@/components/settings/control-item";
 // hooks
 import { useUserProfile } from "@/hooks/store/user";
 
-export const StartOfWeekPreference = observer(function StartOfWeekPreference(props: {
-  option: { title: string; description: string };
-}) {
-  // hooks
+export const StartOfWeekPreference = observer(function StartOfWeekPreference() {
+  const { t, currentLocale } = useTranslation();
+  const title = t("power_k.preferences_actions.update_start_of_week");
   const { data: userProfile, updateUserProfile } = useUserProfile();
 
   const handleStartOfWeekChange = async (val: EStartOfTheWeek) => {
     try {
       await updateUserProfile({ start_of_the_week: val });
-      setToast({ type: "success", title: "Success", message: "First day of the week updated successfully" });
+      setToast({
+        type: "success",
+        title: t("toast.success"),
+        message: t("power_k.preferences_actions.toast.generic.success"),
+      });
     } catch (_error) {
-      setToast({ type: "error", title: "Update failed", message: "Please try again later." });
+      setToast({
+        type: "error",
+        title: t("toast.error"),
+        message: t("power_k.preferences_actions.toast.generic.error"),
+      });
     }
   };
 
   return (
     <SettingsControlItem
-      title={props.option.title}
-      description={props.option.description}
+      title={title}
       control={
         <SelectField<EStartOfTheWeek>
-          aria-label={props.option.title}
+          aria-label={title}
           size="md"
           width="fit"
-          options={START_OF_THE_WEEK_OPTIONS}
+          options={START_OF_THE_WEEK_OPTIONS.map(({ value }) => ({
+            value,
+            label: formatDayOfWeek(value, currentLocale),
+          }))}
           value={userProfile.start_of_the_week}
           onValueChange={(value) => {
             if (value !== null) void handleStartOfWeekChange(value);

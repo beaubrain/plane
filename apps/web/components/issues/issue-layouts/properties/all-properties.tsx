@@ -43,6 +43,7 @@ import {
   renderFormattedPayloadDate,
   generateWorkItemLink,
   getIssueDueDateClassName,
+  getStateDisplayName,
 } from "@plane/utils";
 // components
 import { CycleSelect } from "@/components/dropdowns/cycle/cycle-select";
@@ -130,6 +131,9 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
 
   // derived values
   const stateDetails = getStateById(issue.state_id);
+  const stateName = stateDetails
+    ? getStateDisplayName(stateDetails.name, t, stateDetails.group, currentLocale)
+    : undefined;
   const subIssueCount = issue?.sub_issues_count ?? 0;
 
   const issueOperations = useMemo(
@@ -271,12 +275,12 @@ export const IssueProperties = observer(function IssueProperties(props: IIssuePr
     entries.push({
       key: "state",
       hidePriority: getWorkItemPropertyHidePriority("state"),
-      measureKey: stateDetails?.name,
+      measureKey: stateName,
       chip: chipShell(renderState({ tooltip: true })),
       menuRow: {
         icon: <StateGroupIcon stateGroup={stateDetails?.group ?? "backlog"} color={stateDetails?.color} size="md" />,
         label: t("common.state"),
-        preview: stateDetails?.name ?? none,
+        preview: stateName ?? none,
         disabled: isReadOnly,
         editor: ({ onEditorClose }) => renderState(getPropertyEditorProps(onEditorClose)),
       },

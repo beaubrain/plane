@@ -10,7 +10,7 @@ import { FieldLabel } from "@makeplane/propel/elements/field";
 
 type Props = {
   control: React.ReactNode;
-  description: string;
+  description?: string;
   title: React.ReactNode;
 };
 
@@ -32,7 +32,7 @@ export function SettingsControlItem(props: Props) {
         >
           {title}
         </Field.Label>
-        <FieldDescription size="md">{description}</FieldDescription>
+        {description && <FieldDescription size="md">{description}</FieldDescription>}
       </div>
       <div className="shrink-0">{control}</div>
     </Field.Root>

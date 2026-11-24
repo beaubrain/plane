@@ -1,4 +1,9 @@
 {
+  "date_filter": {
+    "after": "შემდეგ",
+    "before": "მანამდე",
+    "range": "დიაპაზონი"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "We're working on this. If you need immediate assistance,",
     "reach_out_to_us": "reach out to us",

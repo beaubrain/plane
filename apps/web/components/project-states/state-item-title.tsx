@@ -12,7 +12,7 @@ import { DragDropOutline } from "@makeplane/propel/icons";
 import { StateGroupIcon } from "@plane/blocks/icons";
 import { useTranslation } from "@plane/i18n";
 import type { IState, TStateOperationsCallbacks } from "@plane/types";
-import { cn } from "@plane/utils";
+import { cn, getStateDisplayName } from "@plane/utils";
 // local imports
 import { useProjectState } from "@/hooks/store/use-project-state";
 import { StateQuickActions } from "./options";
@@ -65,7 +65,7 @@ export const StateItemTitle = observer(function StateItemTitle(props: TStateItem
         />
         {/* state title and description */}
         <div>
-          <h6 className="text-body-sm-medium">{state.name}</h6>
+          <h6 className="text-body-sm-medium">{getStateDisplayName(state.name, t, state.group)}</h6>
           {hasDescription && <p className="text-caption-sm-regular text-secondary">{state.description}</p>}
         </div>
       </div>

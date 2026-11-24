@@ -1,4 +1,9 @@
 {
+  "date_filter": {
+    "after": "След",
+    "before": "Преди",
+    "range": "Период"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Работим по проблема. Ако се нуждаете от незабавна помощ,",
     "reach_out_to_us": "свържете се с нас",

@@ -1,4 +1,9 @@
 {
+  "date_filter": {
+    "after": "以降",
+    "before": "以前",
+    "range": "期間"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "現在この問題に取り組んでいます。緊急のサポートが必要な場合は、",
     "reach_out_to_us": "お問い合わせください",

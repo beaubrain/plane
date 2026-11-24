@@ -27,7 +27,7 @@ interface Props {
 }
 export const CalendarMonthsDropdown = observer(function CalendarMonthsDropdown(props: Props) {
   const { issuesFilterStore } = props;
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
 
   const issueCalendarView = useCalendarView();
 
@@ -35,29 +35,17 @@ export const CalendarMonthsDropdown = observer(function CalendarMonthsDropdown(p
 
   const { activeMonthDate } = issueCalendarView.calendarFilters;
 
+  const language = currentLocale === "ua" ? "uk" : currentLocale;
+  const calendarMonth = new Intl.DateTimeFormat(language, { year: "numeric", month: "long" });
+  const shortMonth = new Intl.DateTimeFormat(language, { month: "short" });
+
   const getWeekLayoutHeader = (): string => {
-    const allDaysOfActiveWeek = issueCalendarView.allDaysOfActiveWeek;
-
-    if (!allDaysOfActiveWeek) return "Week view";
-
-    const daysList = Object.keys(allDaysOfActiveWeek);
-
+    const daysList = Object.keys(issueCalendarView.allDaysOfActiveWeek ?? {});
     const firstDay = getDate(daysList[0]);
     const lastDay = getDate(daysList[daysList.length - 1]);
 
-    if (!firstDay || !lastDay) return "Week view";
-
-    if (firstDay.getMonth() === lastDay.getMonth() && firstDay.getFullYear() === lastDay.getFullYear())
-      return `${MONTHS_LIST[firstDay.getMonth() + 1].title} ${firstDay.getFullYear()}`;
-
-    if (firstDay.getFullYear() !== lastDay.getFullYear()) {
-      return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} ${firstDay.getFullYear()} - ${
-        MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
-      } ${lastDay.getFullYear()}`;
-    } else
-      return `${MONTHS_LIST[firstDay.getMonth() + 1].shortTitle} - ${
-        MONTHS_LIST[lastDay.getMonth() + 1].shortTitle
-      } ${lastDay.getFullYear()}`;
+    if (!firstDay || !lastDay) return t("common.week");
+    return calendarMonth.formatRange(firstDay, lastDay);
   };
 
   const handleDateChange = (date: Date) => {
@@ -75,9 +63,7 @@ export const CalendarMonthsDropdown = observer(function CalendarMonthsDropdown(p
             type="button"
             className="rounded-xs text-h5-semibold outline-none focus-visible:ring-2 focus-visible:ring-accent-strong"
           >
-            {calendarLayout === "month"
-              ? `${MONTHS_LIST[activeMonthDate.getMonth() + 1].title} ${activeMonthDate.getFullYear()}`
-              : getWeekLayoutHeader()}
+            {calendarLayout === "month" ? calendarMonth.format(activeMonthDate) : getWeekLayoutHeader()}
           </button>
         }
       />
@@ -111,8 +97,8 @@ export const CalendarMonthsDropdown = observer(function CalendarMonthsDropdown(p
               <Toggle
                 key={month.shortTitle}
                 size="xs"
-                label={month.shortTitle}
-                aria-label={`${month.title} ${activeMonthDate.getFullYear()}`}
+                label={shortMonth.format(new Date(activeMonthDate.getFullYear(), index, 1))}
+                aria-label={calendarMonth.format(new Date(activeMonthDate.getFullYear(), index, 1))}
                 pressed={activeMonthDate.getMonth() === index}
                 onClick={() => {
                   const newDate = new Date(activeMonthDate.getFullYear(), index, 1);

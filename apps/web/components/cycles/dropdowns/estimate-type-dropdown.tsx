@@ -37,7 +37,7 @@ export const EstimateTypeDropdown = observer(function EstimateTypeDropdown(props
         value={cycleEstimateOptions.find((v) => v.value === value) ?? null}
         onChange={(next) => void onChange(next as TCycleEstimateType)}
         getOptionValue={(option) => option.value}
-        getOptionLabel={(option) => option.label}
+        getOptionLabel={(option) => t(option.label)}
         showSearch={false}
         pinSelected={false}
         placeholder={t("common.none")}
@@ -48,6 +48,8 @@ export const EstimateTypeDropdown = observer(function EstimateTypeDropdown(props
       </Select>
     </div>
   ) : showDefault ? (
-    <span className="capitalize">{cycleEstimateOptions.find((v) => v.value === value)?.label ?? value}</span>
+    <span className="capitalize">
+      {t(cycleEstimateOptions.find((v) => v.value === value)?.label ?? "common.work_items")}
+    </span>
   ) : null;
 });

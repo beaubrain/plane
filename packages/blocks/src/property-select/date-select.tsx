@@ -5,7 +5,8 @@
  */
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { useTranslation } from "@plane/i18n";
+import { formatCalendarDate, getCalendarLocale, getSeoulToday } from "@plane/utils";
 import { Calendar } from "@makeplane/propel/components/calendar";
 import type { DateSelectCommonProps } from "./date-select-shell";
 import { DateSelectShell } from "./date-select-shell";
@@ -36,10 +37,12 @@ export function DateSelect(props: DateSelectProps) {
     clearable = false,
     onClose,
   } = props;
+  const { currentLocale } = useTranslation();
+  const today = getSeoulToday();
   // states
   const [isOpen, setIsOpen] = useState(props.defaultOpen ?? false);
   // derived values
-  const formatted = value ? format(value, formatToken) : "";
+  const formatted = value ? formatCalendarDate(value, formatToken, currentLocale) : "";
   const disabledMatchers = buildDisabledMatchers(minDate, maxDate);
 
   const handleOpenChange = (open: boolean) => {
@@ -62,9 +65,11 @@ export function DateSelect(props: DateSelectProps) {
       }}
     >
       <Calendar
+        locale={getCalendarLocale(currentLocale)}
+        today={today}
         mode="single"
         selected={value ?? undefined}
-        defaultMonth={value ?? defaultMonth}
+        defaultMonth={value ?? defaultMonth ?? today}
         disabled={disabledMatchers}
         weekStartsOn={weekStartsOn}
         onSelect={(date) => {

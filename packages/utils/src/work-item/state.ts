@@ -7,7 +7,28 @@
 // plane imports
 import type { TDraggableData } from "@plane/constants";
 import { STATE_GROUPS } from "@plane/constants";
-import type { IState, IStateResponse } from "@plane/types";
+import type { IState, IStateResponse, TStateGroups } from "@plane/types";
+import { getDisplayLanguage } from "../datetime";
+
+const STATE_NAME_KEYS: Record<TStateGroups, string> = {
+  backlog: "workspace_projects.state.backlog",
+  unstarted: "workspace_projects.state.unstarted",
+  started: "project_modules.status.in_progress",
+  completed: "common.completed",
+  cancelled: "workspace_projects.state.cancelled",
+};
+
+export function getStateDisplayName(
+  name: string,
+  t: (key: string) => string,
+  group?: TStateGroups,
+  language = getDisplayLanguage()
+): string {
+  if (language === "en") return name;
+  const candidates = group ? [STATE_GROUPS[group]] : Object.values(STATE_GROUPS);
+  const defaultState = candidates.find((state) => state?.defaultStateName === name);
+  return defaultState ? t(STATE_NAME_KEYS[defaultState.key]) : name;
+}
 
 export const orderStateGroups = (unorderedStateGroups: IStateResponse | undefined): IStateResponse | undefined => {
   if (!unorderedStateGroups) return undefined;

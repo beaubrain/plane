@@ -13,7 +13,7 @@ import { PROJECT_AUTOMATION_MONTHS, EUserPermissions, EUserPermissionsLevel, EIc
 import { useTranslation } from "@plane/i18n";
 import { StateGroupIcon } from "@plane/blocks/icons";
 import type { IProject, IState } from "@plane/types";
-import { cn } from "@plane/utils";
+import { cn, getStateDisplayName } from "@plane/utils";
 import { Switch } from "@makeplane/propel/components/switch";
 import { Select } from "@plane/blocks/select";
 import { Loader } from "@plane/blocks/skeleton";
@@ -159,7 +159,7 @@ export const AutoCloseAutomation = observer(function AutoCloseAutomation(props: 
                 onChange={(val) => void handleChange({ default_state: val })}
                 disabled={!multipleOptions}
                 getOptionValue={(state) => state.id}
-                getOptionLabel={(state) => state.name}
+                getOptionLabel={(state) => getStateDisplayName(state.name, t, state.group)}
                 getOptionIcon={(state) => (
                   <StateGroupIcon stateGroup={state.group} color={state.color} size={EIconSize.LG} />
                 )}

@@ -276,7 +276,7 @@ class UserWorkspaceDashboardEndpoint(BaseAPIView):
         issues_due_week = (
             Issue.issue_objects.filter(workspace__slug=slug, assignees__in=[request.user])
             .annotate(target_week=ExtractWeek("target_date"))
-            .filter(target_week=timezone.now().date().isocalendar()[1])
+            .filter(target_week=timezone.localdate().isocalendar()[1])
             .count()
         )
 

@@ -255,7 +255,7 @@ class AdvanceAnalyticsChartEndpoint(AdvanceAnalyticsBaseView):
         # Generate monthly data (ensure months with 0 count are included)
         data = []
         # include the current date at the end
-        end_date = timezone.now().date()
+        end_date = timezone.localdate()
         last_month = end_date.replace(day=1)
         current_month = start_date
 

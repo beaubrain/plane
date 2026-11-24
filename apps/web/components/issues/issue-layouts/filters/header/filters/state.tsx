@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { getStateDisplayName } from "@plane/utils";
 import { observer } from "mobx-react";
 import { EIconSize } from "@plane/constants";
 import { StateGroupIcon } from "@plane/blocks/icons";
@@ -24,7 +25,7 @@ export const FilterState = observer(function FilterState(props: Props) {
   // derived values
   const options = (states ?? []).map((state) => ({
     value: state.id,
-    label: state.name,
+    label: getStateDisplayName(state.name, t, state.group),
     icon: <StateGroupIcon stateGroup={state.group} color={state.color} size={EIconSize.MD} percentage={state?.order} />,
   }));
 

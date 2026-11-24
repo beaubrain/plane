@@ -101,6 +101,7 @@ class ProjectCreateSerializer(BaseSerializer):
             "updated_at",
             "created_by",
             "updated_by",
+            "timezone",
             "logo_props",
         ]
 

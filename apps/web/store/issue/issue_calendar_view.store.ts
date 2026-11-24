@@ -10,7 +10,7 @@ import { observable, action, makeObservable, runInAction, computed, reaction } f
 import { computedFn } from "mobx-utils";
 import type { ICalendarPayload, ICalendarWeek } from "@plane/types";
 import { EStartOfTheWeek } from "@plane/types";
-import { generateCalendarData, getWeekNumberOfDate } from "@plane/utils";
+import { generateCalendarData, getWeekNumberOfDate, getSeoulToday } from "@plane/utils";
 // types
 import type { IIssueRootStore } from "./root.store";
 
@@ -44,8 +44,8 @@ export class CalendarStore implements ICalendarStore {
 
   // observables
   calendarFilters: { activeMonthDate: Date; activeWeekDate: Date } = {
-    activeMonthDate: new Date(),
-    activeWeekDate: new Date(),
+    activeMonthDate: getSeoulToday(),
+    activeWeekDate: getSeoulToday(),
   };
   calendarPayload: ICalendarPayload | null = null;
   // root store
@@ -167,7 +167,7 @@ export class CalendarStore implements ICalendarStore {
   });
 
   updateCalendarFilters = (filters: Partial<{ activeMonthDate: Date; activeWeekDate: Date }>) => {
-    this.updateCalendarPayload(filters.activeMonthDate || filters.activeWeekDate || new Date());
+    this.updateCalendarPayload(filters.activeMonthDate || filters.activeWeekDate || getSeoulToday());
 
     runInAction(() => {
       this.calendarFilters = {
@@ -190,7 +190,7 @@ export class CalendarStore implements ICalendarStore {
 
   initCalendar = () => {
     const startOfWeek = this.rootStore.rootStore.user.userProfile.data?.start_of_the_week ?? EStartOfTheWeek.SUNDAY;
-    const newCalendarPayload = generateCalendarData(null, new Date(), startOfWeek);
+    const newCalendarPayload = generateCalendarData(null, getSeoulToday(), startOfWeek);
 
     runInAction(() => {
       this.calendarPayload = newCalendarPayload;

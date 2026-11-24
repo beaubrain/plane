@@ -7,7 +7,6 @@ import random
 import string
 import uuid
 
-import pytz
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 
 # Django imports
@@ -116,8 +115,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     bot_type = models.CharField(max_length=30, verbose_name="Bot Type", blank=True, null=True)
 
     # timezone
-    USER_TIMEZONE_CHOICES = tuple(zip(pytz.common_timezones, pytz.common_timezones))
-    user_timezone = models.CharField(max_length=255, default="UTC", choices=USER_TIMEZONE_CHOICES)
+    USER_TIMEZONE_CHOICES = (("Asia/Seoul", "Asia/Seoul"),)
+    user_timezone = models.CharField(max_length=255, default="Asia/Seoul", choices=USER_TIMEZONE_CHOICES)
 
     # email validation
     is_email_valid = models.BooleanField(default=False)

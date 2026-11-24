@@ -4,6 +4,8 @@
  * See the LICENSE file for details.
  */
 
+import { getStateDisplayName } from "@plane/utils";
+import { useTranslation } from "@plane/i18n";
 import { observer } from "mobx-react";
 // icons
 // plane imports
@@ -20,6 +22,7 @@ type Props = {
 };
 
 export const AppliedStateFilters = observer(function AppliedStateFilters(props: Props) {
+  const { t } = useTranslation();
   const { handleRemove, states, values, editable } = props;
 
   return (
@@ -28,6 +31,7 @@ export const AppliedStateFilters = observer(function AppliedStateFilters(props: 
         const stateDetails = states?.find((s) => s.id === stateId);
 
         if (!stateDetails) return null;
+        const stateName = getStateDisplayName(stateDetails.name, t, stateDetails.group);
 
         return (
           <RemovableChip
@@ -41,8 +45,8 @@ export const AppliedStateFilters = observer(function AppliedStateFilters(props: 
                 percentage={stateDetails?.order}
               />
             }
-            label={stateDetails.name}
-            ariaLabel={stateDetails.name}
+            label={stateName}
+            ariaLabel={stateName}
             onRemove={editable ? () => handleRemove(stateId) : undefined}
           />
         );

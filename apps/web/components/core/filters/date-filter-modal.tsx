@@ -20,7 +20,13 @@ import { Icon } from "@makeplane/propel/components/icon";
 import { IconButton } from "@makeplane/propel/components/icon-button";
 import { CloseOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
-import { renderFormattedPayloadDate, renderFormattedDate, getDate } from "@plane/utils";
+import {
+  renderFormattedPayloadDate,
+  renderFormattedDate,
+  getCalendarLocale,
+  getDate,
+  getSeoulToday,
+} from "@plane/utils";
 import { DateFilterSelect } from "./date-filter-select";
 type Props = {
   title: string;
@@ -35,17 +41,16 @@ type TFormValues = {
   date2: Date;
 };
 
-const defaultValues: TFormValues = {
-  filterType: "range",
-  date1: new Date(),
-  date2: new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()),
-};
-
 export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props) {
   // plane hooks
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
+  const today = getSeoulToday();
   const { handleSubmit, watch, control } = useForm<TFormValues>({
-    defaultValues,
+    defaultValues: {
+      filterType: "range",
+      date1: today,
+      date2: new Date(today.getFullYear(), today.getMonth() + 1, today.getDate()),
+    },
   });
 
   const handleFormSubmit = (formData: TFormValues) => {
@@ -59,7 +64,7 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
   };
 
   const date1 = getDate(watch("date1"));
-  const date2 = getDate(watch("date1"));
+  const date2 = getDate(watch("date2"));
 
   const isInvalid = watch("filterType") === "range" && date1 && date2 ? date1 > date2 : false;
 
@@ -102,8 +107,10 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
                       const date2Value = getDate(watch("date2"));
                       return (
                         <Calendar
+                          locale={getCalendarLocale(currentLocale)}
+                          today={getSeoulToday()}
                           selected={dateValue}
-                          defaultMonth={dateValue}
+                          defaultMonth={dateValue ?? getSeoulToday()}
                           onSelect={(date: Date | undefined) => {
                             if (!date) return;
                             onChange(date);
@@ -124,8 +131,10 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
                         const date1Value = getDate(watch("date1"));
                         return (
                           <Calendar
+                            locale={getCalendarLocale(currentLocale)}
+                            today={getSeoulToday()}
                             selected={dateValue}
-                            defaultMonth={dateValue}
+                            defaultMonth={dateValue ?? getSeoulToday()}
                             onSelect={(date: Date | undefined) => {
                               if (!date) return;
                               onChange(date);
@@ -141,9 +150,9 @@ export function DateFilterModal({ title, handleClose, isOpen, onSelect }: Props)
                 </div>
                 {watch("filterType") === "range" && (
                   <h6 className="flex items-center gap-1 text-caption-sm-regular">
-                    <span className="text-secondary">After:</span>
+                    <span className="text-secondary">{t("date_filter.after")}</span>
                     <span>{renderFormattedDate(watch("date1"))}</span>
-                    <span className="ml-1 text-secondary">Before:</span>
+                    <span className="ml-1 text-secondary">{t("date_filter.before")}</span>
                     {!isInvalid && <span>{renderFormattedDate(watch("date2"))}</span>}
                   </h6>
                 )}

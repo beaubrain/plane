@@ -5,14 +5,18 @@
 """Lapsed intake snoozes return to PENDING; snoozes are day-granular in the project timezone."""
 
 from datetime import datetime, timedelta, timezone as dt_timezone
+from importlib import import_module
+from types import SimpleNamespace
 
 import pytest
+from django.apps import apps
+from django.db import connection
 from django.utils import timezone
 
 from plane.api.serializers import IntakeIssueUpdateSerializer
 from plane.app.serializers import IntakeIssueSerializer
 from plane.bgtasks.issue_automation_task import unsnooze_expired_intake_issues
-from plane.db.models import Intake, IntakeIssue, Issue, Project, State
+from plane.db.models import Cycle, Intake, IntakeIssue, Issue, Project, State
 from plane.db.models.intake import IntakeIssueStatus
 
 pytestmark = pytest.mark.unit
@@ -45,6 +49,29 @@ def _snooze(intake_issue, value, serializer_class=IntakeIssueSerializer):
     )
     assert serializer.is_valid(), serializer.errors
     return serializer.save().snoozed_till
+
+
+def test_seoul_migration_preserves_project_calendar_days(make_row, create_user):
+    snooze = make_row(IntakeIssueStatus.SNOOZED, _utc(2026, 12, 3, 12))
+    cycle = Cycle.objects.create(
+        project=snooze.project,
+        owned_by=create_user,
+        name="Existing cycle",
+        start_date=_utc(2026, 12, 2, 18, 30),
+        end_date=_utc(2026, 12, 4, 18, 29),
+        timezone="Asia/Kolkata",
+    )
+    migration = import_module("plane.db.migrations.0127_use_seoul_timezone")
+    migration.use_seoul_timezone(apps, SimpleNamespace(connection=connection))
+
+    snooze.refresh_from_db()
+    cycle.refresh_from_db()
+    snooze.project.refresh_from_db()
+    assert snooze.project.timezone == "Asia/Seoul"
+    assert cycle.timezone == "Asia/Seoul"
+    assert snooze.snoozed_till == _utc(2026, 12, 2, 15)
+    assert cycle.start_date == _utc(2026, 12, 2, 15)
+    assert cycle.end_date == _utc(2026, 12, 4, 14, 59)
 
 
 def test_only_lapsed_snoozes_return_to_pending(make_row):

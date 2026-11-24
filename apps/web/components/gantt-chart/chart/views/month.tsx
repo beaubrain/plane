@@ -6,7 +6,7 @@
 
 import { observer } from "mobx-react";
 // components
-import { cn } from "@plane/utils";
+import { cn, formatCalendarDate } from "@plane/utils";
 import { HEADER_HEIGHT, SIDEBAR_WIDTH } from "@/components/gantt-chart/constants";
 // helpers
 // hooks
@@ -17,7 +17,7 @@ import { getNumberOfDaysBetweenTwoDates } from "../../views/helpers";
 import { useTranslation } from "@plane/i18n";
 
 export const MonthChartView = observer(function MonthChartView(_props: any) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   // chart hook
   const { currentViewData, renderView } = useTimeLineChartStore();
   const monthView: IMonthView = renderView;
@@ -56,7 +56,7 @@ export const MonthChartView = observer(function MonthChartView(_props: any) {
                       left: `${SIDEBAR_WIDTH}px`,
                     }}
                   >
-                    {monthBlock?.title}
+                    {formatCalendarDate(new Date(monthBlock.year, monthBlock.month, 1), "MMM, yyyy", currentLocale)}
                     {monthBlock.today && (
                       <span
                         className={cn("ml-2 rounded-sm bg-accent-primary px-1 text-caption-2xs-medium text-on-color")}
@@ -90,7 +90,11 @@ export const MonthChartView = observer(function MonthChartView(_props: any) {
                       {weekBlock.startDate.getDate()}-{weekBlock.endDate.getDate()}
                     </span>
                   </div>
-                  <div className="space-x-1 text-caption-sm-medium">{weekBlock.weekData.shortTitle}</div>
+                  <div className="space-x-1 text-caption-sm-medium">
+                    {currentLocale === "ko"
+                      ? `${weekBlock.weekNumber}${t("common.week")}`
+                      : weekBlock.weekData.shortTitle}
+                  </div>
                 </div>
               ))}
             </div>

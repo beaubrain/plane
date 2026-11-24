@@ -160,7 +160,7 @@ export const ModuleIssuesHeader = observer(function ModuleIssuesHeader() {
             </Breadcrumbs>
             {workItemsCount && workItemsCount > 0 ? (
               <Tooltip
-                label={`There are ${workItemsCount} ${workItemsCount > 1 ? "work items" : "work item"} in this module`}
+                label={`${t("issue.label", { count: workItemsCount })} · ${workItemsCount}`}
                 layout="stacked"
                 side="bottom"
                 disabled={isMobile}

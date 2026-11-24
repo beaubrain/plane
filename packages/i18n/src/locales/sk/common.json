@@ -1,4 +1,9 @@
 {
+  "date_filter": {
+    "after": "Po",
+    "before": "Pred",
+    "range": "Rozsah"
+  },
   "cloud_maintenance_message": {
     "we_are_working_on_this_if_you_need_immediate_assistance": "Pracujeme na tom. Ak potrebujete okamžitú pomoc,",
     "reach_out_to_us": "kontaktujte nás",

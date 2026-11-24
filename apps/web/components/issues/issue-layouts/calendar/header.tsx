@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { getSeoulToday } from "@plane/utils";
 import { observer } from "mobx-react";
 import { Button } from "@makeplane/propel/components/button";
 import { IconButton } from "@makeplane/propel/components/icon-button";
@@ -92,7 +93,7 @@ export const CalendarHeader = observer(function CalendarHeader(props: ICalendarH
   };
 
   const handleToday = () => {
-    const today = new Date();
+    const today = getSeoulToday();
     const firstDayOfCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
     issueCalendarView.updateCalendarFilters({

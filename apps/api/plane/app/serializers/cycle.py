@@ -46,6 +46,7 @@ class CycleWriteSerializer(BaseSerializer):
             "project",
             "owned_by",
             "archived_at",
+            "timezone",
             "created_by",
             "updated_by",
         ]

@@ -49,7 +49,7 @@ type Props = {
 const AUDIT_DATE_FORMAT = "MMM d, yyyy h:mma";
 
 const formatAuditDate = (date: string | null | undefined) =>
-  date ? renderFormattedDate(new Date(date), AUDIT_DATE_FORMAT) : undefined;
+  date ? renderFormattedDate(date, AUDIT_DATE_FORMAT) : undefined;
 
 /**
  * Work item properties shared by the detail page sidebar and the peek overview: grouped into

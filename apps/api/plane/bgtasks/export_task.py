@@ -44,7 +44,7 @@ def upload_to_s3(zip_file: io.BytesIO, workspace_id: UUID, token_id: str, slug: 
     """
     Upload a ZIP file to S3 and generate a presigned URL.
     """
-    file_name = f"{workspace_id}/export-{slug}-{token_id}-{str(timezone.now().date())}.zip"
+    file_name = f"{workspace_id}/export-{slug}-{token_id}-{str(timezone.localdate())}.zip"
     expires_in = 7 * 24 * 60 * 60
 
     if settings.USE_MINIO:

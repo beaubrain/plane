@@ -27,7 +27,13 @@ import { ISSUE_PRIORITIES } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 // types
 import type { TIssuePriorities, TWorkspaceDraftIssue } from "@plane/types";
-import { getDate, getIssueDueDateClassName, renderFormattedDate, renderFormattedPayloadDate } from "@plane/utils";
+import {
+  getDate,
+  getIssueDueDateClassName,
+  renderFormattedDate,
+  renderFormattedPayloadDate,
+  getStateDisplayName,
+} from "@plane/utils";
 // components
 import { CycleSelect } from "@/components/dropdowns/cycle/cycle-select";
 import { EstimateSelect } from "@/components/dropdowns/estimate/estimate-select";
@@ -88,6 +94,9 @@ export const DraftIssueProperties = observer(function DraftIssueProperties(props
   const { workspaceSlug } = useParams();
   // derived values
   const stateDetails = getStateById(issue.state_id);
+  const stateName = stateDetails
+    ? getStateDisplayName(stateDetails.name, t, stateDetails.group, currentLocale)
+    : undefined;
 
   const issueOperations = useMemo(
     () => ({
@@ -186,12 +195,12 @@ export const DraftIssueProperties = observer(function DraftIssueProperties(props
   entries.push({
     key: "state",
     hidePriority: getWorkItemPropertyHidePriority("state"),
-    measureKey: stateDetails?.name,
+    measureKey: stateName,
     chip: chipShell(renderState({ tooltip: true })),
     menuRow: {
       icon: <StateGroupIcon stateGroup={stateDetails?.group ?? "backlog"} color={stateDetails?.color} size="md" />,
       label: t("common.state"),
-      preview: stateDetails?.name ?? none,
+      preview: stateName ?? none,
       editor: ({ onEditorClose }) => renderState(getPropertyEditorProps(onEditorClose)),
     },
   });

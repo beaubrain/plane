@@ -13,7 +13,7 @@ import { useTranslation } from "@plane/i18n";
 import { AreaChart } from "@plane/blocks/charts/area-chart";
 import { EmptyStateCompact } from "@plane/blocks/empty-state";
 import type { IChartResponse, TChartData } from "@plane/types";
-import { cn } from "@plane/utils";
+import { cn, formatCalendarDate, getDate } from "@plane/utils";
 // hooks
 import { useAnalytics } from "@/hooks/store/use-analytics";
 // services
@@ -55,16 +55,12 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
   );
   const parsedData: TChartData<string, string>[] = useMemo(() => {
     if (!createdVsResolvedData?.data) return [];
-    const dates = new Intl.DateTimeFormat(currentLocale === "ua" ? "uk" : currentLocale, {
-      dateStyle: "medium",
-      timeZone: "UTC",
-    });
     return createdVsResolvedData.data.map((datum) => {
-      const date = new Date(datum.key);
+      const date = getDate(datum.key);
       return {
         ...datum,
         [datum.key]: datum.count,
-        name: Number.isNaN(date.getTime()) ? datum.key : dates.format(date),
+        name: date ? formatCalendarDate(date, undefined, currentLocale) : datum.key,
       };
     });
   }, [createdVsResolvedData, currentLocale]);

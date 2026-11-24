@@ -42,7 +42,6 @@ type TUserProfileForm = {
   email: string;
   role: string;
   language: string;
-  user_timezone: string;
 };
 
 type Props = {
@@ -76,7 +75,6 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
       email: user.email || "",
       role: profile.role || "Product / Project Manager",
       language: profile.language || "en",
-      user_timezone: user.user_timezone || "Asia/Kolkata",
     },
   });
   // derived values

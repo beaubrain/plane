@@ -5,6 +5,7 @@
  */
 
 // plane types
+import { SEOUL_TIME_ZONE, renderFormattedTime } from "@plane/utils";
 import { useTranslation } from "@plane/i18n";
 // hooks
 import type { IUser } from "@plane/types";
@@ -20,30 +21,24 @@ export function UserGreetingsView(props: IUserGreetingsView) {
   // current time hook
   const { currentTime } = useCurrentTime();
   // store hooks
-  const { t } = useTranslation();
-
-  const hour = new Intl.DateTimeFormat("en-US", {
-    hour12: false,
-    hour: "numeric",
-  }).format(currentTime);
-
-  const date = new Intl.DateTimeFormat("en-US", {
-    month: "short",
+  const { t, currentLocale } = useTranslation();
+  const locale = currentLocale === "ua" ? "uk" : currentLocale;
+  const hour = Number(
+    new Intl.DateTimeFormat("en", {
+      timeZone: SEOUL_TIME_ZONE,
+      hourCycle: "h23",
+      hour: "numeric",
+    }).format(currentTime)
+  );
+  const date = new Intl.DateTimeFormat(locale, {
+    timeZone: SEOUL_TIME_ZONE,
+    month: "long",
     day: "numeric",
-  }).format(currentTime);
-
-  const weekDay = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
   }).format(currentTime);
+  const timeString = renderFormattedTime(currentTime);
 
-  const timeString = new Intl.DateTimeFormat("en-US", {
-    timeZone: user?.user_timezone,
-    hour12: false, // Use 24-hour format
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(currentTime);
-
-  const greeting = parseInt(hour, 10) < 12 ? "morning" : parseInt(hour, 10) < 18 ? "afternoon" : "evening";
+  const greeting = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
 
   return (
     <div className="my-6 flex flex-col items-center">
@@ -53,7 +48,7 @@ export function UserGreetingsView(props: IUserGreetingsView) {
       <h5 className="flex items-center gap-2 font-medium text-placeholder">
         <div>{greeting === "morning" ? "🌤️" : greeting === "afternoon" ? "🌥️" : "🌙️"}</div>
         <div>
-          {weekDay}, {date} {timeString}
+          {date} {timeString}
         </div>
       </h5>
     </div>

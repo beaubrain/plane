@@ -15,6 +15,12 @@ import type { i18n as I18nInstance } from "i18next";
 
 export const i18nInstance: I18nInstance = i18n.createInstance();
 
+if (typeof document !== "undefined") {
+  i18nInstance.on("languageChanged", (language) => {
+    document.documentElement.lang = language;
+  });
+}
+
 i18nInstance
   .use(ICU)
   .use(initReactI18next)

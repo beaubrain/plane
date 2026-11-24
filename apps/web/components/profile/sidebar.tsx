@@ -69,7 +69,7 @@ export const ProfileSidebar = observer(function ProfileSidebar(props: TProfileSi
     },
     {
       i18n_label: "profile.details.time_zone",
-      value: <ProfileSidebarTime timeZone={userData?.user_timezone} />,
+      value: <ProfileSidebarTime />,
     },
   ];
 

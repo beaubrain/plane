@@ -10,11 +10,18 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import { Button } from "@makeplane/propel/components/button";
-import { Input, InputGroup } from "@makeplane/propel/components/input";
+import { CalendarOutline } from "@makeplane/propel/icons";
+import { DateSelect } from "@plane/blocks/property-select";
 import { Spinner } from "@plane/blocks/spinner";
 import { useTranslation } from "@plane/i18n";
 import type { TAssigneeWorkloadQuery } from "@plane/types";
-import { generateWorkItemLink } from "@plane/utils";
+import {
+  formatCalendarDate,
+  generateWorkItemLink,
+  getDate,
+  getStateDisplayName,
+  renderFormattedPayloadDate,
+} from "@plane/utils";
 import { useAnalytics } from "@/hooks/store/use-analytics";
 import { AnalyticsService } from "@/services/analytics.service";
 import AnalyticsWrapper from "./analytics-wrapper";
@@ -37,7 +44,6 @@ function AssignedTasks({ workspaceSlug, params, assigneeId, displayName, formatH
     ["assigned-workload-tasks", workspaceSlug, params, assigneeId, cursor],
     () => analyticsService.getAssignedWorkloadTasks(workspaceSlug, params, assigneeId, cursor)
   );
-  const dates = new Intl.DateTimeFormat(currentLocale, { dateStyle: "medium", timeZone: "UTC" });
 
   return (
     <div className="flex flex-col gap-2 border-t border-subtle pt-3">
@@ -64,12 +70,17 @@ function AssignedTasks({ workspaceSlug, params, assigneeId, displayName, formatH
                 </Link>
                 <div className="flex flex-wrap items-center gap-3 text-secondary">
                   <span>
-                    {task.state_name?.trim().toLowerCase() === "todo" ? t(`${workloadKey}.work_date`) : task.state_name}
+                    {task.state_name?.trim().toLowerCase() === "todo"
+                      ? t(`${workloadKey}.work_date`)
+                      : task.state_name && getStateDisplayName(task.state_name, t, undefined, currentLocale)}
                   </span>
                   {(task.start_date || task.target_date) && (
                     <span>
                       {[task.start_date, task.target_date]
-                        .flatMap((date) => (date ? [dates.format(new Date(date))] : []))
+                        .flatMap((date) => {
+                          const day = getDate(date);
+                          return day ? [formatCalendarDate(day, undefined, currentLocale)] : [];
+                        })
                         .join(" – ")}
                     </span>
                   )}
@@ -129,18 +140,24 @@ export const AssigneeWorkload = observer(function AssigneeWorkload() {
     <AnalyticsWrapper i18nTitle={`${workloadKey}.title`}>
       <div className="flex flex-col gap-3 text-body-sm-regular">
         <div className="flex flex-wrap items-end gap-2">
-          <label className="flex flex-col gap-1">
-            <span>{t("start_date")}</span>
-            <InputGroup size="md">
-              <Input type="date" size="md" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
-            </InputGroup>
-          </label>
-          <label className="flex flex-col gap-1">
-            <span>{t("end_date")}</span>
-            <InputGroup size="md">
-              <Input type="date" size="md" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-            </InputGroup>
-          </label>
+          <div role="group" aria-label={t("start_date")}>
+            <DateSelect
+              variant="select-md"
+              placeholder={t("start_date")}
+              icon={<CalendarOutline aria-hidden="true" />}
+              value={getDate(startDate) ?? null}
+              onChange={(date) => setStartDate(renderFormattedPayloadDate(date) ?? "")}
+            />
+          </div>
+          <div role="group" aria-label={t("end_date")}>
+            <DateSelect
+              variant="select-md"
+              placeholder={t("end_date")}
+              icon={<CalendarOutline aria-hidden="true" />}
+              value={getDate(endDate) ?? null}
+              onChange={(date) => setEndDate(renderFormattedPayloadDate(date) ?? "")}
+            />
+          </div>
           <Button
             variant="secondary"
             size="sm"

@@ -6,7 +6,7 @@
 
 import { observer } from "mobx-react";
 // plane utils
-import { cn } from "@plane/utils";
+import { cn, formatCalendarDate } from "@plane/utils";
 // hooks
 import { useTimeLineChartStore } from "@/hooks/use-timeline-chart";
 //
@@ -16,7 +16,7 @@ import { groupMonthsToQuarters } from "../../views";
 import { useTranslation } from "@plane/i18n";
 
 export const QuarterChartView = observer(function QuarterChartView(_props: any) {
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const { currentViewData, renderView } = useTimeLineChartStore();
   const monthBlocks: IMonthBlock[] = renderView;
 
@@ -42,7 +42,18 @@ export const QuarterChartView = observer(function QuarterChartView(_props: any) 
                     left: `${SIDEBAR_WIDTH}px`,
                   }}
                 >
-                  {quarterBlock?.title}
+                  {[
+                    formatCalendarDate(
+                      new Date(quarterBlock.year, quarterBlock.quarterNumber * 3, 1),
+                      "MMM, yyyy",
+                      currentLocale
+                    ),
+                    formatCalendarDate(
+                      new Date(quarterBlock.year, quarterBlock.quarterNumber * 3 + 2, 1),
+                      "MMM",
+                      currentLocale
+                    ),
+                  ].join(" – ")}
                   {quarterBlock.today && (
                     <span
                       className={cn("ml-2 rounded-sm bg-accent-primary px-1 text-caption-2xs-medium text-on-color")}
@@ -52,7 +63,9 @@ export const QuarterChartView = observer(function QuarterChartView(_props: any) 
                   )}
                 </div>
                 <div className="sticky px-3 py-2 text-caption-sm-regular whitespace-nowrap text-placeholder capitalize">
-                  {quarterBlock.shortTitle}
+                  {currentLocale === "ko"
+                    ? `${quarterBlock.quarterNumber + 1}${t("common.quarter")}`
+                    : quarterBlock.shortTitle}
                 </div>
               </div>
               {/** Months Sub title */}
@@ -74,7 +87,7 @@ export const QuarterChartView = observer(function QuarterChartView(_props: any) 
                           "rounded-lg bg-accent-primary px-2 text-on-color": monthBlock.today,
                         })}
                       >
-                        {monthBlock.monthData.shortTitle}
+                        {formatCalendarDate(new Date(monthBlock.year, monthBlock.month, 1), "MMM", currentLocale)}
                       </span>
                     </div>
                   </div>

@@ -337,7 +337,7 @@ USE_I18N = True
 
 # Timezones
 USE_TZ = True
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Seoul"
 
 # Default Auto Field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

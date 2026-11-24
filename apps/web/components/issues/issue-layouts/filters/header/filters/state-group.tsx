@@ -18,7 +18,6 @@ type Props = {
 
 const STATE_GROUP_OPTIONS = Object.values(STATE_GROUPS).map((stateGroup) => ({
   value: stateGroup.key,
-  label: stateGroup.label,
   icon: <StateGroupIcon stateGroup={stateGroup.key} />,
 }));
 
@@ -29,7 +28,11 @@ export const FilterStateGroup = observer(function FilterStateGroup(props: Props)
   return (
     <FilterSubmenu
       label={t("common.state_group")}
-      options={STATE_GROUP_OPTIONS}
+      options={STATE_GROUP_OPTIONS.map(({ value, icon }) => ({
+        value,
+        icon,
+        label: t(`workspace_projects.state.${value}`),
+      }))}
       appliedFilters={appliedFilters}
       onToggle={handleUpdate}
     />

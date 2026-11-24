@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import { getStateDisplayName } from "@plane/utils";
 import type { ReactNode } from "react";
 import { useCallback, useMemo } from "react";
 import { observer } from "mobx-react";
@@ -37,9 +38,9 @@ type StateSelectWebProps = {
   tabIndex?: number;
 };
 
-const toOption = (state: IState): StateOption => ({
+const toOption = (state: IState, t: (key: string) => string, language: string): StateOption => ({
   id: state.id,
-  name: state.name,
+  name: getStateDisplayName(state.name, t, state.group, language),
   color: state.color,
   group: state.group,
   order: state.order,
@@ -74,7 +75,7 @@ export const StateSelect = observer(function StateSelect(props: StateSelectWebPr
   // store hooks
   const { getProjectStateIds, getStateById, fetchProjectStates } = useProjectState();
   // translation
-  const { t } = useTranslation();
+  const { t, currentLocale } = useTranslation();
   const resolvedTooltip = useMemo<SelectTooltipOverride | undefined>(() => {
     if (!tooltip) return undefined;
     const override = typeof tooltip === "object" ? tooltip : undefined;
@@ -96,16 +97,16 @@ export const StateSelect = observer(function StateSelect(props: StateSelectWebPr
       const results = (stateIds ?? [])
         .map((stateId) => getStateById(stateId))
         .filter((state): state is IState => !!state)
-        .filter((state) => !query || state.name.toLowerCase().includes(query))
-        .map(toOption);
+        .map((state) => toOption(state, t, currentLocale))
+        .filter((state) => !query || state.name.toLowerCase().includes(query));
       return { results, next_page_results: false };
     },
-    [workspaceSlug, projectId, getProjectStateIds, fetchProjectStates, getStateById]
+    [workspaceSlug, projectId, getProjectStateIds, fetchProjectStates, getStateById, t, currentLocale]
   );
 
   // Resolved in the observer render (not in a memo) so MobX re-renders when the state loads.
   const selectedState = value ? getStateById(value) : undefined;
-  const selected = selectedState ? toOption(selectedState) : null;
+  const selected = selectedState ? toOption(selectedState, t, currentLocale) : null;
 
   return (
     <StateSelectBlock
