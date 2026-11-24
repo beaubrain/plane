@@ -1,0 +1,70 @@
+name: plane
+
+x-backend: &backend
+  image: "${PLANE_ECR_REGISTRY:?Set PLANE_ECR_REGISTRY}/plane/api:${PLANE_IMAGE_TAG:?Set PLANE_IMAGE_TAG}"
+
+services:
+  api:
+    <<: *backend
+    build: !reset null
+    env_file: !override [.env]
+  worker:
+    <<: *backend
+    build: !reset null
+    env_file: !override [.env]
+    command:
+      - /bin/bash
+      - -ec
+      - |
+        python manage.py wait_for_db
+        python manage.py wait_for_migrations
+        exec celery -A plane worker -l info --concurrency=1
+  beat-worker:
+    <<: *backend
+    build: !reset null
+    env_file: !override [.env]
+  migrator:
+    <<: *backend
+    build: !reset null
+    env_file: !override [.env]
+    profiles: [migration]
+
+  web:
+    image: "${PLANE_ECR_REGISTRY}/plane/web:${PLANE_IMAGE_TAG}"
+    build: !reset null
+    environment:
+      STATIC_RATE_LIMIT_EVENTS: "${PLANE_STATIC_RATE_LIMIT_EVENTS:-1200}"
+  admin:
+    image: "${PLANE_ECR_REGISTRY}/plane/admin:${PLANE_IMAGE_TAG}"
+    build: !reset null
+  space:
+    image: "${PLANE_ECR_REGISTRY}/plane/space:${PLANE_IMAGE_TAG}"
+    build: !reset null
+  live:
+    image: "${PLANE_ECR_REGISTRY}/plane/live:${PLANE_IMAGE_TAG}"
+    build: !reset null
+    environment:
+      API_BASE_URL: http://api:8000
+      CORS_ALLOWED_ORIGINS: "${WEB_URL:?Set WEB_URL}"
+      REDIS_URL: redis://plane-redis:6379/
+      LIVE_SERVER_SECRET_KEY: "${LIVE_SERVER_SECRET_KEY:?Set LIVE_SERVER_SECRET_KEY}"
+  proxy:
+    image: "${PLANE_ECR_REGISTRY}/plane/proxy:${PLANE_IMAGE_TAG}"
+    build: !reset null
+    environment:
+      SITE_ADDRESS: "${PLANE_DOMAIN:?Set PLANE_DOMAIN}"
+      TRUSTED_PROXIES: 127.0.0.1/32
+    depends_on:
+      - live
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+
+  plane-db:
+    env_file: !reset []
+  plane-mq:
+    env_file: !reset []
+
+volumes:
+  caddy-data:
+  caddy-config:
