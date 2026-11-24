@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Gisteren",
+      "last_7_days": "Afgelopen 7 dagen",
+      "last_30_days": "Afgelopen 30 dagen",
+      "last_3_months": "Afgelopen 3 maanden"
+    },
+    "for_entity": "Analyse voor {title}",
     "label": "Analyses",
     "page_label": "{workspace} - Analyses",
     "open_tasks": "Totaal aantal openstaande taken",

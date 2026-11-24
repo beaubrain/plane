@@ -35,6 +35,7 @@ import { Loader } from "@plane/blocks/skeleton";
 import { copyTextToClipboard } from "@plane/utils";
 // hooks
 import { useProjectPublish } from "@/hooks/store/use-project-publish";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   isOpen: boolean;
@@ -64,6 +65,7 @@ const VIEW_OPTIONS: TViewOption[] = [
 ];
 
 export const PublishProjectModal = observer(function PublishProjectModal(props: Props) {
+  const { t } = useTranslation();
   const { isOpen, onClose, projectId } = props;
   // states
   const [isUnPublishing, setIsUnPublishing] = useState(false);
@@ -207,7 +209,7 @@ export const PublishProjectModal = observer(function PublishProjectModal(props: 
             <DialogHeader>
               <div className="flex items-center justify-between gap-2">
                 <DialogHeading>
-                  <DialogTitle>Publish project</DialogTitle>
+                  <DialogTitle>{t("publish_project")}</DialogTitle>
                 </DialogHeading>
                 {isProjectPublished && (
                   <Button
@@ -247,7 +249,7 @@ export const PublishProjectModal = observer(function PublishProjectModal(props: 
                         <div className="flex flex-shrink-0 items-center gap-1">
                           <a
                             href={publishLink}
-                            aria-label="Open in new tab"
+                            aria-label={t("common.actions.open_in_new_tab")}
                             className="grid size-8 place-items-center rounded-sm bg-layer-3 hover:bg-layer-3-hover"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -259,7 +261,7 @@ export const PublishProjectModal = observer(function PublishProjectModal(props: 
                             className="h-8 rounded-sm bg-layer-3 px-3 py-2 text-caption-sm-medium hover:bg-layer-3-hover"
                             onClick={() => void handleCopyLink()}
                           >
-                            Copy link
+                            {t("common.actions.copy_link")}
                           </button>
                         </div>
                       </div>
@@ -274,7 +276,7 @@ export const PublishProjectModal = observer(function PublishProjectModal(props: 
                   )}
                   <div className="space-y-4">
                     <div className="relative flex items-center justify-between gap-2">
-                      <div className="text-body-xs-regular">Views</div>
+                      <div className="text-body-xs-regular">{t("common.views")}</div>
                       <Controller
                         control={control}
                         name="view_props"
@@ -358,7 +360,7 @@ export const PublishProjectModal = observer(function PublishProjectModal(props: 
             </DialogInfo>
             {!fetchSettingsLoader && (
               <div className="relative flex items-center gap-2">
-                <Button variant="secondary" size="md" stretch="auto" label="Cancel" onClick={handleClose} />
+                <Button variant="secondary" size="md" stretch="auto" label={t("common.cancel")} onClick={handleClose} />
                 {isProjectPublished ? (
                   isDirty && (
                     <Button

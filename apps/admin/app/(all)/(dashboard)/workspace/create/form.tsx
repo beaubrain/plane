@@ -125,7 +125,7 @@ export function WorkspaceCreateForm() {
                 });
               }}
               ref={ref}
-              placeholder="Something familiar and recognizable is always best."
+              placeholder={t("workspace_creation.form.name.placeholder")}
               error={errors.name?.message}
             />
           )}
@@ -222,7 +222,7 @@ export function WorkspaceCreateForm() {
           stretch="auto"
           nativeButton={false}
           render={<Link href="/workspace" />}
-          label="Go back"
+          label={t("common.go_back")}
         />
       </div>
     </div>

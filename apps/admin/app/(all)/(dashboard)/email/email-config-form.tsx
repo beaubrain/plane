@@ -18,6 +18,7 @@ import { setToast } from "@plane/blocks/toast";
 import { useInstance } from "@/hooks/store";
 // local components
 import { SendTestEmailModal } from "./test-email-modal";
+import { useTranslation } from "@plane/i18n";
 
 type IInstanceEmailForm = {
   config: IFormattedInstanceConfiguration;
@@ -34,6 +35,7 @@ const EMAIL_SECURITY_OPTIONS: { [key in TEmailSecurityKeys]: string } = {
 };
 
 export function InstanceEmailForm(props: IInstanceEmailForm) {
+  const { t } = useTranslation();
   const { config } = props;
   const emailSecurityLabelId = useId();
   // states
@@ -195,7 +197,9 @@ export function InstanceEmailForm(props: IInstanceEmailForm) {
           <div className="flex w-full max-w-xl flex-col gap-y-10 px-1">
             <div className="mr-8 flex items-center gap-10 pt-4">
               <div className="grow">
-                <div className="text-body-xs-medium text-primary">Authentication</div>
+                <div className="text-body-xs-medium text-primary">
+                  {t("workspace_settings.settings.members.details.authentication")}
+                </div>
                 <div className="text-caption-sm-regular text-tertiary">
                   This is optional, but we recommend setting up a username and a password for your SMTP server.
                 </div>

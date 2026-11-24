@@ -16,6 +16,7 @@ import { useIssueDetail } from "@/hooks/store/use-issue-detail";
 // local imports
 import { IssueLinkCreateUpdateModal } from "./create-update-link-modal";
 import { IssueLinkList } from "./links";
+import { useTranslation } from "@plane/i18n";
 
 export type TLinkOperations = {
   create: (data: Partial<TIssueLink>) => Promise<void>;
@@ -31,6 +32,7 @@ export type TIssueLinkRoot = {
 };
 
 export function IssueLinkRoot(props: TIssueLinkRoot) {
+  const { t } = useTranslation();
   // props
   const { workspaceSlug, projectId, issueId, disabled = false } = props;
   // hooks
@@ -122,7 +124,7 @@ export function IssueLinkRoot(props: TIssueLinkRoot) {
 
       <div className="py-1 text-caption-sm-regular">
         <div className="flex items-center justify-between gap-2">
-          <h4>Links</h4>
+          <h4>{t("common.links")}</h4>
           {!disabled && (
             <button
               type="button"

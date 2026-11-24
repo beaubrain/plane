@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 // plane imports
-import { ROLE, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
+import { ROLE_DETAILS, EUserPermissions, EUserPermissionsLevel } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { DeactivatedUserOutline, DeleteOutline, MoreHorizontalOutline } from "@makeplane/propel/icons";
 import { Avatar } from "@makeplane/propel/components/avatar";
@@ -42,9 +42,9 @@ type NameProps = {
 
 type TRoleOption = { key: EUserPermissions; label: string };
 
-const ROLE_OPTIONS: TRoleOption[] = Object.entries(ROLE).map(([key, label]) => ({
+const ROLE_OPTIONS: TRoleOption[] = Object.entries(ROLE_DETAILS).map(([key, details]) => ({
   key: Number(key) as EUserPermissions,
-  label,
+  label: details.i18n_title,
 }));
 
 type AccountTypeProps = {
@@ -106,6 +106,7 @@ export function NameColumn(props: NameProps) {
 
 export const AccountTypeColumn = observer(function AccountTypeColumn(props: AccountTypeProps) {
   const { rowData, workspaceSlug } = props;
+  const { t } = useTranslation();
   // form info
   const { control } = useForm();
   // store hooks
@@ -130,7 +131,7 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
         </div>
       ) : isRoleNonEditable ? (
         <div className="flex w-32">
-          <span>{ROLE[rowData.role]}</span>
+          <span>{t(ROLE_DETAILS[rowData.role].i18n_title)}</span>
         </div>
       ) : (
         <Controller
@@ -158,12 +159,12 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
                 }}
                 getValues={() => ROLE_OPTIONS}
                 getOptionValue={(role) => String(role.key)}
-                getOptionLabel={(role) => role.label}
+                getOptionLabel={(role) => t(role.label)}
                 showSearch={false}
                 pinSelected={false}
               >
                 <Select.Trigger<TRoleOption> variant="select-ghost-md">
-                  <span className="min-w-0 flex-1 truncate text-left">{ROLE[rowData.role]}</span>
+                  <span className="min-w-0 flex-1 truncate text-left">{t(ROLE_DETAILS[rowData.role].i18n_title)}</span>
                 </Select.Trigger>
               </Select>
             </div>

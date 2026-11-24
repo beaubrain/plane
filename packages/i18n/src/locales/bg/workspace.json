@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Вчера",
+      "last_7_days": "Последните 7 дни",
+      "last_30_days": "Последните 30 дни",
+      "last_3_months": "Последните 3 месеца"
+    },
+    "for_entity": "Анализ за {title}",
     "label": "Анализи",
     "page_label": "{workspace} - Анализи",
     "open_tasks": "Общо отворени задачи",

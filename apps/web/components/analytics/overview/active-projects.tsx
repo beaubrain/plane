@@ -24,7 +24,7 @@ const ActiveProjects = observer(function ActiveProjects() {
   const { t } = useTranslation();
   const { fetchProjectAnalyticsCount } = useProject();
   const { workspaceSlug } = useParams();
-  const { selectedDurationLabel } = useAnalytics();
+  const { selectedDurationLabelKey } = useAnalytics();
   const { data: projectAnalyticsCount, isLoading: isProjectAnalyticsCountLoading } = useSWR(
     workspaceSlug ? ["projectAnalyticsCount", workspaceSlug] : null,
     workspaceSlug
@@ -37,7 +37,7 @@ const ActiveProjects = observer(function ActiveProjects() {
   return (
     <AnalyticsSectionWrapper
       title={`${t("workspace_analytics.active_projects")}`}
-      subtitle={selectedDurationLabel}
+      subtitle={selectedDurationLabelKey ? t(selectedDurationLabelKey) : null}
       className="lg:col-span-2"
     >
       <div

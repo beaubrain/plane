@@ -23,6 +23,7 @@ import { AuthHeader } from "@/app/(all)/(home)/auth-header";
 import { FormHeader } from "./form-header";
 // hooks
 import { useCsrfToken } from "@/hooks/use-csrf-token";
+import { useTranslation } from "@plane/i18n";
 
 // error codes
 enum EErrorCodes {
@@ -60,6 +61,7 @@ const defaultFromData: TFormData = {
 };
 
 export function InstanceSetupForm() {
+  const { t } = useTranslation();
   // search params
   const searchParams = useSearchParams();
   const firstNameParam = searchParams?.get("first_name") || undefined;
@@ -179,7 +181,7 @@ export function InstanceSetupForm() {
                   autoFocus
                   maxLength={50}
                   orientation="vertical"
-                  label="First name"
+                  label={t("first_name")}
                   required
                 />
               </div>
@@ -200,7 +202,7 @@ export function InstanceSetupForm() {
                   autoComplete="off"
                   maxLength={50}
                   orientation="vertical"
-                  label="Last name"
+                  label={t("last_name")}
                   required
                 />
               </div>
@@ -217,7 +219,7 @@ export function InstanceSetupForm() {
               aria-invalid={errorData.type === EErrorCodes.INVALID_EMAIL}
               autoComplete="off"
               orientation="vertical"
-              label="Email"
+              label={t("auth.common.email.label")}
               required
               error={errorData.type === EErrorCodes.INVALID_EMAIL && errorData.message ? errorData.message : undefined}
             />
@@ -227,7 +229,7 @@ export function InstanceSetupForm() {
               id="company_name"
               name="company_name"
               type="text"
-              placeholder="Company name"
+              placeholder={t("templates.settings.form.publish.company_name.label")}
               value={formData.company_name}
               onChange={(e) => {
                 const validation = validateCompanyName(e.target.value, false);
@@ -237,7 +239,7 @@ export function InstanceSetupForm() {
               }}
               maxLength={80}
               orientation="vertical"
-              label="Company name"
+              label={t("templates.settings.form.publish.company_name.label")}
               required
             />
 
@@ -247,7 +249,7 @@ export function InstanceSetupForm() {
                 id="password"
                 name="password"
                 type={showPassword.password ? "text" : "password"}
-                placeholder="New password"
+                placeholder={t("auth.common.password.new_password.label")}
                 value={formData.password}
                 onChange={(e) => handleFormChange("password", e.target.value)}
                 aria-invalid={errorData.type === EErrorCodes.INVALID_PASSWORD}
@@ -255,7 +257,7 @@ export function InstanceSetupForm() {
                 onBlur={() => setIsPasswordInputFocused(false)}
                 autoComplete="new-password"
                 orientation="vertical"
-                label="Set a password"
+                label={t("auth.common.password.set_password")}
                 required
                 error={
                   errorData.type === EErrorCodes.INVALID_PASSWORD && errorData.message ? errorData.message : undefined
@@ -283,12 +285,12 @@ export function InstanceSetupForm() {
                 name="confirm_password"
                 value={formData.confirm_password}
                 onChange={(e) => handleFormChange("confirm_password", e.target.value)}
-                placeholder="Confirm password"
+                placeholder={t("auth.common.password.confirm_password.label")}
                 onFocus={() => setIsRetryPasswordInputFocused(true)}
                 onBlur={() => setIsRetryPasswordInputFocused(false)}
                 autoComplete="new-password"
                 orientation="vertical"
-                label="Confirm password"
+                label={t("auth.common.password.confirm_password.label")}
                 required
                 endIcon={
                   <IconButton
@@ -339,7 +341,7 @@ export function InstanceSetupForm() {
                 stretch="full"
                 disabled={isButtonDisabled}
                 loading={isSubmitting}
-                label="Continue"
+                label={t("common.continue")}
               />
             </div>
           </form>

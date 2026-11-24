@@ -15,7 +15,7 @@ import { MoreHorizontalOutline, UserMinusOutline } from "@makeplane/propel/icons
 // plane imports
 import { Select } from "@plane/blocks/select";
 import { setToast } from "@plane/blocks/toast";
-import { ROLE, EUserPermissions } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import type { EUserProjectRoles, IUser, IWorkspaceMember, TProjectMembership } from "@plane/types";
 import { getFileURL } from "@plane/utils";
@@ -109,7 +109,7 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
     formState: { errors },
   } = useForm();
   // derived values
-  const roleLabel = ROLE[rowData.original_role ?? EUserPermissions.GUEST];
+  const roleLabel = t(ROLE_DETAILS[rowData.original_role ?? EUserPermissions.GUEST].i18n_title);
   const isCurrentUser = currentUser?.id === rowData.member.id;
   const isRowDataWorkspaceAdmin = [EUserPermissions.ADMIN].includes(
     Number(getWorkspaceMemberDetails(rowData.member.id)?.role)
@@ -149,7 +149,7 @@ export const AccountTypeColumn = observer(function AccountTypeColumn(props: Acco
           rules={{ required: "Role is required." }}
           render={() => {
             const roleOptions: TRoleOption[] = Object.entries(checkCurrentOptionWorkspaceRole(rowData.member.id)).map(
-              ([key, label]) => ({ key, label })
+              ([key]) => ({ key, label: t(ROLE_DETAILS[Number(key) as EUserPermissions].i18n_title) })
             );
             return (
               <div className="w-32">

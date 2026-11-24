@@ -20,6 +20,7 @@ import type { TControllerSwitchFormField } from "@/components/common/controller-
 import { ControllerSwitch } from "@/components/common/controller-switch";
 import type { TCopyField } from "@/components/common/copy-field";
 import { CopyField } from "@/components/common/copy-field";
+import { useTranslation } from "@plane/i18n";
 
 type Props<T extends FieldValues> = {
   providerName: string;
@@ -33,6 +34,7 @@ type Props<T extends FieldValues> = {
 };
 
 export function OAuthProviderForm<T extends FieldValues>(props: Props<T>) {
+  const { t } = useTranslation();
   const { providerName, control, formFields, switchField, onSave, serviceDetails, webServiceDetails } = props;
   // form state
   const { isDirty, isSubmitting } = useFormState({ control });
@@ -88,7 +90,7 @@ export function OAuthProviderForm<T extends FieldValues>(props: Props<T>) {
                   stretch="auto"
                   nativeButton={false}
                   render={<Link href="/authentication" onClick={handleGoBack} />}
-                  label="Go back"
+                  label={t("common.go_back")}
                 />
               </div>
             </div>

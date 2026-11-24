@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "昨日",
+      "last_7_days": "過去7日間",
+      "last_30_days": "過去30日間",
+      "last_3_months": "過去3か月間"
+    },
+    "for_entity": "{title}の分析",
     "label": "アナリティクス",
     "page_label": "{workspace} - アナリティクス",
     "open_tasks": "オープンタスクの合計",

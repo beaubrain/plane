@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { observer } from "mobx-react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 // plane imports
-import { ROLE, EUserPermissions } from "@plane/constants";
+import { ROLE, ROLE_DETAILS, EUserPermissions } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { AddOutline, ChevronDownOutline, CloseOutline } from "@makeplane/propel/icons";
@@ -161,7 +161,10 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
   const getRoleOptions = (memberId: string): TRoleOption[] =>
     Object.entries(checkCurrentOptionWorkspaceRole(memberId))
       .filter(([key]) => parseInt(key) <= (currentProjectRole ?? EUserPermissions.GUEST))
-      .map(([key, label]) => ({ key: parseInt(key) as EUserPermissions, label }));
+      .map(([key]) => ({
+        key: parseInt(key) as EUserPermissions,
+        label: t(ROLE_DETAILS[Number(key) as EUserPermissions].i18n_title),
+      }));
 
   const handleMemberChange = (index: number, memberId: string, onChange: (val: string) => void) => {
     onChange(memberId);
@@ -206,7 +209,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                             onChange={(val: string) => handleMemberChange(index, val, onChange)}
                             variant="select-lg"
                             memberIds={uninvitedPeople}
-                            placeholder="Select co-worker"
+                            placeholder={t("project_settings.members.invite_members.select_co_worker")}
                           />
                         )}
                       />
@@ -222,7 +225,7 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                         <Controller
                           name={`members.${index}.role`}
                           control={control}
-                          rules={{ required: "Select Role" }}
+                          rules={{ required: t("role") }}
                           render={({ field: { value, onChange } }) => {
                             const roleOptions = getRoleOptions(watch(`members.${index}.member_id`));
                             return (
@@ -233,17 +236,17 @@ export const SendProjectInvitationModal = observer(function SendProjectInvitatio
                                   onChange={(key) => onChange(parseInt(key))}
                                   getOptionValue={(role) => String(role.key)}
                                   getOptionLabel={(role) => role.label}
-                                  placeholder="Select role"
+                                  placeholder={t("role")}
                                   showSearch={false}
                                   pinSelected={false}
                                 >
                                   <Select.Trigger<TRoleOption>
                                     variant="pill-md"
                                     appendIcon={<ChevronDownOutline />}
-                                    tooltip={{ emptyContent: "Select role" }}
+                                    tooltip={{ emptyContent: t("role") }}
                                   >
                                     <span className="min-w-0 grow truncate text-left capitalize">
-                                      {value ? ROLE[value] : "Select role"}
+                                      {value ? t(ROLE_DETAILS[value].i18n_title) : t("role")}
                                     </span>
                                   </Select.Trigger>
                                 </Select>

@@ -109,7 +109,7 @@ export const TransferIssuesModal = observer(function TransferIssuesModal(props: 
         <DialogMain>
           <DialogHeader>
             <DialogHeading>
-              <DialogTitle>Transfer work items</DialogTitle>
+              <DialogTitle>{t("product_tour.cycle.step_four.title")}</DialogTitle>
             </DialogHeading>
           </DialogHeader>
           <div className="flex items-center gap-2 border-b border-subtle pb-3">

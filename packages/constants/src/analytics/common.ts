@@ -104,19 +104,19 @@ export const ANALYTICS_INSIGHTS_FIELDS: Record<TAnalyticsTabsBase, IInsightField
 
 export const ANALYTICS_DURATION_FILTER_OPTIONS = [
   {
-    name: "Yesterday",
+    i18nKey: "workspace_analytics.period.yesterday",
     value: "yesterday",
   },
   {
-    name: "Last 7 days",
+    i18nKey: "workspace_analytics.period.last_7_days",
     value: "last_7_days",
   },
   {
-    name: "Last 30 days",
+    i18nKey: "workspace_analytics.period.last_30_days",
     value: "last_30_days",
   },
   {
-    name: "Last 3 months",
+    i18nKey: "workspace_analytics.period.last_3_months",
     value: "last_3_months",
   },
 ];
@@ -148,11 +148,11 @@ export const ANALYTICS_X_AXIS_VALUES: { value: ChartXAxisProperty; i18nKey: stri
   },
   {
     value: ChartXAxisProperty.CYCLES,
-    i18nKey: "cycle.label",
+    i18nKey: "common.cycle",
   },
   {
     value: ChartXAxisProperty.MODULES,
-    i18nKey: "module.label",
+    i18nKey: "common.module",
   },
   {
     value: ChartXAxisProperty.COMPLETED_AT,

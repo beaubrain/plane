@@ -27,7 +27,7 @@ const analyticsService = new AnalyticsService();
 const CreatedVsResolved = observer(function CreatedVsResolved() {
   const {
     selectedDuration,
-    selectedDurationLabel,
+    selectedDurationLabelKey,
     selectedProjects,
     selectedCycle,
     selectedModule,
@@ -102,7 +102,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
   return (
     <AnalyticsSectionWrapper
       title={t("workspace_analytics.created_vs_resolved")}
-      subtitle={selectedDurationLabel}
+      subtitle={selectedDurationLabelKey ? t(selectedDurationLabelKey) : null}
       className="col-span-1"
     >
       {isCreatedVsResolvedLoading ? (

@@ -24,12 +24,15 @@ import { useAppRouter } from "@/hooks/use-app-router";
 // wrappers
 import { AuthenticationWrapper } from "@/lib/wrappers/authentication-wrapper";
 import { WorkspaceService } from "@/services/workspace.service";
+import { useTranslation } from "@plane/i18n";
+
 // services
 
 // service initialization
 const workspaceService = new WorkspaceService();
 
 function WorkspaceInvitationPage() {
+  const { t } = useTranslation();
   // router
   const router = useAppRouter();
   // query params
@@ -140,7 +143,7 @@ function WorkspaceInvitationPage() {
                       size="md"
                       href="https://github.com/makeplane"
                       external
-                      label="Star us on GitHub"
+                      label={t("home.star_us_on_github")}
                     />
                     <AnchorButton
                       variant="secondary"

@@ -17,6 +17,7 @@ import { Input } from "@makeplane/propel/components/input";
 // helpers
 import { cn } from "@plane/utils";
 import { checkEmailValidity } from "@/helpers/string.helper";
+import { useTranslation } from "@plane/i18n";
 
 type TAuthEmailForm = {
   defaultEmail: string;
@@ -24,6 +25,7 @@ type TAuthEmailForm = {
 };
 
 export const AuthEmailForm = observer(function AuthEmailForm(props: TAuthEmailForm) {
+  const { t } = useTranslation();
   const { onSubmit, defaultEmail } = props;
   // states
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,7 +55,7 @@ export const AuthEmailForm = observer(function AuthEmailForm(props: TAuthEmailFo
     <form onSubmit={handleFormSubmit} className="mt-5 space-y-4">
       <div className="space-y-1">
         <label className="text-body-xs-medium text-tertiary" htmlFor="email">
-          Email
+          {t("auth.common.email.label")}
         </label>
         <div
           className={cn(
@@ -83,7 +85,7 @@ export const AuthEmailForm = observer(function AuthEmailForm(props: TAuthEmailFo
           {email.length > 0 && (
             <button
               type="button"
-              aria-label="Clear email"
+              aria-label={t("aria_labels.auth_forms.clear_email")}
               onClick={() => {
                 setEmail("");
                 inputRef.current?.focus();
@@ -108,7 +110,7 @@ export const AuthEmailForm = observer(function AuthEmailForm(props: TAuthEmailFo
         stretch="full"
         disabled={isButtonDisabled}
         loading={isSubmitting}
-        label="Continue"
+        label={t("common.continue")}
       />
     </form>
   );

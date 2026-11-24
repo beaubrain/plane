@@ -44,7 +44,7 @@ const ProjectInsights = observer(function ProjectInsights() {
   const params = useParams();
   const { t } = useTranslation();
   const workspaceSlug = params.workspaceSlug.toString();
-  const { selectedDuration, selectedDurationLabel, selectedProjects, selectedCycle, selectedModule, isPeekView } =
+  const { selectedDuration, selectedDurationLabelKey, selectedProjects, selectedCycle, selectedModule, isPeekView } =
     useAnalytics();
 
   const { data: projectInsightsData, isLoading: isLoadingProjectInsight } = useSWR(
@@ -70,7 +70,7 @@ const ProjectInsights = observer(function ProjectInsights() {
   return (
     <AnalyticsSectionWrapper
       title={`${t("workspace_analytics.project_insights")}`}
-      subtitle={selectedDurationLabel}
+      subtitle={selectedDurationLabelKey ? t(selectedDurationLabelKey) : null}
       className="lg:col-span-3"
     >
       {isLoadingProjectInsight ? (

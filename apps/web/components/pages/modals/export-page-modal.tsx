@@ -29,6 +29,7 @@ import { setToast } from "@plane/blocks/toast";
 import { PDFDocument } from "@/components/editor/pdf";
 // hooks
 import { useParseEditorContent } from "@/hooks/use-parse-editor-content";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   editorRef: EditorRefApi | null;
@@ -115,6 +116,7 @@ const defaultValues: TFormValues = {
 };
 
 export function ExportPageModal(props: Props) {
+  const { t } = useTranslation();
   const { editorRef, isOpen, onClose, pageTitle } = props;
   // states
   const [isExporting, setIsExporting] = useState(false);
@@ -282,7 +284,7 @@ export function ExportPageModal(props: Props) {
           </DialogBody>
         </DialogMain>
         <DialogActions>
-          <Button variant="secondary" size="md" stretch="auto" label="Cancel" onClick={handleClose} />
+          <Button variant="secondary" size="md" stretch="auto" label={t("common.cancel")} onClick={handleClose} />
           <Button
             variant="primary"
             size="md"

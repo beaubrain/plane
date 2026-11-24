@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Вчера",
+      "last_7_days": "Последние 7 дней",
+      "last_30_days": "Последние 30 дней",
+      "last_3_months": "Последние 3 месяца"
+    },
+    "for_entity": "Аналитика по {title}",
     "label": "Аналитика",
     "page_label": "{workspace} - Аналитика",
     "open_tasks": "Всего открытых рабочих элементов",

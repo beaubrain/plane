@@ -15,6 +15,7 @@ import { Input } from "@makeplane/propel/components/input";
 import useTimer from "@/hooks/use-timer";
 // types
 import { EAuthModes } from "@/types/auth";
+import { useTranslation } from "@plane/i18n";
 
 // services
 const authService = new AuthService();
@@ -38,6 +39,7 @@ const defaultValues: TUniqueCodeFormValues = {
 };
 
 export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
+  const { t } = useTranslation();
   const { mode, email, nextPath, handleEmailClear, generateEmailUniqueCode } = props;
   // derived values
   const defaultResetTimerValue = 5;
@@ -87,7 +89,7 @@ export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
       <input type="hidden" value={nextPath} name="next_path" />
       <div className="space-y-1">
         <label className="text-body-xs-medium text-tertiary" htmlFor="email">
-          Email
+          {t("auth.common.email.label")}
         </label>
         <div className="relative flex h-10 items-center rounded-md border border-subtle bg-surface-1 px-3 [&_input]:disable-autofill-style">
           <Input
@@ -104,7 +106,7 @@ export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
           {uniqueCodeFormData.email.length > 0 && (
             <button
               type="button"
-              aria-label="Clear email"
+              aria-label={t("aria_labels.auth_forms.clear_email")}
               className="absolute right-3 hover:cursor-pointer"
               onClick={handleEmailClear}
               tabIndex={-1}
@@ -117,7 +119,7 @@ export function AuthUniqueCodeForm(props: TAuthUniqueCodeForm) {
 
       <div className="space-y-1">
         <label className="text-body-xs-medium text-tertiary" htmlFor="code">
-          Unique code
+          {t("auth.common.unique_code.label")}
         </label>
         <div className="relative flex h-10 items-center rounded-md border border-subtle bg-surface-1 pr-12 pl-3 [&_input]:disable-autofill-style">
           <Input

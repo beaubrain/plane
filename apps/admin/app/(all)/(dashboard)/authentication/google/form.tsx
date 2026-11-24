@@ -16,6 +16,7 @@ import type { TCopyField } from "@/components/common/copy-field";
 import { OAuthProviderForm } from "@/components/authentication/oauth-provider-form";
 // hooks
 import { useOAuthProviderConfigForm } from "@/hooks/use-oauth-provider-config-form";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   config: IFormattedInstanceConfiguration;
@@ -29,6 +30,7 @@ const GOOGLE_FORM_SWITCH_FIELD: TControllerSwitchFormField<GoogleConfigFormValue
 };
 
 export function InstanceGoogleConfigForm(props: Props) {
+  const { t } = useTranslation();
   const { config } = props;
   // form data
   const {
@@ -98,7 +100,10 @@ export function InstanceGoogleConfigForm(props: Props) {
       description: (
         <p>
           We will auto-generate this. Paste this into your{" "}
-          <CodeBlock darkerShade>Authorized JavaScript origins</CodeBlock> field. For this OAuth client{" "}
+          <CodeBlock darkerShade>
+            {t("workspace_settings.settings.applications.authorized_javascript_origins_title")}
+          </CodeBlock>{" "}
+          field. For this OAuth client{" "}
           <a
             href="https://console.cloud.google.com/apis/credentials/oauthclient"
             target="_blank"

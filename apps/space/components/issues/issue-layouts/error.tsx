@@ -6,15 +6,17 @@
 
 // plane imports
 import { EmptyStateDetailed } from "@plane/blocks/empty-state";
+import { useTranslation } from "@plane/i18n";
 
 export function SomethingWentWrongError() {
+  const { t } = useTranslation();
   return (
     <div className="grid min-h-screen w-full place-items-center bg-surface-1 p-6">
       <EmptyStateDetailed
         align="center"
         assetKey="server-error"
         assetClassName="size-40"
-        title="Oops! Something went wrong."
+        title={t("common.something_went_wrong")}
         description="The public board does not exist. Please check the URL."
       />
     </div>

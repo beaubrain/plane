@@ -17,6 +17,7 @@ import { ControllerInput } from "@/components/common/controller-input";
 import { setToast } from "@plane/blocks/toast";
 // hooks
 import { useInstance } from "@/hooks/store";
+import { useTranslation } from "@plane/i18n";
 
 export interface IGeneralConfigurationForm {
   instance: IInstance;
@@ -24,6 +25,7 @@ export interface IGeneralConfigurationForm {
 }
 
 export const GeneralConfigurationForm = observer(function GeneralConfigurationForm(props: IGeneralConfigurationForm) {
+  const { t } = useTranslation();
   const { instance, instanceAdmins } = props;
   // hooks
   const { updateInstanceInfo } = useInstance();
@@ -80,7 +82,7 @@ export const GeneralConfigurationForm = observer(function GeneralConfigurationFo
             type="email"
             size="lg"
             orientation="vertical"
-            label="Email"
+            label={t("auth.common.email.label")}
             value={instanceAdmins[0]?.user_detail?.email ?? ""}
             placeholder="Admin email"
             autoComplete="on"

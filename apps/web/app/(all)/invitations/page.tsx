@@ -11,7 +11,7 @@ import Link from "next/link";
 import useSWR, { mutate } from "swr";
 import { TickCircleOutline } from "@makeplane/propel/icons";
 // plane imports
-import { ROLE } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 // types
 import { Button } from "@makeplane/propel/components/button";
@@ -154,7 +154,7 @@ function UserInvitationsPage() {
                             {truncateText(invitation.workspace.name, 30)}
                           </span>
                           <span className="block text-caption-sm-regular text-secondary capitalize">
-                            {ROLE[invitation.role]}
+                            {t(ROLE_DETAILS[invitation.role].i18n_title)}
                           </span>
                         </span>
                         <span className={`flex-shrink-0 ${isSelected ? "text-accent-primary" : "text-secondary"}`}>

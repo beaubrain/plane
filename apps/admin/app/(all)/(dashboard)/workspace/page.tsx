@@ -144,7 +144,7 @@ const WorkspaceManagementPage = observer(function WorkspaceManagementPage(_props
                   stretch="auto"
                   nativeButton={false}
                   render={<Link href="/workspace/create" />}
-                  label="Create workspace"
+                  label={t("create_workspace")}
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ const WorkspaceManagementPage = observer(function WorkspaceManagementPage(_props
                   stretch="auto"
                   onClick={() => fetchNextWorkspaces()}
                   loading={workspaceLoader === "pagination"}
-                  label="Load more"
+                  label={t("common.load_more")}
                 />
               </div>
             )}

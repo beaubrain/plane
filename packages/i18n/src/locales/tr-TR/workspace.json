@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Dün",
+      "last_7_days": "Son 7 gün",
+      "last_30_days": "Son 30 gün",
+      "last_3_months": "Son 3 ay"
+    },
+    "for_entity": "{title} analizi",
     "label": "Analitik",
     "page_label": "{workspace} - Analitik",
     "open_tasks": "Toplam açık görev",

@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "어제",
+      "last_7_days": "최근 7일",
+      "last_30_days": "최근 30일",
+      "last_3_months": "최근 3개월"
+    },
+    "for_entity": "{title} 분석",
     "label": "분석",
     "page_label": "{workspace} - 분석",
     "open_tasks": "열린 작업 항목",

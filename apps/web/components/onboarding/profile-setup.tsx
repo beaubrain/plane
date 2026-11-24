@@ -299,7 +299,7 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     className="text-body-xs-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
                     htmlFor="first_name"
                   >
-                    First name
+                    {t("first_name")}
                   </label>
                   <Controller
                     control={control}
@@ -340,7 +340,7 @@ export const ProfileSetup = observer(function ProfileSetup(props: Props) {
                     className="text-body-xs-medium text-tertiary after:ml-0.5 after:text-danger-primary after:content-['*']"
                     htmlFor="last_name"
                   >
-                    Last name
+                    {t("last_name")}
                   </label>
                   <Controller
                     control={control}

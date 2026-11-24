@@ -28,7 +28,7 @@ export const WorkItemsModalHeader = observer(function WorkItemsModalHeader(props
   return (
     <div className="flex items-center justify-between gap-4 bg-surface-1 px-5 py-4 text-body-xs-regular">
       <h3 className="text-body-md-semibold break-words">
-        Analytics for {title} {cycle && `in ${cycle.name}`} {module && `in ${module.name}`}
+        {t("workspace_analytics.for_entity", { title: [title, cycle?.name, module?.name].filter(Boolean).join(" / ") })}
       </h3>
       <div className="flex items-center gap-2">
         <div className="hidden md:block">

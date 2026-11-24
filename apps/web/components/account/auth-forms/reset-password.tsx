@@ -100,7 +100,7 @@ export const ResetPasswordForm = observer(function ResetPasswordForm() {
 
   return (
     <FormContainer>
-      <AuthFormHeader title="Reset password" description="Create a new password." />
+      <AuthFormHeader title={t("auth.forgot_password.title")} description="Create a new password." />
 
       {errorInfo && errorInfo?.type === EErrorAlertType.BANNER_ALERT && (
         <Banner

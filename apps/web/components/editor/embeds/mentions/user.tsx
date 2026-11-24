@@ -9,7 +9,8 @@ import { useParams } from "next/navigation";
 import { Link } from "react-router";
 // plane imports
 import { Avatar } from "@makeplane/propel/components/avatar";
-import { ROLE } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import { Popover, PopoverContent, PopoverTrigger } from "@makeplane/propel/components/popover";
 import { cn, getFileURL } from "@plane/utils";
 // hooks
@@ -22,6 +23,7 @@ type Props = {
 
 export const EditorUserMention = observer(function EditorUserMention(props: Props) {
   const { id } = props;
+  const { t } = useTranslation();
   // router
   const { projectId } = useParams();
   // params
@@ -78,7 +80,11 @@ export const EditorUserMention = observer(function EditorUserMention(props: Prop
               >
                 {userDetails?.display_name}
               </Link>
-              {roleDetails && <p className="truncate text-caption-sm-regular text-secondary">{ROLE[roleDetails]}</p>}
+              {roleDetails && (
+                <p className="truncate text-caption-sm-regular text-secondary">
+                  {t(ROLE_DETAILS[roleDetails].i18n_title)}
+                </p>
+              )}
             </div>
           </div>
         </PopoverContent>

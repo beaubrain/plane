@@ -362,7 +362,7 @@ export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
             stretch="full"
             disabled={isInvitationDisabled || !isValid || isSubmitting}
             loading={isSubmitting}
-            label="Continue"
+            label={t("common.continue")}
           />
           <Button variant="ghost" size="lg" stretch="full" onClick={nextStep} label="I’ll do it later" />
         </div>

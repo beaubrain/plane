@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Ayer",
+      "last_7_days": "Últimos 7 días",
+      "last_30_days": "Últimos 30 días",
+      "last_3_months": "Últimos 3 meses"
+    },
+    "for_entity": "Análisis de {title}",
     "label": "Análisis",
     "page_label": "{workspace} - Análisis",
     "open_tasks": "Total de tareas abiertas",

@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Včera",
+      "last_7_days": "Posledných 7 dní",
+      "last_30_days": "Posledných 30 dní",
+      "last_3_months": "Posledné 3 mesiace"
+    },
+    "for_entity": "Analýza pre {title}",
     "label": "Analytika",
     "page_label": "{workspace} - Analytika",
     "open_tasks": "Celkovo otvorených úloh",

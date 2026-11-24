@@ -9,8 +9,10 @@ import { Button } from "@makeplane/propel/components/button";
 // assets
 import InstanceFailureDarkImage from "@/app/assets/instance/instance-failure-dark.svg?url";
 import InstanceFailureImage from "@/app/assets/instance/instance-failure.svg?url";
+import { useTranslation } from "@plane/i18n";
 
 export function InstanceFailureView() {
+  const { t } = useTranslation();
   const { resolvedTheme } = useTheme();
 
   const instanceImage = resolvedTheme === "dark" ? InstanceFailureDarkImage : InstanceFailureImage;
@@ -31,7 +33,7 @@ export function InstanceFailureView() {
           </p>
         </div>
         <div className="flex justify-center">
-          <Button variant="primary" size="md" stretch="auto" label="Retry" onClick={handleRetry} />
+          <Button variant="primary" size="md" stretch="auto" label={t("common.retry")} onClick={handleRetry} />
         </div>
       </div>
     </div>

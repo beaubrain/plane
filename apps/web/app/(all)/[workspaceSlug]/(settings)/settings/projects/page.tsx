@@ -15,8 +15,10 @@ import ProjectDarkEmptyState from "@/app/assets/empty-state/project-settings/no-
 import ProjectLightEmptyState from "@/app/assets/empty-state/project-settings/no-projects-light.png?url";
 // hooks
 import { useCommandPalette } from "@/hooks/store/use-command-palette";
+import { useTranslation } from "@plane/i18n";
 
 function ProjectSettingsPage() {
+  const { t } = useTranslation();
   // store hooks
   const { resolvedTheme } = useTheme();
   const { toggleCreateProjectModal } = useCommandPalette();
@@ -24,8 +26,8 @@ function ProjectSettingsPage() {
   const resolvedPath = resolvedTheme === "dark" ? ProjectDarkEmptyState : ProjectLightEmptyState;
   return (
     <div className="mx-auto flex h-full max-w-[480px] flex-col items-center justify-center gap-4">
-      <img src={resolvedPath} alt="No projects yet" />
-      <div className="text-body-md-semibold text-tertiary">No projects yet</div>
+      <img src={resolvedPath} alt={t("workspace_projects.empty_state.no_projects.title")} />
+      <div className="text-body-md-semibold text-tertiary">{t("workspace_projects.empty_state.no_projects.title")}</div>
       <div className="text-center text-body-xs-regular text-tertiary">
         Projects act as the foundation for goal-driven work. They let you manage your teams, tasks, and everything you
         need to get things done.
@@ -43,7 +45,7 @@ function ProjectSettingsPage() {
           variant="primary"
           size="sm"
           stretch="auto"
-          label="Start your first project"
+          label={t("workspace_projects.empty_state.no_projects.primary_button.text")}
           onClick={() => toggleCreateProjectModal(true)}
         />
       </div>

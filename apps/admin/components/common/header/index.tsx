@@ -20,15 +20,17 @@ import { useTheme } from "@/hooks/store";
 // local imports
 import { CORE_HEADER_SEGMENT_LABELS } from "./core";
 import { EXTENDED_HEADER_SEGMENT_LABELS } from "./extended";
+import { useTranslation } from "@plane/i18n";
 
 export const HamburgerToggle = observer(function HamburgerToggle() {
+  const { t } = useTranslation();
   const { isSidebarCollapsed, toggleSidebar } = useTheme();
   return (
     <div className="shrink-0 md:hidden">
       <IconButton
         variant="ghost"
         size="md"
-        aria-label="Toggle sidebar"
+        aria-label={t("aria_labels.projects_sidebar.collapse_sidebar")}
         aria-expanded={!isSidebarCollapsed}
         aria-controls="admin-sidebar"
         icon={<Icon icon={MenuOutline} />}
@@ -88,6 +90,7 @@ function HeaderCrumb(props: THeaderCrumbProps) {
 }
 
 export const AdminHeader = observer(function AdminHeader() {
+  const { t } = useTranslation();
   const pathName = usePathname();
   // collapsed crumbs render as plain anchors, so their links need the app's base path
   const baseHref = useHref("/");
@@ -104,7 +107,11 @@ export const AdminHeader = observer(function AdminHeader() {
             crumbLabel="Settings"
             crumbHref={resolveCrumbHref("/general/")}
             component={
-              <HeaderCrumb label="Settings" href="/general/" icon={<SettingsOutline className="text-tertiary" />} />
+              <HeaderCrumb
+                label={t("settings")}
+                href="/general/"
+                icon={<SettingsOutline className="text-tertiary" />}
+              />
             }
           />
           {breadcrumbItems.map((item, index) => {

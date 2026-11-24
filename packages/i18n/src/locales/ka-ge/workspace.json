@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "გუშინ",
+      "last_7_days": "ბოლო 7 დღე",
+      "last_30_days": "ბოლო 30 დღე",
+      "last_3_months": "ბოლო 3 თვე"
+    },
+    "for_entity": "ანალიტიკა: {title}",
     "label": "ანალიტიკა",
     "page_label": "{workspace} - ანალიტიკა",
     "open_tasks": "სულ ღია დავალებები",

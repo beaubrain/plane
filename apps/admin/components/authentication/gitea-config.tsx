@@ -16,6 +16,7 @@ import { Switch } from "@makeplane/propel/components/switch";
 import type { TInstanceAuthenticationMethodKeys } from "@plane/types";
 // hooks
 import { useInstance } from "@/hooks/store";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   disabled: boolean;
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export const GiteaConfiguration = observer(function GiteaConfiguration(props: Props) {
+  const { t } = useTranslation();
   const { disabled, updateConfig } = props;
   // store
   const { formattedConfig } = useInstance();
@@ -35,7 +37,12 @@ export const GiteaConfiguration = observer(function GiteaConfiguration(props: Pr
     <>
       {GiteaConfigured ? (
         <div className="flex items-center gap-4">
-          <AnchorButton variant="primary" size="sm" render={<Link href="/authentication/gitea" />} label="Edit" />
+          <AnchorButton
+            variant="primary"
+            size="sm"
+            render={<Link href="/authentication/gitea" />}
+            label={t("common.actions.edit")}
+          />
           <Switch
             checked={Boolean(parseInt(GiteaConfig))}
             onCheckedChange={() => {
@@ -56,7 +63,7 @@ export const GiteaConfiguration = observer(function GiteaConfiguration(props: Pr
           nativeButton={false}
           render={<Link href="/authentication/gitea" />}
           icon={<Icon icon={PreferencesOutline} tint="tertiary" />}
-          label="Configure"
+          label={t("integrations.configure")}
         />
       )}
     </>

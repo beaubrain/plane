@@ -6,8 +6,10 @@
 
 // ui
 import { Button } from "@makeplane/propel/components/button";
+import { useTranslation } from "@plane/i18n";
 
 function ErrorPage() {
+  const { t } = useTranslation();
   const handleRetry = () => {
     window.location.reload();
   };
@@ -31,7 +33,7 @@ function ErrorPage() {
           </p>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <Button variant="primary" size="md" stretch="auto" label="Refresh" onClick={handleRetry} />
+          <Button variant="primary" size="md" stretch="auto" label={t("refresh")} onClick={handleRetry} />
           {/* <Button variant="secondary" size="lg" onClick={() => {}}>
             Sign out
           </Button> */}

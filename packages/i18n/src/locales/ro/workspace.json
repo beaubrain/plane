@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Ieri",
+      "last_7_days": "Ultimele 7 zile",
+      "last_30_days": "Ultimele 30 de zile",
+      "last_3_months": "Ultimele 3 luni"
+    },
+    "for_entity": "Analiză pentru {title}",
     "label": "Statistici",
     "page_label": "{workspace} - Statistici",
     "open_tasks": "Total activități deschise",

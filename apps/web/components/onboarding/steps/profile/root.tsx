@@ -29,6 +29,7 @@ import { AuthService } from "@/services/auth.service";
 import { CommonOnboardingHeader } from "../common";
 import { MarketingConsent } from "./consent";
 import { SetPasswordRoot } from "./set-password";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   handleStepChange: (step: EOnboardingSteps, skipInvites?: boolean) => void;
@@ -57,6 +58,7 @@ const defaultValues: Partial<TProfileSetupFormValues> = {
 };
 
 export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepChange }: Props) {
+  const { t } = useTranslation();
   // states
   const [isImageUploadModalOpen, setIsImageUploadModalOpen] = useState(false);
   // store hooks
@@ -217,7 +219,7 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
                 size="xl"
                 orientation="vertical"
                 type="text"
-                label="Name"
+                label={t("common.name")}
                 required
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
@@ -238,7 +240,14 @@ export const ProfileSetupStep = observer(function ProfileSetupStep({ handleStepC
           )}
         </div>
         {/* Continue Button */}
-        <Button variant="primary" type="submit" stretch="full" size="lg" disabled={isButtonDisabled} label="Continue" />
+        <Button
+          variant="primary"
+          type="submit"
+          stretch="full"
+          size="lg"
+          disabled={isButtonDisabled}
+          label={t("common.continue")}
+        />
       </div>
 
       {/* Marketing Consent */}

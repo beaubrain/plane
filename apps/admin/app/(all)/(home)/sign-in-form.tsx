@@ -22,6 +22,7 @@ import { useCsrfToken } from "@/hooks/use-csrf-token";
 import { AuthBanner } from "./auth-banner";
 import { AuthHeader } from "./auth-header";
 import { authErrorHandler } from "./auth-helpers";
+import { useTranslation } from "@plane/i18n";
 
 // error codes
 enum EErrorCodes {
@@ -49,6 +50,7 @@ const defaultFromData: TFormData = {
 };
 
 export function InstanceSignInForm() {
+  const { t } = useTranslation();
   // search params
   const searchParams = useSearchParams();
   const emailParam = searchParams.get("email") || undefined;
@@ -137,7 +139,7 @@ export function InstanceSignInForm() {
               // oxlint-disable-next-line jsx-a11y/no-autofocus -- sole primary field of a dedicated sign-in page
               autoFocus
               orientation="vertical"
-              label="Email"
+              label={t("auth.common.email.label")}
               required
             />
 
@@ -151,7 +153,7 @@ export function InstanceSignInForm() {
               onChange={(e) => handleFormChange("password", e.target.value)}
               autoComplete="off"
               orientation="vertical"
-              label="Password"
+              label={t("auth.common.password.label")}
               required
               endIcon={
                 <IconButton

@@ -15,6 +15,7 @@ import { useStates } from "@/hooks/store/use-state";
 // local imports
 import { FilterHeader } from "./helpers/filter-header";
 import { FilterOption } from "./helpers/filter-option";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   appliedFilters: string[] | null;
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export const FilterState = observer(function FilterState(props: Props) {
+  const { t } = useTranslation();
   const { appliedFilters, handleUpdate, searchQuery } = props;
 
   const { sortedStates: states } = useStates();
@@ -73,7 +75,7 @@ export const FilterState = observer(function FilterState(props: Props) {
                 )}
               </>
             ) : (
-              <p className="text-caption-sm-regular text-placeholder italic">No matches found</p>
+              <p className="text-caption-sm-regular text-placeholder italic">{t("common.search.no_matches_found")}</p>
             )
           ) : (
             <Loader className="space-y-2">

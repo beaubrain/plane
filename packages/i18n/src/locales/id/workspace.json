@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Kemarin",
+      "last_7_days": "7 hari terakhir",
+      "last_30_days": "30 hari terakhir",
+      "last_3_months": "3 bulan terakhir"
+    },
+    "for_entity": "Analitik untuk {title}",
     "label": "Analitik",
     "page_label": "{workspace} - Analitik",
     "open_tasks": "Jumlah tugas terbuka",

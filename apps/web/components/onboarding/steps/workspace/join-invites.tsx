@@ -6,7 +6,7 @@
 
 import { useState } from "react";
 // plane imports
-import { ROLE } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
 import { Button } from "@makeplane/propel/components/button";
 import type { IWorkspaceMemberInvitation } from "@plane/types";
 import { Checkbox } from "@makeplane/propel/components/checkbox";
@@ -20,6 +20,7 @@ import { useUserSettings } from "@/hooks/store/user";
 import { WorkspaceService } from "@/services/workspace.service";
 // local components
 import { CommonOnboardingHeader } from "../common";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   invitations: IWorkspaceMemberInvitation[];
@@ -29,6 +30,7 @@ type Props = {
 const workspaceService = new WorkspaceService();
 
 export function WorkspaceJoinInvitesStep(props: Props) {
+  const { t } = useTranslation();
   const { invitations, handleNextStep, handleCurrentViewChange } = props;
   // states
   const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false);
@@ -107,7 +109,9 @@ export function WorkspaceJoinInvitesStep(props: Props) {
                   <span aria-hidden="true" className="w-full truncate text-body-sm-medium text-primary">
                     {truncateText(invitedWorkspace?.name, 30)}
                   </span>
-                  <span className="w-full truncate text-body-xs-regular text-tertiary">{ROLE[invitation.role]}</span>
+                  <span className="w-full truncate text-body-xs-regular text-tertiary">
+                    {t(ROLE_DETAILS[invitation.role].i18n_title)}
+                  </span>
                 </span>
               </label>
             );
@@ -121,19 +125,19 @@ export function WorkspaceJoinInvitesStep(props: Props) {
           onClick={submitInvitations}
           disabled={isJoiningWorkspaces || !invitationsRespond.length}
           loading={isJoiningWorkspaces}
-          label="Continue"
+          label={t("common.continue")}
         />
         <Button
           variant="ghost"
           size="lg"
           stretch="full"
-          label="Create new workspace"
+          label={t("create_workspace")}
           onClick={handleCurrentViewChange}
           disabled={isJoiningWorkspaces}
         />
       </div>
     </div>
   ) : (
-    <div>No Invitations found</div>
+    <div>{t("no_pending_invites")}</div>
   );
 }

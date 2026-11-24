@@ -320,7 +320,7 @@ export const GeneralProfileSettingsForm = observer(function GeneralProfileSettin
                     value={value}
                     ref={ref}
                     error={errors.email?.message}
-                    placeholder="Enter your email"
+                    placeholder={t("account_settings.profile.change_email_modal.form.email.placeholder")}
                     autoComplete="on"
                     disabled
                   />

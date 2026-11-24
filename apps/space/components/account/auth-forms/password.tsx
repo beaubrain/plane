@@ -18,6 +18,7 @@ import { PasswordStrengthIndicator } from "@plane/blocks/auth";
 import { getPasswordStrength } from "@plane/utils";
 // types
 import { EAuthModes, EAuthSteps } from "@/types/auth";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   email: string;
@@ -43,6 +44,7 @@ const defaultValues: TPasswordFormValues = {
 const authService = new AuthService();
 
 export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props) {
+  const { t } = useTranslation();
   const { email, nextPath, isSMTPConfigured, handleAuthStep, handleEmailClear, mode } = props;
   // ref
   const formRef = useRef<HTMLFormElement>(null);
@@ -126,7 +128,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
       <input type="hidden" value={nextPath} name="next_path" />
       <div className="space-y-1">
         <label className="text-body-xs-medium text-tertiary" htmlFor="email">
-          Email
+          {t("auth.common.email.label")}
         </label>
         <div className="relative flex h-10 items-center rounded-md border border-subtle bg-surface-1 px-3 [&_input]:disable-autofill-style">
           <Input
@@ -142,7 +144,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
           {passwordFormData.email.length > 0 && (
             <button
               type="button"
-              aria-label="Clear email"
+              aria-label={t("aria_labels.auth_forms.clear_email")}
               className="absolute right-3 hover:cursor-pointer"
               onClick={handleEmailClear}
               tabIndex={-1}
@@ -165,7 +167,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
             size="xl"
             value={passwordFormData.password}
             onChange={(e) => handleFormChange("password", e.target.value)}
-            placeholder="Enter password"
+            placeholder={t("auth.common.password.placeholder")}
             onFocus={() => setIsPasswordInputFocused(true)}
             onBlur={() => setIsPasswordInputFocused(false)}
             autoComplete="off"
@@ -190,7 +192,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
       {mode === EAuthModes.SIGN_UP && (
         <div className="space-y-1">
           <label className="text-body-xs-medium text-tertiary" htmlFor="confirm_password">
-            Confirm password
+            {t("auth.common.password.confirm_password.label")}
           </label>
           <div className="relative flex h-10 items-center rounded-md border border-subtle bg-surface-1 pr-12 pl-3 [&_input]:disable-autofill-style">
             <Input
@@ -200,7 +202,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
               size="xl"
               value={passwordFormData.confirm_password}
               onChange={(e) => handleFormChange("confirm_password", e.target.value)}
-              placeholder="Confirm password"
+              placeholder={t("auth.common.password.confirm_password.label")}
               onFocus={() => setIsRetryPasswordInputFocused(true)}
               onBlur={() => setIsRetryPasswordInputFocused(false)}
               autoComplete="off"
@@ -243,7 +245,7 @@ export const AuthPasswordForm = observer(function AuthPasswordForm(props: Props)
                 variant="secondary"
                 size="lg"
                 stretch="full"
-                label="Sign in with unique code"
+                label={t("auth.common.sign_in_with_unique_code")}
                 onClick={redirectToUniqueCodeSignIn}
               />
             )}

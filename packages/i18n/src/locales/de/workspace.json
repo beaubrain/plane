@@ -66,6 +66,13 @@
     }
   },
   "workspace_analytics": {
+    "period": {
+      "yesterday": "Gestern",
+      "last_7_days": "Letzte 7 Tage",
+      "last_30_days": "Letzte 30 Tage",
+      "last_3_months": "Letzte 3 Monate"
+    },
+    "for_entity": "Analyse für {title}",
     "label": "Analysen",
     "page_label": "{workspace} - Analysen",
     "open_tasks": "Insgesamt offene Aufgaben",

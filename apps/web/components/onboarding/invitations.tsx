@@ -6,7 +6,7 @@
 
 import { useState } from "react";
 // plane imports
-import { ROLE } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
 // types
 import { Button } from "@makeplane/propel/components/button";
 import { Button as ButtonElement } from "@makeplane/propel/elements/button";
@@ -23,6 +23,7 @@ import { useWorkspace } from "@/hooks/store/use-workspace";
 import { useUserSettings } from "@/hooks/store/user";
 // services
 import { WorkspaceService } from "@/services/workspace.service";
+import { useTranslation } from "@plane/i18n";
 
 type Props = {
   invitations: IWorkspaceMemberInvitation[];
@@ -32,6 +33,7 @@ type Props = {
 const workspaceService = new WorkspaceService();
 
 export function Invitations(props: Props) {
+  const { t } = useTranslation();
   const { invitations, handleNextStep, handleCurrentViewChange } = props;
   // states
   const [isJoiningWorkspaces, setIsJoiningWorkspaces] = useState(false);
@@ -90,7 +92,9 @@ export function Invitations(props: Props) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-body-xs-medium">{truncateText(invitedWorkspace?.name, 30)}</div>
-                  <p className="text-caption-sm-regular text-secondary">{ROLE[invitation.role]}</p>
+                  <p className="text-caption-sm-regular text-secondary">
+                    {t(ROLE_DETAILS[invitation.role].i18n_title)}
+                  </p>
                 </div>
                 <span className="pointer-events-none flex-shrink-0">
                   <Checkbox checked={isSelected} aria-label={invitedWorkspace?.name ?? "Select workspace invitation"} />
@@ -111,7 +115,7 @@ export function Invitations(props: Props) {
       </ButtonElement>
       <div className="mx-auto mt-4 flex items-center sm:w-96">
         <hr className="w-full border-strong" />
-        <p className="mx-3 flex-shrink-0 text-center text-body-xs-regular text-placeholder">or</p>
+        <p className="mx-3 flex-shrink-0 text-center text-body-xs-regular text-placeholder">{t("common.or")}</p>
         <hr className="w-full border-strong" />
       </div>
       <Button
@@ -121,10 +125,10 @@ export function Invitations(props: Props) {
         render={<button type="button" className="bg-surface-2 text-body-sm-regular" />}
         onClick={handleCurrentViewChange}
         disabled={isJoiningWorkspaces}
-        label="Create your own workspace"
+        label={t("workspace_creation.heading")}
       />
     </div>
   ) : (
-    <div>No Invitations found</div>
+    <div>{t("no_pending_invites")}</div>
   );
 }
